@@ -1,0 +1,496 @@
+/* =====================================================================
+   components.css — gösterge, DR bandı, karar şeridi, grafik, tablolar
+   components.css — readout, DR band, verdict, plot, tables
+   ===================================================================== */
+
+/* ---------- readout (signature) ---------- */
+.dro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line-hard);
+  border: 1px solid var(--line-hard);
+}
+
+.dro .cell {
+  background: #11181d;
+  padding: 14px 16px;
+  color: #dfe7ea
+}
+
+.dro .cell.warnbg {
+  background: #2a1512
+}
+
+.dro .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #8fa2ac
+}
+
+.dro .v {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.05;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em
+}
+
+.dro .v small {
+  font-size: 15px;
+  font-weight: 400;
+  color: #8fa2ac;
+  margin-left: 6px;
+  letter-spacing: 0
+}
+
+.dro .sub {
+  font-size: 11.5px;
+  color: #9fb0b9;
+  margin-top: 6px;
+  font-family: var(--sans)
+}
+
+.dro .v.ok {
+  color: #8ee0a4
+}
+
+.dro .v.bad {
+  color: #ff8b7d
+}
+
+.dro .v.warn {
+  color: #ffc861
+}
+
+.dro.three {
+  grid-template-columns: 1fr 1fr 1fr
+}
+
+.dro.three .v {
+  font-size: 30px
+}
+
+/* ---------- DR bandı / DR window band ---------- */
+.band {
+  position: relative;
+  height: 30px;
+  border: 1px solid var(--line-hard);
+  background: var(--panel-2);
+  display: flex;
+  overflow: hidden;
+}
+
+.band .seg {
+  height: 100%;
+  position: relative
+}
+
+.band .seg.o {
+  background: repeating-linear-gradient(135deg, #cbe0ee, #cbe0ee 5px, #b9d4e6 5px, #b9d4e6 10px)
+}
+
+.band .seg.g {
+  background: repeating-linear-gradient(135deg, #cfe6d6, #cfe6d6 5px, #c3dfcc 5px, #c3dfcc 10px)
+}
+
+.band .seg.a {
+  background: repeating-linear-gradient(135deg, #f6e4bd, #f6e4bd 5px, #f0daaa 5px, #f0daaa 10px)
+}
+
+.band .seg.r {
+  background: repeating-linear-gradient(135deg, #f3cdc8, #f3cdc8 5px, #eebeb8 5px, #eebeb8 10px)
+}
+
+.band .mark {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--ink);
+  z-index: 2
+}
+
+.band .mark::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--ink);
+}
+
+.bandaxis {
+  position: relative;
+  height: 30px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.bandaxis span {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.bandaxis span b {
+  display: block;
+  font-weight: 600;
+  color: var(--ink)
+}
+
+.bandkey {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  margin-top: 10px
+}
+
+.bandkey i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--line-hard);
+  margin-right: 5px;
+  vertical-align: -1px
+}
+
+.wintxt {
+  margin-top: 12px;
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px
+}
+
+.wintxt b {
+  font-family: var(--mono)
+}
+
+.wintxt p {
+  margin: 0 0 7px
+}
+
+.wintxt p:last-child {
+  margin-bottom: 0
+}
+
+/* ---------- verdict banner ---------- */
+.verdict {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 13px;
+  border: 1px solid;
+  font-size: 13px;
+  margin-bottom: 14px
+}
+
+.verdict .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  color: #fff;
+  white-space: nowrap;
+  margin-top: 1px
+}
+
+.verdict.ok {
+  border-color: #8fbfa1;
+  background: #eaf4ee
+}
+
+.verdict.ok .tag {
+  background: var(--green)
+}
+
+.verdict.bad {
+  border-color: #dda49e;
+  background: #faecea
+}
+
+.verdict.bad .tag {
+  background: var(--red)
+}
+
+.verdict.warn {
+  border-color: #ddc48d;
+  background: #fbf3e2
+}
+
+.verdict.warn .tag {
+  background: var(--amber)
+}
+
+.verdict.idle {
+  border-color: var(--line-hard);
+  background: var(--panel-2)
+}
+
+.verdict.idle .tag {
+  background: var(--ink-3)
+}
+
+/* ---------- plot ---------- */
+.plotwrap {
+  position: relative;
+  background: #fbfcfc;
+  border-bottom: 1px solid var(--line)
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 420px;
+  touch-action: none
+}
+
+.plotbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  flex-wrap: wrap
+}
+
+.plotbar input[type=range] {
+  flex: 1;
+  min-width: 160px;
+  accent-color: var(--blue);
+  height: 26px;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: var(--ink-2);
+  padding: 0 12px 10px;
+  text-transform: uppercase
+}
+
+.legend i {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  vertical-align: middle;
+  margin-right: 5px
+}
+
+/* ---------- tables ---------- */
+.tablewrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px
+}
+
+th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: left;
+  font-weight: 500;
+  border-bottom: 1px solid var(--line-hard);
+  padding: 7px 8px;
+  white-space: nowrap;
+}
+
+td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top
+}
+
+tr:last-child td {
+  border-bottom: 0
+}
+
+tr.crow {
+  cursor: pointer
+}
+
+tr.crow:hover td {
+  background: #e6eef5
+}
+
+td.num,
+th.num {
+  text-align: right;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums
+}
+
+.blk {
+  font-family: var(--mono);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  padding: 0 5px;
+  font-size: 11.5px
+}
+
+.sev {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  color: #fff
+}
+
+.sev.hi {
+  background: var(--red)
+}
+
+.sev.md {
+  background: var(--amber)
+}
+
+.sev.lo {
+  background: var(--ink-3)
+}
+
+/* ---------- chips ---------- */
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  border: 1px solid var(--line-hard);
+  background: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.chip:hover {
+  background: var(--panel-2)
+}
+
+.chip.on {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink)
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:760px) {
+  .dro.three {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .dro.three .cell:first-child {
+    grid-column: 1 / -1
+  }
+}
+
+@media (max-width:640px) {
+  canvas {
+    height: 320px
+  }
+
+  .dro .v {
+    font-size: 32px
+  }
+
+  .dro.three .v {
+    font-size: 26px
+  }
+
+  .dro .cell {
+    padding: 12px 13px
+  }
+
+  .plotbar {
+    gap: 8px
+  }
+
+  .plotbar input[type=range] {
+    flex: 1 1 100%;
+    order: 3;
+    min-width: 0;
+  }
+
+  .legend,
+  .bandkey {
+    gap: 8px 12px
+  }
+
+  .bandaxis {
+    font-size: 9px
+  }
+
+  td,
+  th {
+    padding: 8px 7px
+  }
+
+  table {
+    font-size: 12px
+  }
+
+  tr.crow td:first-child,
+  tr.crow td:nth-child(2) {
+    white-space: nowrap
+  }
+}
+
+@media (max-width:520px) {
+  .dro {
+    grid-template-columns: 1fr
+  }
+
+  .dro.three {
+    grid-template-columns: 1fr
+  }
+
+  .dro.three .cell:first-child {
+    grid-column: auto
+  }
+
+  canvas {
+    height: 280px
+  }
+
+  .verdict {
+    flex-direction: column;
+    gap: 7px
+  }
+
+  .verdict .tag {
+    align-self: flex-start
+  }
+}

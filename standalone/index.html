@@ -1,0 +1,4358 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEK DOSYA SÜRÜMÜ — OTOMATİK ÜRETİLDİ, ELLE DÜZENLEME
+  STANDALONE BUILD — GENERATED, DO NOT EDIT BY HAND
+
+  Kaynak / source : index.html + assets/
+  Üretim / build  : python tools/build_standalone.py
+
+  Bu dosya tek başına çalışır: indir, çift tıkla, tarayıcıda açılır.
+  Yazı tipleri internetten gelir; çevrimdışıyken sistem yazı tipine düşer.
+
+  This file runs on its own: download it, double-click, it opens in a browser.
+  Fonts come from the network; offline it falls back to system fonts.
+  ============================================================================
+-->
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="description"
+    content="Heidenhain Klartext (.H) / ISO kontur yarıçap ve DR penceresi analizi — tarayıcıda çalışır. Contour radius and DR window analysis for Heidenhain programs, runs in the browser.">
+  <title>Kontur Yarıçap Analizi — Heidenhain .H</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+/* ---- assets/css/base.css ---- */
+/* =====================================================================
+   base.css — değişkenler, sıfırlama, tipografi, form denetimleri
+   base.css — tokens, reset, typography, form controls
+   ===================================================================== */
+:root {
+  --bg: #d7dcdf;
+  --panel: #f3f5f6;
+  --panel-2: #e8ecee;
+  --ink: #0d1418;
+  --ink-2: #4d5a63;
+  --ink-3: #7d8b94;
+  --line: #b6c0c6;
+  --line-hard: #94a2aa;
+  --blue: #14507e;
+  --teal: #0f7d86;
+  --amber: #b57405;
+  --red: #b32319;
+  --green: #2c6b41;
+  --shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(13, 20, 24, .14);
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --tap: 44px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0
+}
+
+html {
+  -webkit-text-size-adjust: 100%
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(148, 162, 170, .30) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 162, 170, .30) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- form ---------- */
+label.f {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0 0 4px
+}
+
+input[type=number],
+input[type=text],
+textarea,
+select {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line-hard);
+  padding: 7px 8px;
+  border-radius: 0;
+}
+
+textarea {
+  min-height: 190px;
+  resize: vertical;
+  line-height: 1.45;
+  font-size: 12px;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px
+}
+
+input[type=checkbox] {
+  width: auto;
+  min-width: 18px;
+  min-height: 18px;
+  accent-color: var(--blue);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.row3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.hint {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  margin: 4px 0 0
+}
+
+.chkline {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.chkline input[type=checkbox] {
+  margin-top: 2px
+}
+
+button {
+  font-family: var(--cond);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  padding: 9px 14px;
+  cursor: pointer;
+  border-radius: 0;
+  touch-action: manipulation;
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-hard)
+}
+
+button.ghost:hover {
+  background: var(--panel-2)
+}
+
+button:hover {
+  background: #1d2a31
+}
+
+button.ghost:active,
+button:active {
+  transform: translateY(1px)
+}
+
+.btnrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px
+}
+
+.drop {
+  border: 1.5px dashed var(--line-hard);
+  background: var(--panel-2);
+  padding: 14px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop.hot {
+  border-color: var(--blue);
+  background: #e6eef5;
+  color: var(--blue)
+}
+
+.drop b {
+  font-family: var(--cond);
+  text-transform: uppercase;
+  letter-spacing: .04em
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--panel-2);
+  padding: 1px 4px;
+  border: 1px solid var(--line)
+}
+
+ul.notes {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  color: var(--ink-2)
+}
+
+ul.notes li {
+  margin: 5px 0
+}
+
+.empty {
+  color: var(--ink-3);
+  font-size: 12.5px;
+  padding: 14px 12px
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+  </style>
+  <style>
+/* ---- assets/css/layout.css ---- */
+/* =====================================================================
+   layout.css — sayfa iskeleti, başlık, ızgara, kartlar, dil anahtarı
+   layout.css — page shell, masthead, grid, cards, language switch
+   ===================================================================== */
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 18px 64px
+}
+
+/* ---------- masthead ---------- */
+header.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.brand h1 {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 13px;
+  max-width: 62ch
+}
+
+.topright {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stamp {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--line-hard);
+  padding: 5px 9px;
+  background: var(--panel);
+  white-space: nowrap;
+}
+
+/* ---------- dil anahtarı / language switch ---------- */
+.langbar {
+  display: flex;
+  border: 1px solid var(--line-hard);
+  background: var(--panel);
+}
+
+.langbar button {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  padding: 6px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  min-height: 30px;
+}
+
+.langbar button+button {
+  border-left: 1px solid var(--line-hard)
+}
+
+.langbar button:hover {
+  background: var(--panel-2);
+  color: var(--ink)
+}
+
+.langbar button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff
+}
+
+/* ---------- layout ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  gap: 16px;
+  align-items: start
+}
+
+/* Izgara hücreleri varsayılan olarak min-content'in altına inmez; program
+   metni "white-space: pre" olduğu için bu, dar ekranlarda sütunu satırın
+   uzunluğu kadar şişirirdi. Taşmayı textarea kendi içinde kaydırarak çözer.
+
+   Grid items do not shrink below min-content by default; since the program
+   text is "white-space: pre" that would blow the column up to the longest
+   line on narrow screens. The textarea scrolls the overflow internally. */
+.grid>* {
+  min-width: 0
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line-hard);
+  box-shadow: var(--shadow)
+}
+
+.card>h2 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  background: var(--panel-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card .body {
+  padding: 12px
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.actionbar {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+footer {
+  margin-top: 26px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-hard);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  letter-spacing: .04em
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .card {
+    transition: box-shadow .15s ease
+  }
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:900px) {
+  .grid {
+    grid-template-columns: 1fr
+  }
+
+  .wrap {
+    padding: 16px 14px 48px
+  }
+
+  .brand h1 {
+    font-size: 25px
+  }
+}
+
+@media (max-width:700px) {
+  header.top {
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .brand {
+    order: 1;
+    width: 100%
+  }
+
+  .topright {
+    order: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stamp {
+    white-space: normal;
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+}
+
+@media (max-width:640px) {
+  .wrap {
+    padding: 14px 12px 40px
+  }
+
+  .brand h1 {
+    font-size: 22px;
+    line-height: 1.15
+  }
+
+  .brand p {
+    font-size: 12.5px
+  }
+
+  /* iOS'ta odaklanınca sayfayı yakınlaştırmasın / avoid iOS focus zoom */
+  input[type=number],
+  input[type=text],
+  select {
+    font-size: 16px;
+    padding: 9px 8px;
+  }
+
+  textarea {
+    font-size: 13px;
+    min-height: 150px
+  }
+
+  button {
+    min-height: var(--tap);
+    padding: 10px 14px;
+  }
+
+  .btnrow button {
+    flex: 1 1 auto
+  }
+
+  .actionbar button {
+    flex: 1 1 auto
+  }
+
+  .card .body {
+    padding: 11px
+  }
+
+  .card>h2 {
+    padding: 9px 11px
+  }
+}
+
+@media (max-width:400px) {
+
+  .row,
+  .row3 {
+    grid-template-columns: 1fr
+  }
+}
+  </style>
+  <style>
+/* ---- assets/css/components.css ---- */
+/* =====================================================================
+   components.css — gösterge, DR bandı, karar şeridi, grafik, tablolar
+   components.css — readout, DR band, verdict, plot, tables
+   ===================================================================== */
+
+/* ---------- readout (signature) ---------- */
+.dro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line-hard);
+  border: 1px solid var(--line-hard);
+}
+
+.dro .cell {
+  background: #11181d;
+  padding: 14px 16px;
+  color: #dfe7ea
+}
+
+.dro .cell.warnbg {
+  background: #2a1512
+}
+
+.dro .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #8fa2ac
+}
+
+.dro .v {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.05;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em
+}
+
+.dro .v small {
+  font-size: 15px;
+  font-weight: 400;
+  color: #8fa2ac;
+  margin-left: 6px;
+  letter-spacing: 0
+}
+
+.dro .sub {
+  font-size: 11.5px;
+  color: #9fb0b9;
+  margin-top: 6px;
+  font-family: var(--sans)
+}
+
+.dro .v.ok {
+  color: #8ee0a4
+}
+
+.dro .v.bad {
+  color: #ff8b7d
+}
+
+.dro .v.warn {
+  color: #ffc861
+}
+
+.dro.three {
+  grid-template-columns: 1fr 1fr 1fr
+}
+
+.dro.three .v {
+  font-size: 30px
+}
+
+/* ---------- DR bandı / DR window band ---------- */
+.band {
+  position: relative;
+  height: 30px;
+  border: 1px solid var(--line-hard);
+  background: var(--panel-2);
+  display: flex;
+  overflow: hidden;
+}
+
+.band .seg {
+  height: 100%;
+  position: relative
+}
+
+.band .seg.o {
+  background: repeating-linear-gradient(135deg, #cbe0ee, #cbe0ee 5px, #b9d4e6 5px, #b9d4e6 10px)
+}
+
+.band .seg.g {
+  background: repeating-linear-gradient(135deg, #cfe6d6, #cfe6d6 5px, #c3dfcc 5px, #c3dfcc 10px)
+}
+
+.band .seg.a {
+  background: repeating-linear-gradient(135deg, #f6e4bd, #f6e4bd 5px, #f0daaa 5px, #f0daaa 10px)
+}
+
+.band .seg.r {
+  background: repeating-linear-gradient(135deg, #f3cdc8, #f3cdc8 5px, #eebeb8 5px, #eebeb8 10px)
+}
+
+.band .mark {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--ink);
+  z-index: 2
+}
+
+.band .mark::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--ink);
+}
+
+.bandaxis {
+  position: relative;
+  height: 30px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.bandaxis span {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.bandaxis span b {
+  display: block;
+  font-weight: 600;
+  color: var(--ink)
+}
+
+.bandkey {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  margin-top: 10px
+}
+
+.bandkey i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--line-hard);
+  margin-right: 5px;
+  vertical-align: -1px
+}
+
+.wintxt {
+  margin-top: 12px;
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px
+}
+
+.wintxt b {
+  font-family: var(--mono)
+}
+
+.wintxt p {
+  margin: 0 0 7px
+}
+
+.wintxt p:last-child {
+  margin-bottom: 0
+}
+
+/* ---------- verdict banner ---------- */
+.verdict {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 13px;
+  border: 1px solid;
+  font-size: 13px;
+  margin-bottom: 14px
+}
+
+.verdict .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  color: #fff;
+  white-space: nowrap;
+  margin-top: 1px
+}
+
+.verdict.ok {
+  border-color: #8fbfa1;
+  background: #eaf4ee
+}
+
+.verdict.ok .tag {
+  background: var(--green)
+}
+
+.verdict.bad {
+  border-color: #dda49e;
+  background: #faecea
+}
+
+.verdict.bad .tag {
+  background: var(--red)
+}
+
+.verdict.warn {
+  border-color: #ddc48d;
+  background: #fbf3e2
+}
+
+.verdict.warn .tag {
+  background: var(--amber)
+}
+
+.verdict.idle {
+  border-color: var(--line-hard);
+  background: var(--panel-2)
+}
+
+.verdict.idle .tag {
+  background: var(--ink-3)
+}
+
+/* ---------- plot ---------- */
+.plotwrap {
+  position: relative;
+  background: #fbfcfc;
+  border-bottom: 1px solid var(--line)
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 420px;
+  touch-action: none
+}
+
+.plotbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  flex-wrap: wrap
+}
+
+.plotbar input[type=range] {
+  flex: 1;
+  min-width: 160px;
+  accent-color: var(--blue);
+  height: 26px;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: var(--ink-2);
+  padding: 0 12px 10px;
+  text-transform: uppercase
+}
+
+.legend i {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  vertical-align: middle;
+  margin-right: 5px
+}
+
+/* ---------- tables ---------- */
+.tablewrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px
+}
+
+th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: left;
+  font-weight: 500;
+  border-bottom: 1px solid var(--line-hard);
+  padding: 7px 8px;
+  white-space: nowrap;
+}
+
+td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top
+}
+
+tr:last-child td {
+  border-bottom: 0
+}
+
+tr.crow {
+  cursor: pointer
+}
+
+tr.crow:hover td {
+  background: #e6eef5
+}
+
+td.num,
+th.num {
+  text-align: right;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums
+}
+
+.blk {
+  font-family: var(--mono);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  padding: 0 5px;
+  font-size: 11.5px
+}
+
+.sev {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  color: #fff
+}
+
+.sev.hi {
+  background: var(--red)
+}
+
+.sev.md {
+  background: var(--amber)
+}
+
+.sev.lo {
+  background: var(--ink-3)
+}
+
+/* ---------- chips ---------- */
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  border: 1px solid var(--line-hard);
+  background: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.chip:hover {
+  background: var(--panel-2)
+}
+
+.chip.on {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink)
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:760px) {
+  .dro.three {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .dro.three .cell:first-child {
+    grid-column: 1 / -1
+  }
+}
+
+@media (max-width:640px) {
+  canvas {
+    height: 320px
+  }
+
+  .dro .v {
+    font-size: 32px
+  }
+
+  .dro.three .v {
+    font-size: 26px
+  }
+
+  .dro .cell {
+    padding: 12px 13px
+  }
+
+  .plotbar {
+    gap: 8px
+  }
+
+  .plotbar input[type=range] {
+    flex: 1 1 100%;
+    order: 3;
+    min-width: 0;
+  }
+
+  .legend,
+  .bandkey {
+    gap: 8px 12px
+  }
+
+  .bandaxis {
+    font-size: 9px
+  }
+
+  td,
+  th {
+    padding: 8px 7px
+  }
+
+  table {
+    font-size: 12px
+  }
+
+  tr.crow td:first-child,
+  tr.crow td:nth-child(2) {
+    white-space: nowrap
+  }
+}
+
+@media (max-width:520px) {
+  .dro {
+    grid-template-columns: 1fr
+  }
+
+  .dro.three {
+    grid-template-columns: 1fr
+  }
+
+  .dro.three .cell:first-child {
+    grid-column: auto
+  }
+
+  canvas {
+    height: 280px
+  }
+
+  .verdict {
+    flex-direction: column;
+    gap: 7px
+  }
+
+  .verdict .tag {
+    align-self: flex-start
+  }
+}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="top">
+      <div class="brand">
+        <h1 data-i18n="app.h1">Kontur Yarıçap Analizi</h1>
+        <p data-i18n-html="app.lead"></p>
+      </div>
+      <div class="topright">
+        <div class="stamp" data-i18n="app.stamp"></div>
+        <div class="langbar" id="langbar" role="group" data-i18n-aria="app.langAria"></div>
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <!-- ============ SOL: GİRİŞ / LEFT: INPUT ============ -->
+      <div class="stack">
+        <section class="card">
+          <h2 data-i18n="card.program">1 · Program</h2>
+          <div class="body">
+            <div class="drop" id="drop" tabindex="0" role="button" data-i18n-html="drop.idle"></div>
+            <input type="file" id="file" accept=".h,.hc,.H,.i,.I,.nc,.NC,.txt" hidden>
+            <div style="margin-top:10px">
+              <label class="f" for="src" data-i18n="label.src"></label>
+              <textarea id="src" spellcheck="false" data-i18n-ph="ph.src"></textarea>
+            </div>
+            <div class="btnrow">
+              <button id="run" data-i18n="btn.run"></button>
+              <button class="ghost" id="sample" data-i18n="btn.sample"></button>
+              <button class="ghost" id="clear" data-i18n="btn.clear"></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 data-i18n="card.tool">2 · Takım</h2>
+          <div class="body">
+            <div class="row">
+              <div>
+                <label class="f" for="rtab" data-i18n="label.rtab"></label>
+                <input type="number" id="rtab" value="0.25" step="0.01" min="0" inputmode="decimal">
+              </div>
+              <div>
+                <label class="f" for="drcur" data-i18n="label.drcur"></label>
+                <input type="number" id="drcur" value="-0.25" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+            <p class="hint" data-i18n-html="hint.eff"></p>
+            <div class="row" style="margin-top:10px">
+              <div>
+                <label class="f" for="rphys" data-i18n="label.rphys"></label>
+                <input type="number" id="rphys" value="0.25" step="0.005" min="0.001" inputmode="decimal">
+              </div>
+              <div>
+                <label class="f" for="drref" data-i18n="label.drref"></label>
+                <input type="number" id="drref" value="-0.25" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+            <p class="hint" data-i18n-html="hint.dev"></p>
+            <div class="row" style="margin-top:10px">
+              <div>
+                <label class="f" for="safety" data-i18n="label.safety"></label>
+                <input type="number" id="safety" value="0.005" step="0.005" min="0" inputmode="decimal">
+              </div>
+              <div>
+                <label class="f" for="tol" data-i18n="label.tol"></label>
+                <input type="number" id="tol" value="0.002" step="0.001" min="0.0005" inputmode="decimal">
+              </div>
+            </div>
+
+            <label class="chkline">
+              <input type="checkbox" id="gouge">
+              <span data-i18n="chk.gouge"></span>
+            </label>
+
+            <label class="chkline">
+              <input type="checkbox" id="outAllow">
+              <span data-i18n-html="chk.outAllow"></span>
+            </label>
+
+            <div class="row" style="margin-top:10px">
+              <div>
+                <label class="f" for="outcap" data-i18n="label.outcap"></label>
+                <input type="number" id="outcap" value="0.3" step="0.01" min="0" inputmode="decimal" disabled>
+              </div>
+              <div>
+                <p class="hint" style="margin:18px 0 0" data-i18n="hint.outcap"></p>
+              </div>
+            </div>
+            <p class="hint" data-i18n-html="hint.outoffset"></p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 data-i18n="card.howto">Nasıl okunur</h2>
+          <div class="body">
+            <ul class="notes">
+              <li data-i18n-html="howto.1"></li>
+              <li data-i18n-html="howto.2"></li>
+              <li data-i18n-html="howto.3"></li>
+              <li data-i18n-html="howto.4"></li>
+              <li data-i18n-html="howto.5"></li>
+              <li data-i18n-html="howto.6"></li>
+              <li data-i18n-html="howto.7"></li>
+              <li data-i18n-html="howto.8"></li>
+              <li data-i18n-html="howto.9"></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ SAĞ: SONUÇ / RIGHT: RESULTS ============ -->
+      <div class="stack">
+
+        <div id="verdict" class="verdict idle"></div>
+
+        <div class="dro three">
+          <div class="cell" id="cellMin">
+            <div class="k" id="kMin"></div>
+            <div class="v" id="vMin">—</div>
+            <div class="sub" id="sMin"></div>
+          </div>
+          <div class="cell" id="cellMax">
+            <div class="k" data-i18n="dro.maxCtl"></div>
+            <div class="v" id="vMax">—</div>
+            <div class="sub" id="sMax"></div>
+          </div>
+          <div class="cell" id="cellForm">
+            <div class="k" data-i18n="dro.maxForm"></div>
+            <div class="v" id="vForm">—</div>
+            <div class="sub" id="sForm"></div>
+          </div>
+        </div>
+
+        <section class="card">
+          <h2><span data-i18n="card.window"></span><span id="winNote"
+              style="text-transform:none;letter-spacing:0"></span></h2>
+          <div class="body">
+            <div class="band" id="band"></div>
+            <div class="bandaxis" id="bandAxis"></div>
+            <div class="bandkey">
+              <span id="keyOut" style="display:none"><i class="o" style="background:#b9d4e6"></i><span
+                  data-i18n="band.out"></span></span>
+              <span><i class="g" style="background:#c3dfcc"></i><span data-i18n="band.green"></span></span>
+              <span><i class="a" style="background:#f0daaa"></i><span data-i18n="band.amber"></span></span>
+              <span><i class="r" style="background:#eebeb8"></i><span data-i18n="band.red"></span></span>
+            </div>
+            <div class="wintxt" id="winTxt"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2><span data-i18n="card.plot"></span><span id="plotTitle"></span></h2>
+          <div class="plotwrap">
+            <canvas id="cv"></canvas>
+          </div>
+          <div class="plotbar">
+            <label class="f" for="rng" style="margin:0;white-space:nowrap" data-i18n="plot.testdr"></label>
+            <input type="range" id="rng" min="0" max="100" value="50" step="1" disabled>
+            <span class="blk" id="rngVal" style="min-width:86px;text-align:right">— mm</span>
+            <button class="ghost" id="fit" style="padding:5px 10px;font-size:12px" data-i18n="plot.fit"></button>
+          </div>
+          <div class="legend">
+            <span><i style="background:#0d1418"></i><span data-i18n="legend.contour"></span></span>
+            <span><i style="background:#14507e"></i><span data-i18n="legend.center"></span></span>
+            <span><i style="background:#b32319"></i><span data-i18n="legend.gouge"></span></span>
+            <span><i style="background:#0f7d86"></i><span data-i18n="legend.channel"></span></span>
+            <span><i style="background:#7a3fa8"></i><span data-i18n="legend.plunge"></span></span>
+            <span><i style="background:#b57405"></i><span data-i18n="legend.damage"></span></span>
+          </div>
+          <div class="chips" id="conChips" style="padding:0 12px 12px"></div>
+        </section>
+
+        <section class="card">
+          <h2><span data-i18n="card.links"></span><span id="lnkAt" style="text-transform:none;letter-spacing:0"></span>
+          </h2>
+          <div id="lnkBox"></div>
+        </section>
+
+        <section class="card">
+          <h2><span data-i18n="card.damage"></span><span id="dmgAt" style="text-transform:none;letter-spacing:0"></span>
+          </h2>
+          <div id="dmgBox"></div>
+        </section>
+
+        <div class="actionbar">
+          <button class="ghost" id="dl" data-i18n="btn.annotate"></button>
+          <button class="ghost" id="toggleDet" data-i18n="btn.detailsShow"></button>
+        </div>
+
+        <section class="card det" style="display:none">
+          <h2 data-i18n="card.crit"></h2>
+          <div id="critBox"></div>
+        </section>
+
+        <section class="card det" style="display:none">
+          <h2 data-i18n="card.corners"></h2>
+          <div id="cornBox"></div>
+        </section>
+
+        <section class="card det" style="display:none">
+          <h2 data-i18n="card.contours"></h2>
+          <div id="conBox"></div>
+        </section>
+
+        <section class="card det" style="display:none">
+          <h2 data-i18n="card.parse"></h2>
+          <div id="warnBox"></div>
+        </section>
+
+      </div>
+    </div>
+
+    <footer data-i18n="app.footer"></footer>
+  </div>
+
+  <script>
+/* ---- assets/js/i18n.js ---- */
+/* =====================================================================
+   i18n.js — küçük çeviri çekirdeği / tiny translation core
+
+   Sözlükler I18N.register(code, meta, dict) ile kaydedilir.
+   Anahtar bulunamazsa önce yedek dile (tr), sonra anahtarın kendisine düşer.
+   Yer tutucular: "DR {v} mm"  ->  t('key', {v: 0.25})
+   ===================================================================== */
+(function (global) {
+  'use strict';
+
+  var DICTS = {};
+  var META = {};
+  var FALLBACK = 'tr';
+  var LANG = FALLBACK;
+  var listeners = [];
+  var STORAGE_KEY = 'hrl.lang';
+
+  function register(code, meta, dict) {
+    DICTS[code] = dict;
+    META[code] = meta || { code: code, label: code.toUpperCase() };
+  }
+
+  function langs() {
+    return Object.keys(DICTS).map(function (c) { return META[c]; });
+  }
+
+  function has(code) { return Object.prototype.hasOwnProperty.call(DICTS, code); }
+
+  function fill(str, params) {
+    if (!params) return str;
+    return String(str).replace(/\{(\w+)\}/g, function (m, k) {
+      return params[k] === undefined || params[k] === null ? m : String(params[k]);
+    });
+  }
+
+  function raw(key) {
+    var d = DICTS[LANG];
+    if (d && d[key] !== undefined) return d[key];
+    var f = DICTS[FALLBACK];
+    if (f && f[key] !== undefined) return f[key];
+    return null;
+  }
+
+  function t(key, params) {
+    var s = raw(key);
+    return s === null ? key : fill(s, params);
+  }
+
+  /* Sözlükte olmayan anahtar için boş dizge — isteğe bağlı parçalarda kullanışlı */
+  function opt(key, params) {
+    var s = raw(key);
+    return s === null ? '' : fill(s, params);
+  }
+
+  /* Sayıya göre "<key>.one" / "<key>.other" varyantı; yoksa "<key>"e düşer.
+     Türkçede sayıdan sonra çoğul eki gelmediği için tek anahtar yeter,
+     İngilizce sözlük varyantları tanımlar.
+
+     Picks the "<key>.one" / "<key>.other" variant by count, falling back to
+     "<key>". Turkish needs no plural after a numeral, so one key is enough
+     there; the English dictionary defines the variants. */
+  function plural(key, n, params) {
+    var v = key + (n === 1 ? '.one' : '.other');
+    var p = {};
+    if (params) for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k];
+    p.n = n;
+    return t(raw(v) === null ? key : v, p);
+  }
+
+  function detect() {
+    var saved = null;
+    try { saved = global.localStorage && global.localStorage.getItem(STORAGE_KEY); } catch (e) { /* private mode */ }
+    if (saved && has(saved)) return saved;
+    var nav = (global.navigator && (global.navigator.language || global.navigator.userLanguage)) || '';
+    var short = String(nav).toLowerCase().split('-')[0];
+    if (has(short)) return short;
+    return has(FALLBACK) ? FALLBACK : Object.keys(DICTS)[0];
+  }
+
+  function apply(root) {
+    var doc = global.document;
+    if (!doc) return;
+    root = root || doc;
+    var i, els;
+
+    els = root.querySelectorAll('[data-i18n]');
+    for (i = 0; i < els.length; i++) els[i].textContent = t(els[i].getAttribute('data-i18n'));
+
+    els = root.querySelectorAll('[data-i18n-html]');
+    for (i = 0; i < els.length; i++) els[i].innerHTML = t(els[i].getAttribute('data-i18n-html'));
+
+    els = root.querySelectorAll('[data-i18n-ph]');
+    for (i = 0; i < els.length; i++) els[i].setAttribute('placeholder', t(els[i].getAttribute('data-i18n-ph')));
+
+    els = root.querySelectorAll('[data-i18n-title]');
+    for (i = 0; i < els.length; i++) els[i].setAttribute('title', t(els[i].getAttribute('data-i18n-title')));
+
+    els = root.querySelectorAll('[data-i18n-aria]');
+    for (i = 0; i < els.length; i++) els[i].setAttribute('aria-label', t(els[i].getAttribute('data-i18n-aria')));
+
+    if (root === doc) {
+      doc.documentElement.setAttribute('lang', LANG);
+      doc.title = t('app.title');
+    }
+  }
+
+  function setLang(code, silent) {
+    if (!has(code) || code === LANG) return false;
+    LANG = code;
+    try { global.localStorage && global.localStorage.setItem(STORAGE_KEY, code); } catch (e) { /* private mode */ }
+    apply();
+    if (!silent) listeners.forEach(function (fn) { try { fn(code); } catch (e) { /* dinleyici patlamasın */ } });
+    return true;
+  }
+
+  function init() {
+    LANG = detect();
+    apply();
+    return LANG;
+  }
+
+  function onChange(fn) { if (typeof fn === 'function') listeners.push(fn); }
+
+  global.I18N = {
+    register: register, langs: langs, has: has, apply: apply,
+    setLang: setLang, init: init, onChange: onChange, t: t, opt: opt, plural: plural,
+    get lang() { return LANG; }
+  };
+  global.t = t;
+})(typeof window !== 'undefined' ? window : this);
+  </script>
+  <script>
+/* ---- assets/js/i18n/tr.js ---- */
+/* =====================================================================
+   tr.js — Türkçe sözlük (yedek dil)
+   ===================================================================== */
+I18N.register('tr', { code: 'tr', label: 'TR', name: 'Türkçe' }, {
+
+  /* ---------- sayfa iskeleti ---------- */
+  'app.title': 'Kontur Yarıçap Analizi — Heidenhain .H',
+  'app.h1': 'Kontur Yarıçap Analizi',
+  'app.lead': 'Heidenhain Klartext (<code>.H</code>) veya ISO programını okur. DR ile pay verirken hangi aralıkta ' +
+    'kalabileceğini üç ayrı sınırdan bulur: kumandanın “takım yarıçapı çok büyük” hatası, dalış ve geri çekilme ' +
+    'hareketlerinin kanal duvarına taşması, ve bırakılan payın nerede tutmadığı.',
+  'app.stamp': 'Sadece XY düzlemi · mm · yerel çalışır',
+  'app.langAria': 'Dil seçimi',
+  'app.footer': 'Tüm hesap tarayıcıda yapılır · program hiçbir yere gönderilmez · sonuçları makinede doğrulamadan üretime alma',
+
+  /* ---------- 1 · Program ---------- */
+  'card.program': '1 · Program',
+  'drop.idle': '<b>Dosya bırak</b> veya tıkla — .H, .HC, .I, .NC, .txt',
+  'drop.loaded': '<b>{name}</b> yüklendi',
+  'label.src': 'Program metni',
+  'ph.src': '0 BEGIN PGM PARCA MM\n1 BLK FORM 0.1 Z X-60 Y-40 Z-20\n...',
+  'btn.run': 'Analiz et',
+  'btn.sample': 'Örnek yükle',
+  'btn.clear': 'Temizle',
+
+  /* ---------- 2 · Takım ---------- */
+  'card.tool': '2 · Takım',
+  'label.rtab': 'Takım tablosu R (mm)',
+  'label.drcur': 'Programdaki DR (mm)',
+  'hint.eff': 'Etkin yarıçap = R + DR. Post DR = &minus;R yazdıysa etkin yarıçap sıfırdır ve tezgah yolu aynen ' +
+    'işler. DR alanı programdaki TOOL CALL\'dan otomatik doldurulur.',
+  'label.rphys': 'Gerçek takım yarıçapı (mm)',
+  'label.drref': 'Nominal formun DR\'si',
+  'hint.dev': 'Malzemeyi kaldıran <b>gerçek</b> yarıçaptır; tablo R\'sinden bağımsızdır. Nominal DR, resimdeki ' +
+    'formun oluştuğu değerdir &mdash; CAM takım merkez yolu bastıysa bu, programdaki DR\'dir.<br>' +
+    'Duvar sapması = (DR &minus; nominal DR) + (tablo R &minus; gerçek R). Artı değer, duvarda daha çok ' +
+    'malzeme kalması yani kanalın daralması demektir.',
+  'label.safety': 'Güvenlik payı (mm)',
+  'label.tol': 'Yay hassasiyeti (mm)',
+  'chk.gouge': 'Dar geçit taraması. Gerçek kontur programlarında aç; CAM\'in takım merkez yolunu bastığı ' +
+    'programlarda komşu pasoları hata sanar.',
+  'chk.outAllow': '<b>Tezgahta dışarı ofset verebiliyorum.</b> Yolu konturun öbür tarafına kaydırıp kanalı ' +
+    '<b>büyütmek</b> için &minus;R\'nin altına inebiliyorsan aç. DR ekseni aşağı doğru açılır.',
+  'label.outcap': 'Verebildiğin en büyük dış ofset (mm)',
+  'hint.outcap': 'Tezgahın / kumandanın pratik sınırı. Geometrik sınır bunun altındaysa küçük olan geçerlidir.',
+  'hint.outoffset': 'Dış ofset = etkin yarıçapın eksiye düşmesi: takım merkezi konturun öbür yanına geçer, duvar ' +
+    'her yerde <b>nominalin ötesine</b> kesilir ve kanal iki katı kadar genişler. Bu payın geri alınamayacağını ' +
+    'unutma &mdash; verdiğin kadar malzeme kalıcı gider.',
+
+  /* ---------- Nasıl okunur ---------- */
+  'card.howto': 'Nasıl okunur',
+  'howto.1': '<b>DR = &minus;R</b> nominal taban: etkin yarıçap sıfır, tezgah programı olduğu gibi işler. Üstü pay ' +
+    'bırakır ve kanalı daraltır.',
+  'howto.2': '<b>DR minimum · dış</b>: &minus;R\'nin altı, ancak <i>dış ofset</i> ile mümkündür &mdash; takım merkezi ' +
+    'konturun öbür yanına geçer ve kanal büyür. Kumanda toplam yarıçapı eksi kabul etmiyorsa bu bölge kapalıdır; ' +
+    '“dışarı ofset verebiliyorum” kutusunu işaretleyince açılır. Sınırı, dışbükey köşe yaylarının ters döndüğü ' +
+    'ya da yolun kendini kestiği yerdir.',
+  'howto.3': '<b>DR maks · kumanda</b>: bu değeri geçince ofset bir kontur elemanını yutuyor ya da bir iç yaydan ' +
+    'büyük kalıyor. Kumandanın <i>“takım yarıçapı çok büyük”</i> dediği an burasıdır.',
+  'howto.4': '<b>DR maks · form tutar</b>: dalış, geri çekilme ve düzeltme aç/kapa hareketleri <b>R0</b> ile ' +
+    'programlanır, DR ile yer değiştirmez. Bu değerin üstünde takım o noktalarda bırakmak istediğin payı ' +
+    'geri kesip duvarı nominalde bırakır &mdash; kanalın geri kalanı dararken orada yerel bir çentik kalır.',
+  'howto.5': '<b>Kalıcı hasar</b> ayrı ölçülür: bir hareketin <i>nominal</i> duvarın ötesine kesmesi. Pay bırakma ' +
+    'yönünde DR büyütmek normalde bunu yapmaz; program bunu bulursa ayrıca uyarır.',
+  'howto.6': 'Kütük durumu bilinmediği için, nominal DR\'de zaten boşta olan hareketler (önceden açılmış cebe inen ' +
+    'hızlı dalışlar gibi) değerlendirme dışı bırakılır ve listede <i>boşta</i> diye işaretlenir.',
+  'howto.7': 'Z bantları kontur bazında karşılaştırılır: bir hareket, yalnız Z aralığı örtüşen konturların açtığı ' +
+    'alana göre ölçülür. Sürekli Z inişli (Z-level) yollarda kontur bandının tamamı birlikte alınır.',
+  'howto.8': '<b>Parça bozulması</b>: DR sınırı aştığında kumanda M120 ile çalışıyorsa durmaz, yutulan elemanı ' +
+    'atlayıp köşeyi keser. Listedeki mm değeri, yolun o yüzeyin içine girdiği miktardır.',
+  'howto.9': 'Grafikte tekerlekle yakınlaş, sürükleyerek kaydır. Kaydırıcıyla DR\'yi gezdirip kanal sınırının nasıl ' +
+    'daraldığını ve dalış çemberlerinin ne zaman dışarı taştığını görebilirsin.',
+
+  /* ---------- göstergeler ---------- */
+  'dro.min': 'DR minimum',
+  'dro.minOut': 'DR minimum · dış ofset',
+  'dro.maxCtl': 'DR maks · kumanda',
+  'dro.maxForm': 'DR maks · form tutar',
+  'dro.notYet': 'Henüz analiz yapılmadı',
+  'dro.noContour': 'Düzeltmeli kontur bulunamadı',
+  'dro.noRLRR': 'RL / RR bulunamadı',
+  'dro.minOutSub': 'Dışarı {out} mm · kanal {ch} mm büyür',
+  'dro.minOutGeo': ' · sınırı geometri koyuyor',
+  'dro.minOutMach': ' · sınırı tezgah koyuyor',
+  'dro.minNomSub': 'Etkin yarıçap 0 · program aynen işlenir',
+  'dro.maxFree': 'sınırsız',
+  'dro.maxFreeSub': 'Konturlarda takımı sıkıştıran geometri yok',
+  'dro.maxTooTight': 'Etkin yarıçap {r} mm bile fazla',
+  'dro.maxSub': 'Etkin yarıçap en fazla {r} mm · pay {s} dahil',
+  'dro.formOutside': 'Dalış / bağlantı hareketleri kontur alanının dışında kalıyor',
+  'dro.formNoLinks': 'Konturla Z\'de kesişen dalış / bağlantı hareketi yok',
+  'dro.formNoLimit': 'sınır yok',
+  'dro.formOkSub': '{n} hareket incelendi · pay her yerde tutuyor',
+  'dro.formNone': 'yok',
+  'dro.formTightSub': 'Çıkış / dalış noktaları duvara teğet · pay ilk mikrondan kaçıyor',
+  'dro.formSub': 'Bu değere kadar bırakılan pay her yerde oturur',
+
+  /* ---------- DR penceresi ---------- */
+  'card.window': 'DR penceresi',
+  'band.out': 'Dış ofset · kanal büyüyor, nominalin ötesine kesiliyor',
+  'band.green': 'Pay tam oturuyor',
+  'band.amber': 'Pay kısmen kayboluyor · dalış/çıkış noktalarında',
+  'band.red': 'Kumanda hata verir',
+  'window.placeholder': 'Analiz sonrası burada özetlenir.',
+  'window.note': '· şu an DR {dr}',
+  'window.tickOut': 'dış sınır',
+  'window.tickNominal': 'nominal',
+  'window.tickNoRoom': 'pay yok',
+  'window.tickForm': 'pay tutar',
+  'window.tickCtl': 'kumanda',
+  'window.outP': '<p><b>Dış ofset {out} mm\'ye kadar</b> — DR {drMin} altındaki mavi bölge. ' +
+    'Orada takım merkezi konturun öbür yanına geçer, duvar nominalin ötesine kesilir ve kanal en fazla ' +
+    '<b>{ch} mm</b> büyür. {who}</p>',
+  'window.outGeo': 'Sınırı geometri koyuyor: {floor} altında dışbükey köşe yayları ters dönüyor ya da yol kendini kesiyor.',
+  'window.outMach': 'Sınırı senin girdiğin tezgah değeri koyuyor; geometri daha aşağısına da izin veriyor.',
+  'window.tightP1': '<p><b>Kumanda {drMin} … {ctl} arasını kabul eder</b> ({room} mm pay, kanal genişliğinde ' +
+    '{ch} mm daralma) ve bu aralıkta parçaya <b>kalıcı zarar gelmez</b>.</p>',
+  'window.tightP2': '<p>Ama {n} R0 noktası nominal duvara teğet duruyor, bu yüzden bandın tamamı sarı: ' +
+    'DR\'yi ne kadar büyütürsen büyüt o noktalarda duvar nominalde kalır. Kanalın geri kalanı düzgün ' +
+    'daralır, sadece o noktalarda Ø{dia} mm\'lik yerel çentik oluşur ve derinliği bıraktığın payın tamamı kadardır.</p>',
+  'window.roomP': '<p><b>Oynama payı {room} mm</b> — DR {drMin} ile {eff} arası. ' +
+    'Bu aralıkta duvara en fazla {room} mm malzeme bırakırsın, kanal genişliği {ch} mm daralır.</p>',
+  'window.lossyP': '<p>{form} üstünde kumanda hâlâ hata vermez ({ctl}\'e kadar) ve parça hurda olmaz, ama ' +
+    'bıraktığın pay dalış / çıkış noktalarında geri kesilir. Aşağıdaki tabloda hangi kütükte ve ne kadar olduğu var.</p>',
+  'window.harmP': '<p style="color:var(--red)"><b>Dikkat:</b> DR {dr} üstünde bir hareket nominal duvarın ' +
+    'ötesine kesiyor — bu kalıcı hasardır.</p>',
+  'window.safeP': '<p style="color:var(--green)"><b>Kalıcı hasar yok:</b> kumanda sınırına kadar hiçbir dalış ya da ' +
+    'bağlantı hareketi nominal duvarın ötesine kesmiyor. DR büyütmek parçayı küçültmez, yalnız pay bırakır.{extra}</p>',
+  'window.safeOutNote': ' <span style="color:var(--ink-2)">Bu, {drMin} üstü için geçerlidir; ' +
+    'dış ofset bölgesinde konturun kendisi zaten nominalin ötesine kesiyor.</span>',
+  'window.curP': '<p>Seçili DR {dr} → nominale göre duvar sapması <b>{dev} mm</b>, kanal genişliği <b>{ch} mm</b>.{wear}</p>',
+  'window.curWear': ' Bunun {wear} mm\'i, gerçek takımın tablo ölçüsünden farklı olmasından geliyor.',
+  'window.tailOut': '<p style="color:var(--ink-2)">DR {drMin} üstü pay bırakır ve kanalı daraltır; altı dış ofsettir ' +
+    've kanalı büyütür. Dış ofsette bırakılacak pay yoktur, malzeme kalıcı gider &mdash; ölçüyü tezgahta ' +
+    'doğrulamadan tam sınıra oturma.</p>',
+  'window.tailIn': '<p style="color:var(--ink-2)">Bu ayarda DR yalnız pay bırakır: kanalı <b>büyütmek</b> için DR ' +
+    '{drMin}\'in altına inmek, yani etkin yarıçapı eksiye düşürmek gerekir. Tezgahta dışarı ofset ' +
+    'verebiliyorsan “dışarı ofset verebiliyorum” kutusunu işaretle; veremiyorsan tablo R\'sini düşür ya da ' +
+    'nominal formu değiştir.</p>',
+
+  /* ---------- grafik ---------- */
+  'card.plot': 'Kontur ve takım yolu',
+  'plot.testdr': 'Deneme DR',
+  'plot.fit': 'Sığdır',
+  'plot.noVal': '— mm',
+  'plot.val': 'DR {dr}',
+  'plot.empty': 'Kontur yok',
+  'plot.grid': 'ızgara {step} mm',
+  'plot.block': 'kütük {block}',
+  'legend.contour': 'Kontur',
+  'legend.center': 'Takım merkez yolu',
+  'legend.gouge': 'Çakışma / gouge',
+  'legend.channel': 'İşlenen kanal sınırı',
+  'legend.plunge': 'Dalış / bağlantı · takım çemberi',
+  'legend.damage': 'Parça bozulması / odak',
+  'plot.chip': 'Kontur {i} · {side} · {lim}',
+
+  /* ---------- kartlar ---------- */
+  'card.links': 'Dalış ve bağlantı hareketleri',
+  'card.damage': 'Parça bozulmaları',
+  'card.crit': 'Sınırlayan kütükler',
+  'card.corners': 'Keskin iç köşeler',
+  'card.contours': 'Kontur dökümü',
+  'card.parse': 'Ayrıştırma notları',
+  'btn.annotate': 'Uyarıları programa işle ve indir',
+  'btn.detailsShow': 'Ayrıntıları göster',
+  'btn.detailsHide': 'Ayrıntıları gizle',
+  'common.afterAnalysis': 'Analiz sonrası burada listelenir.',
+  'common.dash': '—',
+  'common.at': '· DR {dr}',
+
+  /* ---------- karar şeridi ---------- */
+  'vd.idle.tag': 'Hazır',
+  'vd.idle.txt': 'Bir program yükle ve <b>Analiz et</b>’e bas.',
+  'vd.empty.tag': 'Boş',
+  'vd.empty.txt': 'Önce program metnini yapıştır ya da dosya bırak.',
+  'vd.error.tag': 'Hata',
+  'vd.error.txt': 'Program okunamadı: {msg}',
+  'vd.noContour.tag': 'Kontur yok',
+  'vd.noContour.txt': 'Programda RL / RR (veya G41 / G42) ile açılan kontur yok. Düzeltme kapalıysa yarıçap hatası da çıkmaz.',
+  'vd.noRange.tag': 'Aralık yok',
+  'vd.noRange.txt': 'Etkin yarıçap {r} mm bile bu konturlara sığmıyor. Program bu haliyle sadece DR = {drMin} ' +
+    'civarında, yani düzeltme etkisiz iken işlenebilir.',
+  'vd.drNeg.tag': 'DR eksi',
+  'vd.drNeg.txt': 'DR {dr} ile toplam yarıçap negatife düşer, kumanda bu haliyle kabul etmez. Alt sınır {drMin}. ' +
+    'Tezgahta <b>dışarı ofset</b> verebiliyorsan sol taraftaki kutuyu işaretle: yol konturun öbür yanına geçer ve ' +
+    'kanal büyür. Veremiyorsan tablo R\'sini düşürmen ya da programı değiştirmen gerekir.',
+  'vd.outMuch.tag': 'Dış ofset fazla',
+  'vd.outMuch.txt': 'DR {dr}, dışarı {out} mm demek. Sınır {floor} (dışarı {room} mm){why}',
+  'vd.outMuch.geo': ' — bunun ötesinde dışbükey köşe yayları ters dönüyor ya da yol kendini kesiyor, form bozulur.',
+  'vd.outMuch.mach': ' — tezgah için girdiğin dış ofset sınırı. Daha fazlası gerekiyorsa önce o değeri büyüt.',
+  'vd.drMuch.tag': 'DR fazla',
+  'vd.drMuch.txt': 'DR {dr} kumanda sınırının üstünde. Kabul edilen aralık {floor} … {drMax}.',
+  'vd.outZone.tag': 'Dış ofset',
+  'vd.outZone.txt': 'DR {dr} ile takım merkezi konturun öbür yanına {out} mm geçiyor. ' +
+    'Duvar sapması <b>{dev} mm</b>, kanal genişliği <b>{ch} mm</b>. {note}Dış taban {floor}.{harm}',
+  'vd.outZone.cutting': 'Nominalin ötesine kesiyorsun; bu malzeme geri gelmez, ölçüyü tutturduğundan emin ol. ',
+  'vd.outZone.safe': 'Takım tablodan farklı olduğu için yol dışarı kaysa da duvar nominalin gerisine düşmüyor. ',
+  'vd.outZone.harm': ' Ayrıca {kind} hareketi (kütük {block}) nominal duvarın {mm} mm ötesinde kalıyor.',
+  'vd.harm.tag': 'Parçaya zarar',
+  'vd.harm.txt': 'DR {dr} ile {kind} hareketi (kütük {block}) nominal duvarın {mm} mm ötesine kesiyor — ' +
+    'bu kalıcı hasardır.{top}',
+  'vd.harm.top': ' Hasarsız üst sınır {v}.',
+  'vd.tight.tail': '{n} R0 noktasında (dalış, geri çekilme, düzeltme kapanışı) takım merkezi nominal duvara ' +
+    'teğet duruyor. DR\'yi ne kadar büyütürsen büyüt o noktalarda duvar nominalde kalır: her biri ' +
+    'Ø{dia} mm\'lik, derinliği bıraktığın payın tamamı kadar yerel çentik. Payın her yerde ' +
+    'oturması için o R0 noktalarını kanalın ortasına çekmek gerekir.',
+  'vd.tightDialed.tag': 'Pay yerel kaçıyor',
+  'vd.tightDialed.txt': 'DR {dr} ile duvara {dev} mm pay bırakıyorsun ve parçaya kalıcı zarar gelmiyor. Ama {tail}{worst}',
+  'vd.tightDialed.worst': ' Şu an en derini kütük {block}\'te {mm} mm.',
+  'vd.tightNominal.tag': 'Nominalde · pay tutmaz',
+  'vd.tightNominal.txt': 'Bu DR\'de sorun yok, kumanda {drMax}\'e kadar da kabul eder ve hiçbir hareket nominal ' +
+    'duvarın ötesine kesmez. Ancak pay bırakmaya başladığın anda {tail}',
+  'vd.lossy.tag': 'Pay tutmuyor',
+  'vd.lossy.txt': 'Kumanda hata vermez ve parçada kalıcı hasar yok, ama DR {dr} ile bıraktığın {dev} mm payın ' +
+    '{lost} kadarı {where} noktasında geri kesiliyor. Payın her yerde oturduğu üst sınır {form}.',
+  'vd.lossy.some': 'bir kısmı',
+  'vd.lossy.whereBlock': 'kütük {block}',
+  'vd.lossy.whereGeneric': 'dalış / çıkış',
+  'vd.free.tag': 'Serbest',
+  'vd.free.txt': 'DR için geometrik üst sınır yok. Alt sınır {drMin} (etkin yarıçap sıfır).',
+  'vd.fine.tag': 'Uygun',
+  'vd.fine.txt': 'Sorunsuz aralık {drMin} … {eff} — duvara en fazla {room} mm pay, kanal genişliğinde ' +
+    '{ch} mm daralma.{cur}{out}',
+  'vd.fine.cur': ' Şu anki DR {dr} bu aralıkta.',
+  'vd.fine.out': ' Gerekirse {floor}\'e kadar dışarı ofset verip kanalı {ch} mm büyütebilirsin.',
+  'vd.damageLine': '{n} bozulma noktası. {txt}',
+  'vd.damageArc': 'İç yay etkin yarıçaptan küçük — bu DR ile o yay hiç işlenemez.',
+  'vd.damageGouge': 'Bu DR ile parçada en derin {mm} mm talaş fazlası oluşur (M120 açıksa kumanda durmaz).',
+
+  /* ---------- dalış / bağlantı tablosu ---------- */
+  'link.on': 'Düzeltme açılışı',
+  'link.off': 'Düzeltme kapanışı',
+  'link.plunge': 'Dalış (Z)',
+  'link.retract': 'Geri çekilme (Z)',
+  'link.link': 'Bağlantı',
+  'lnk.noWin': 'Programda değerlendirilebilir dalış / bağlantı hareketi yok.',
+  'lnk.noRows': 'Seçili DR için hareket ölçülemedi.',
+  'lnk.summary': '{n} hareket incelendi · {harm} · {loss}',
+  'lnk.summaryHarm': '<b style="color:var(--red)">{n} tanesi nominal duvarı kesiyor</b>',
+  'lnk.summaryNoHarm': 'nominal duvarı kesen yok',
+  'lnk.summaryLoss': '{n} tanesinde bırakılan pay geri kesiliyor.',
+  'lnk.summaryNoLoss': 'bu DR\'de pay her yerde oturuyor.',
+  'lnk.outZone': ' <b>Dış ofsettesin:</b> bırakılacak pay olmadığı için “pay kaybı” sütunu burada hareketin ' +
+    'büyütülmüş kanalın dışına ne kadar taştığını gösterir. “Kayıpsız üst DR” ise pay bırakma bölgesine ' +
+    '({v} üstüne) aittir.',
+  'lnk.th.block': 'Kütük',
+  'lnk.th.move': 'Hareket',
+  'lnk.th.z': 'Z',
+  'lnk.th.harm': 'Kalıcı hasar',
+  'lnk.th.loss': 'Pay kaybı',
+  'lnk.th.limit': 'Kayıpsız üst DR',
+  'lnk.idle': ' <span style="color:var(--ink-3)">· boşta, kütük durumu bilinmiyor</span>',
+  'lnk.noHarm': 'yok',
+  'lnk.noLimit': 'sınır yok',
+  'lnk.more': '…ve {n} hareket daha.',
+
+  /* ---------- parça bozulmaları ---------- */
+  'dmg.none': 'Bu DR değerinde parçada bozulma yok.',
+  'dmg.summary': '{places} ayrı yer, toplam {blocks} kütük (aynı yer her Z seviyesinde tekrar ediyor).',
+  'dmg.th.contour': 'Kontur',
+  'dmg.th.block': 'Kütük',
+  'dmg.th.level': 'Seviye',
+  'dmg.th.what': 'Ne oluyor',
+  'dmg.th.excess': 'Talaş fazlası',
+  'dmg.kind.gouge': 'Köşe kesiliyor — elemanın üzerinden geçiliyor',
+  'dmg.kind.arc': 'İç yay etkin yarıçaptan küçük',
+  'dmg.kind.throat': 'Dar geçit — yol kendini kesiyor',
+  'dmg.kind.appr': 'Yaklaşma bloğu etkin yarıçaptan kısa — takım kontura yandan dalıyor',
+  'dmg.kind.dep': 'Uzaklaşma bloğu etkin yarıçaptan kısa — takım kontura yandan kaçıyor',
+  'dmg.kind.onIn': 'Düzeltme talaş içinde açılıyor — takım yana süpürüyor',
+  'dmg.kind.onOut': 'Düzeltme talaş içinde kapanıyor — takım yana süpürüyor',
+  'dmg.dz': ' <span style="color:var(--ink-3)">(kütük üstünün {mm} mm altında)</span>',
+  'dmg.unmachinable': 'işlenemez',
+  'dmg.more': '…ve {n} yer daha.',
+
+  /* ---------- sınırlayan kütükler ---------- */
+  'crit.none': 'Takımı sınırlayan iç geometri bulunmadı.',
+  'crit.th.contour': 'Kontur',
+  'crit.th.block': 'Kütük',
+  'crit.th.what': 'Ne oluyor',
+  'crit.th.limit': 'Sınır Ø',
+  'crit.th.sev': 'Önem',
+  'crit.reversal': 'Kontur elemanı ofsette yutuluyor',
+  'crit.overlap': 'Takım yolu kendini kesiyor — dar geçit',
+  'crit.arcflip': 'İç yay takımdan küçük',
+  'crit.nojoin': 'Komşu elemanların ofseti kesişmiyor',
+  'crit.arc': 'İç yay yarıçapı',
+  'crit.sev.hi': 'kritik',
+  'crit.sev.md': 'sınırda',
+  'crit.sev.lo': 'bilgi',
+
+  /* ---------- keskin iç köşeler ---------- */
+  'corn.none': 'Takımı sıkıştıran iç köşe yok. Tüm köşeler dışbükey.',
+  'corn.th.contour': 'Kontur',
+  'corn.th.block': 'Kütük',
+  'corn.th.angle': 'İç açı',
+  'corn.th.edges': 'Komşu kenarlar mm',
+  'corn.th.type': 'Köşe tipi',
+  'corn.verySharp': 'çok keskin',
+  'corn.sharp': 'keskin',
+  'corn.blunt': 'yayvan',
+
+  /* ---------- kontur dökümü ---------- */
+  'con.none': 'Kontur bulunamadı.',
+  'con.th.n': '#',
+  'con.th.comp': 'Düzeltme',
+  'con.th.start': 'Başl. kütük',
+  'con.th.els': 'Eleman',
+  'con.th.len': 'Uzunluk mm',
+  'con.th.minArc': 'En küçük iç yay',
+  'con.th.allowed': 'İzin verilen Ø',
+  'con.th.outLimit': 'Dış ofset sınırı',
+
+  /* ---------- ayrıştırma notları ---------- */
+  'parse.clean': 'Program tam olarak okundu, uyarı yok.',
+  'warn.noCC': 'Kütük {block}: C bloğu öncesinde CC yok, doğru kabul edildi.',
+  'warn.crChord': 'Kütük {block}: CR yarıçapı kirişten küçük, doğru kabul edildi.',
+  'warn.rnd': 'Kütük {block}: RND R{v} uygulanamadı, keskin köşe kabul edildi.',
+  'warn.chf': 'Kütük {block}: CHF {v} uygulanamadı, keskin köşe kabul edildi.',
+  'warn.noContour': 'RL / RR (veya G41 / G42) ile açılmış hiçbir kontur bulunamadı.',
+  'warn.linkFail': 'Dalış analizi yapılamadı: {msg}',
+
+  /* ---------- programa işlenen notlar (ASCII, büyük harf) ---------- */
+  'dl.nothing.tag': 'İşaretlenecek yok',
+  'dl.nothing.txt': 'Önce analiz çalıştır; uyarı çıkmazsa programa eklenecek bir şey yok.',
+  'dl.fail.tag': 'İndirilemedi',
+  'dl.suffix': '-UYARILI.H',
+  'an.range': 'DR ARALIGI {a} ... {b} (KUMANDA)',
+  'an.rangeOpen': 'DR ALT SINIR {a} , UST SINIR YOK',
+  'an.form': 'PAYIN HER YERDE TUTTUGU UST DR {v}',
+  'an.outFloor': 'DIS OFSET ILE TABAN DR {v} : KANAL EN COK {mm} MM BUYUR',
+  'an.harm': 'KALICI HASAR : NOMINAL DUVARIN {mm} MM OTESINE KESIYOR',
+  'an.lossLimit': 'DR {v} USTUNDE BIRAKILAN PAY BURADA GERI KESILIR',
+  'an.lossNow': ' , SU AN {mm} MM',
+  'an.arcflip': 'IC YAY : ETKIN YARICAP {v} MM ALTINDA KALMALI',
+  'an.swallow': 'DR {v} UZERINDE BU ELEMAN OFSETTE YUTULUR',
+  'an.gouge': 'DR {v} ILE TALAS FAZLASI {mm} MM',
+  'an.arc': 'DR {v} ILE BU YAY ISLENEMEZ',
+  'an.apprShort': 'YAKLASMA/UZAKLASMA BLOGU ETKIN YARICAPTAN {mm} MM KISA',
+  'an.compIn': 'DUZELTME TALAS ICINDE {what} : KUTUK USTUNUN {dz} MM ALTINDA , {mm} MM YANAL SUPURME',
+  'an.compIn.on': 'ACILIYOR',
+  'an.compIn.off': 'KAPANIYOR'
+});
+  </script>
+  <script>
+/* ---- assets/js/i18n/en.js ---- */
+/* =====================================================================
+   en.js — English dictionary
+   ===================================================================== */
+I18N.register('en', { code: 'en', label: 'EN', name: 'English' }, {
+
+  /* ---------- page shell ---------- */
+  'app.title': 'Contour Radius Analysis — Heidenhain .H',
+  'app.h1': 'Contour Radius Analysis',
+  'app.lead': 'Reads a Heidenhain Klartext (<code>.H</code>) or ISO program. When you dial stock in with DR it ' +
+    'finds the range you may stay in, from three separate limits: the control\'s “tool radius too large” error, ' +
+    'plunge and retract moves breaking into the slot wall, and where the stock you left does not survive.',
+  'app.stamp': 'XY plane only · mm · runs locally',
+  'app.langAria': 'Language',
+  'app.footer': 'All maths runs in your browser · the program is never uploaded · verify results on the machine before production',
+
+  /* ---------- 1 · Program ---------- */
+  'card.program': '1 · Program',
+  'drop.idle': '<b>Drop a file</b> or click — .H, .HC, .I, .NC, .txt',
+  'drop.loaded': '<b>{name}</b> loaded',
+  'label.src': 'Program text',
+  'ph.src': '0 BEGIN PGM PART MM\n1 BLK FORM 0.1 Z X-60 Y-40 Z-20\n...',
+  'btn.run': 'Analyse',
+  'btn.sample': 'Load sample',
+  'btn.clear': 'Clear',
+
+  /* ---------- 2 · Tool ---------- */
+  'card.tool': '2 · Tool',
+  'label.rtab': 'Tool table R (mm)',
+  'label.drcur': 'DR in the program (mm)',
+  'hint.eff': 'Effective radius = R + DR. If the post wrote DR = &minus;R the effective radius is zero and the ' +
+    'machine runs the path as programmed. The DR field is filled automatically from the TOOL CALL in the program.',
+  'label.rphys': 'Actual tool radius (mm)',
+  'label.drref': 'DR of the nominal form',
+  'hint.dev': 'This is the <b>actual</b> radius removing material; it is independent of the table R. The nominal DR ' +
+    'is the value at which the form on the drawing appears &mdash; if CAM posted the tool centre path, that is the ' +
+    'DR in the program.<br>' +
+    'Wall deviation = (DR &minus; nominal DR) + (table R &minus; actual R). A positive value means more material ' +
+    'left on the wall, i.e. the slot gets narrower.',
+  'label.safety': 'Safety margin (mm)',
+  'label.tol': 'Arc tolerance (mm)',
+  'chk.gouge': 'Narrow-passage scan. Turn it on for real contour programs; on programs where CAM posted the tool ' +
+    'centre path it mistakes neighbouring passes for errors.',
+  'chk.outAllow': '<b>My machine can offset outward.</b> Turn this on if you can go below &minus;R to push the path ' +
+    'to the other side of the contour and <b>widen</b> the slot. The DR axis then opens downward.',
+  'label.outcap': 'Largest outward offset you can apply (mm)',
+  'hint.outcap': 'The practical limit of your machine / control. If the geometric limit is tighter, the smaller one wins.',
+  'hint.outoffset': 'Outward offset = the effective radius going negative: the tool centre crosses to the other side ' +
+    'of the contour, the wall is cut <b>past nominal</b> everywhere and the slot gets twice that much wider. ' +
+    'Remember this cannot be taken back &mdash; whatever you give away is gone for good.',
+
+  /* ---------- How to read this ---------- */
+  'card.howto': 'How to read this',
+  'howto.1': '<b>DR = &minus;R</b> is the nominal baseline: effective radius zero, the machine runs the program as ' +
+    'written. Above it you leave stock and the slot narrows.',
+  'howto.2': '<b>DR minimum · outward</b>: below &minus;R, only possible with an <i>outward offset</i> &mdash; the ' +
+    'tool centre crosses to the other side of the contour and the slot grows. If your control refuses a negative ' +
+    'total radius this zone is closed; ticking “my machine can offset outward” opens it. Its limit is where convex ' +
+    'corner arcs invert or the path starts to cut itself.',
+  'howto.3': '<b>DR max · control</b>: past this value the offset swallows a contour element or stays larger than an ' +
+    'inside arc. This is the moment the control says <i>“tool radius too large”</i>.',
+  'howto.4': '<b>DR max · form holds</b>: plunge, retract and compensation on/off moves are programmed with <b>R0</b> ' +
+    'and do not shift with DR. Above this value the tool cuts back the stock you wanted to leave at those points and ' +
+    'holds the wall at nominal &mdash; the rest of the slot narrows while a local notch stays there.',
+  'howto.5': '<b>Permanent damage</b> is measured separately: a move cutting past the <i>nominal</i> wall. Raising DR ' +
+    'in the stock-leaving direction normally does not do this; if the program finds it, it warns you separately.',
+  'howto.6': 'Because the blank condition is unknown, moves that are already in fresh air at the nominal DR (rapid ' +
+    'plunges into a previously opened pocket, for example) are excluded and marked <i>idle</i> in the list.',
+  'howto.7': 'Z bands are compared per contour: a move is measured only against the area opened by contours whose Z ' +
+    'range overlaps it. On continuously descending (Z-level) paths the whole contour band is taken together.',
+  'howto.8': '<b>Part damage</b>: when DR exceeds the limit and the control runs with M120, it does not stop — it ' +
+    'skips the swallowed element and cuts the corner. The mm value in the list is how far the path enters that surface.',
+  'howto.9': 'Zoom the plot with the wheel, pan by dragging. Sweep DR with the slider to watch the slot boundary ' +
+    'close in and see when the plunge circles break out.',
+
+  /* ---------- readouts ---------- */
+  'dro.min': 'DR minimum',
+  'dro.minOut': 'DR minimum · outward',
+  'dro.maxCtl': 'DR max · control',
+  'dro.maxForm': 'DR max · form holds',
+  'dro.notYet': 'Not analysed yet',
+  'dro.noContour': 'No compensated contour found',
+  'dro.noRLRR': 'No RL / RR found',
+  'dro.minOutSub': '{out} mm outward · slot grows {ch} mm',
+  'dro.minOutGeo': ' · geometry sets the limit',
+  'dro.minOutMach': ' · the machine sets the limit',
+  'dro.minNomSub': 'Effective radius 0 · program runs as written',
+  'dro.maxFree': 'unlimited',
+  'dro.maxFreeSub': 'No geometry in the contours pinches the tool',
+  'dro.maxTooTight': 'Even an effective radius of {r} mm is too much',
+  'dro.maxSub': 'Effective radius at most {r} mm · includes {s} margin',
+  'dro.formOutside': 'Plunge / link moves fall outside the contour area',
+  'dro.formNoLinks': 'No plunge / link move overlaps a contour in Z',
+  'dro.formNoLimit': 'no limit',
+  'dro.formOkSub.one': '1 move checked · stock holds everywhere',
+  'dro.formOkSub.other': '{n} moves checked · stock holds everywhere',
+  'dro.formNone': 'none',
+  'dro.formTightSub': 'Exit / plunge points touch the wall · stock is lost from the first micron',
+  'dro.formSub': 'Up to this value the stock you leave holds everywhere',
+
+  /* ---------- DR window ---------- */
+  'card.window': 'DR window',
+  'band.out': 'Outward offset · slot grows, cutting past nominal',
+  'band.green': 'Stock holds fully',
+  'band.amber': 'Stock partly lost · at plunge/exit points',
+  'band.red': 'Control errors out',
+  'window.placeholder': 'Summarised here after the analysis.',
+  'window.note': '· DR is {dr} now',
+  'window.tickOut': 'outward limit',
+  'window.tickNominal': 'nominal',
+  'window.tickNoRoom': 'no stock',
+  'window.tickForm': 'stock holds',
+  'window.tickCtl': 'control',
+  'window.outP': '<p><b>Outward offset up to {out} mm</b> — the blue zone below DR {drMin}. ' +
+    'There the tool centre crosses to the other side of the contour, the wall is cut past nominal and the slot ' +
+    'grows by at most <b>{ch} mm</b>. {who}</p>',
+  'window.outGeo': 'Geometry sets the limit: below {floor} convex corner arcs invert or the path cuts itself.',
+  'window.outMach': 'The machine value you entered sets the limit; geometry would allow going lower.',
+  'window.tightP1': '<p><b>The control accepts {drMin} … {ctl}</b> ({room} mm of stock, {ch} mm of narrowing across ' +
+    'the slot width) and within this range the part takes <b>no permanent damage</b>.</p>',
+  'window.tightP2.one': '<p>But 1 R0 point sits tangent to the nominal wall, which is why the whole band is amber: ' +
+    'no matter how far you raise DR, the wall stays at nominal there. The rest of the slot narrows cleanly, only at ' +
+    'that point a Ø{dia} mm local notch appears, as deep as the entire stock you left.</p>',
+  'window.tightP2.other': '<p>But {n} R0 points sit tangent to the nominal wall, which is why the whole band is amber: ' +
+    'no matter how far you raise DR, the wall stays at nominal there. The rest of the slot narrows cleanly, only at ' +
+    'those points a Ø{dia} mm local notch appears, as deep as the entire stock you left.</p>',
+  'window.roomP': '<p><b>Usable range {room} mm</b> — DR {drMin} to {eff}. ' +
+    'Within it you leave at most {room} mm on the wall and the slot width narrows by {ch} mm.</p>',
+  'window.lossyP': '<p>Above {form} the control still does not error out (up to {ctl}) and the part is not scrap, ' +
+    'but the stock you leave is cut back at plunge / exit points. The table below shows in which block and by how much.</p>',
+  'window.harmP': '<p style="color:var(--red)"><b>Careful:</b> above DR {dr} a move cuts past the nominal wall — ' +
+    'that is permanent damage.</p>',
+  'window.safeP': '<p style="color:var(--green)"><b>No permanent damage:</b> up to the control limit no plunge or ' +
+    'link move cuts past the nominal wall. Raising DR does not shrink the part, it only leaves stock.{extra}</p>',
+  'window.safeOutNote': ' <span style="color:var(--ink-2)">This holds above {drMin}; in the outward-offset zone the ' +
+    'contour itself already cuts past nominal.</span>',
+  'window.curP': '<p>Selected DR {dr} → wall deviation against nominal <b>{dev} mm</b>, slot width <b>{ch} mm</b>.{wear}</p>',
+  'window.curWear': ' {wear} mm of that comes from the actual tool differing from the table size.',
+  'window.tailOut': '<p style="color:var(--ink-2)">Above DR {drMin} you leave stock and narrow the slot; below it is ' +
+    'the outward offset, which widens the slot. There is no stock to leave out there, the material is gone for good ' +
+    '&mdash; do not sit exactly on the limit without verifying the size on the machine.</p>',
+  'window.tailIn': '<p style="color:var(--ink-2)">With this setting DR only leaves stock: to <b>widen</b> the slot you ' +
+    'must go below DR {drMin}, i.e. drive the effective radius negative. If your machine can offset outward, tick ' +
+    '“my machine can offset outward”; if it cannot, lower the table R or change the nominal form.</p>',
+
+  /* ---------- plot ---------- */
+  'card.plot': 'Contour and tool path',
+  'plot.testdr': 'Test DR',
+  'plot.fit': 'Fit',
+  'plot.noVal': '— mm',
+  'plot.val': 'DR {dr}',
+  'plot.empty': 'No contour',
+  'plot.grid': 'grid {step} mm',
+  'plot.block': 'block {block}',
+  'legend.contour': 'Contour',
+  'legend.center': 'Tool centre path',
+  'legend.gouge': 'Collision / gouge',
+  'legend.channel': 'Machined slot boundary',
+  'legend.plunge': 'Plunge / link · tool circle',
+  'legend.damage': 'Part damage / focus',
+  'plot.chip': 'Contour {i} · {side} · {lim}',
+
+  /* ---------- cards ---------- */
+  'card.links': 'Plunge and link moves',
+  'card.damage': 'Part damage',
+  'card.crit': 'Limiting blocks',
+  'card.corners': 'Sharp inside corners',
+  'card.contours': 'Contour breakdown',
+  'card.parse': 'Parser notes',
+  'btn.annotate': 'Write warnings into the program and download',
+  'btn.detailsShow': 'Show details',
+  'btn.detailsHide': 'Hide details',
+  'common.afterAnalysis': 'Listed here after the analysis.',
+  'common.dash': '—',
+  'common.at': '· DR {dr}',
+
+  /* ---------- verdict ---------- */
+  'vd.idle.tag': 'Ready',
+  'vd.idle.txt': 'Load a program and press <b>Analyse</b>.',
+  'vd.empty.tag': 'Empty',
+  'vd.empty.txt': 'Paste the program text or drop a file first.',
+  'vd.error.tag': 'Error',
+  'vd.error.txt': 'Could not read the program: {msg}',
+  'vd.noContour.tag': 'No contour',
+  'vd.noContour.txt': 'The program has no contour opened with RL / RR (or G41 / G42). With compensation off there is ' +
+    'no radius error either.',
+  'vd.noRange.tag': 'No range',
+  'vd.noRange.txt': 'Even an effective radius of {r} mm does not fit these contours. As it stands the program can only ' +
+    'be run around DR = {drMin}, i.e. with compensation ineffective.',
+  'vd.drNeg.tag': 'DR negative',
+  'vd.drNeg.txt': 'With DR {dr} the total radius goes negative and the control will not accept it as is. The lower ' +
+    'limit is {drMin}. If your machine can apply an <b>outward offset</b>, tick the box on the left: the path crosses ' +
+    'to the other side of the contour and the slot grows. If it cannot, you must lower the table R or change the program.',
+  'vd.outMuch.tag': 'Outward offset too large',
+  'vd.outMuch.txt': 'DR {dr} means {out} mm outward. The limit is {floor} ({room} mm outward){why}',
+  'vd.outMuch.geo': ' — beyond it convex corner arcs invert or the path cuts itself and the form breaks down.',
+  'vd.outMuch.mach': ' — that is the outward-offset limit you entered for the machine. If you need more, raise that value first.',
+  'vd.drMuch.tag': 'DR too large',
+  'vd.drMuch.txt': 'DR {dr} is above the control limit. The accepted range is {floor} … {drMax}.',
+  'vd.outZone.tag': 'Outward offset',
+  'vd.outZone.txt': 'With DR {dr} the tool centre crosses {out} mm to the other side of the contour. ' +
+    'Wall deviation <b>{dev} mm</b>, slot width <b>{ch} mm</b>. {note}Outward floor {floor}.{harm}',
+  'vd.outZone.cutting': 'You are cutting past nominal; this material does not come back, make sure you hit the size. ',
+  'vd.outZone.safe': 'Because the tool differs from the table, the wall does not fall behind nominal even though the ' +
+    'path shifts outward. ',
+  'vd.outZone.harm': ' Also, the {kind} move (block {block}) stays {mm} mm past the nominal wall.',
+  'vd.harm.tag': 'Damages the part',
+  'vd.harm.txt': 'With DR {dr} the {kind} move (block {block}) cuts {mm} mm past the nominal wall — that is ' +
+    'permanent damage.{top}',
+  'vd.harm.top': ' The damage-free upper limit is {v}.',
+  'vd.tight.tail.one': 'at 1 R0 point (plunge, retract, compensation off) the tool centre sits tangent to the nominal ' +
+    'wall. No matter how far you raise DR, the wall stays at nominal there: a Ø{dia} mm local notch as deep as the ' +
+    'entire stock you left. For the stock to hold everywhere, that R0 point must be pulled into the middle of the slot.',
+  'vd.tight.tail.other': 'at {n} R0 points (plunge, retract, compensation off) the tool centre sits tangent to the ' +
+    'nominal wall. No matter how far you raise DR, the wall stays at nominal there: each one a Ø{dia} mm local notch ' +
+    'as deep as the entire stock you left. For the stock to hold everywhere, those R0 points must be pulled into the ' +
+    'middle of the slot.',
+  'vd.tightDialed.tag': 'Stock lost locally',
+  'vd.tightDialed.txt': 'With DR {dr} you leave {dev} mm on the wall and the part takes no permanent damage. But {tail}{worst}',
+  'vd.tightDialed.worst': ' The deepest right now is {mm} mm at block {block}.',
+  'vd.tightNominal.tag': 'At nominal · stock will not hold',
+  'vd.tightNominal.txt': 'Nothing wrong at this DR — the control accepts up to {drMax} and no move cuts past the ' +
+    'nominal wall. But the moment you start leaving stock, {tail}',
+  'vd.lossy.tag': 'Stock does not hold',
+  'vd.lossy.txt': 'The control does not error out and the part takes no permanent damage, but of the {dev} mm you ' +
+    'leave with DR {dr}, {lost} is cut back at the {where} point. The upper limit where stock holds everywhere is {form}.',
+  'vd.lossy.some': 'part',
+  'vd.lossy.whereBlock': 'block {block}',
+  'vd.lossy.whereGeneric': 'plunge / exit',
+  'vd.free.tag': 'Unconstrained',
+  'vd.free.txt': 'There is no geometric upper limit for DR. The lower limit is {drMin} (effective radius zero).',
+  'vd.fine.tag': 'Good',
+  'vd.fine.txt': 'Trouble-free range {drMin} … {eff} — at most {room} mm of stock on the wall, {ch} mm of narrowing ' +
+    'across the slot width.{cur}{out}',
+  'vd.fine.cur': ' The current DR {dr} is inside that range.',
+  'vd.fine.out': ' If needed you can offset outward down to {floor} and widen the slot by {ch} mm.',
+  'vd.damageLine.one': '1 damage site. {txt}',
+  'vd.damageLine.other': '{n} damage sites. {txt}',
+  'vd.damageArc': 'An inside arc is smaller than the effective radius — that arc cannot be machined at this DR at all.',
+  'vd.damageGouge': 'At this DR the deepest overcut on the part is {mm} mm (with M120 on, the control will not stop).',
+
+  /* ---------- plunge / link table ---------- */
+  'link.on': 'Compensation on',
+  'link.off': 'Compensation off',
+  'link.plunge': 'Plunge (Z)',
+  'link.retract': 'Retract (Z)',
+  'link.link': 'Link',
+  'lnk.noWin': 'The program has no plunge / link move that can be evaluated.',
+  'lnk.noRows': 'No move could be measured for the selected DR.',
+  'lnk.summary.one': '1 move checked · {harm} · {loss}',
+  'lnk.summary.other': '{n} moves checked · {harm} · {loss}',
+  'lnk.summaryHarm.one': '<b style="color:var(--red)">1 of them cuts the nominal wall</b>',
+  'lnk.summaryHarm.other': '<b style="color:var(--red)">{n} of them cut the nominal wall</b>',
+  'lnk.summaryNoHarm': 'none cut the nominal wall',
+  'lnk.summaryLoss.one': '1 of them cuts back the stock you left.',
+  'lnk.summaryLoss.other': '{n} of them cut back the stock you left.',
+  'lnk.summaryNoLoss': 'at this DR the stock holds everywhere.',
+  'lnk.outZone': ' <b>You are in the outward zone:</b> since there is no stock to leave, the “stock lost” column here ' +
+    'shows how far the move breaks out of the widened slot. The “top DR without loss” column refers to the ' +
+    'stock-leaving zone (above {v}).',
+  'lnk.th.block': 'Block',
+  'lnk.th.move': 'Move',
+  'lnk.th.z': 'Z',
+  'lnk.th.harm': 'Permanent damage',
+  'lnk.th.loss': 'Stock lost',
+  'lnk.th.limit': 'Top DR without loss',
+  'lnk.idle': ' <span style="color:var(--ink-3)">· idle, blank condition unknown</span>',
+  'lnk.noHarm': 'none',
+  'lnk.noLimit': 'no limit',
+  'lnk.more.one': '…and 1 more move.',
+  'lnk.more.other': '…and {n} more moves.',
+
+  /* ---------- part damage ---------- */
+  'dmg.none': 'No damage on the part at this DR.',
+  'dmg.summary': 'Distinct sites: {places} · blocks in total: {blocks} (the same site repeats at every Z level).',
+  'dmg.th.contour': 'Contour',
+  'dmg.th.block': 'Block',
+  'dmg.th.level': 'Levels',
+  'dmg.th.what': 'What happens',
+  'dmg.th.excess': 'Overcut',
+  'dmg.kind.gouge': 'Corner cut away — the element is driven over',
+  'dmg.kind.arc': 'Inside arc smaller than the effective radius',
+  'dmg.kind.throat': 'Narrow passage — the path cuts itself',
+  'dmg.kind.appr': 'Approach block shorter than the effective radius — the tool enters the contour sideways',
+  'dmg.kind.dep': 'Departure block shorter than the effective radius — the tool leaves the contour sideways',
+  'dmg.kind.onIn': 'Compensation switched on inside the cut — the tool sweeps sideways',
+  'dmg.kind.onOut': 'Compensation switched off inside the cut — the tool sweeps sideways',
+  'dmg.dz': ' <span style="color:var(--ink-3)">({mm} mm below the top of the blank)</span>',
+  'dmg.unmachinable': 'not machinable',
+  'dmg.more.one': '…and 1 more site.',
+  'dmg.more.other': '…and {n} more sites.',
+
+  /* ---------- limiting blocks ---------- */
+  'crit.none': 'No inside geometry limits the tool.',
+  'crit.th.contour': 'Contour',
+  'crit.th.block': 'Block',
+  'crit.th.what': 'What happens',
+  'crit.th.limit': 'Limit Ø',
+  'crit.th.sev': 'Severity',
+  'crit.reversal': 'Contour element swallowed by the offset',
+  'crit.overlap': 'Tool path cuts itself — narrow passage',
+  'crit.arcflip': 'Inside arc smaller than the tool',
+  'crit.nojoin': 'Offsets of neighbouring elements do not intersect',
+  'crit.arc': 'Inside arc radius',
+  'crit.sev.hi': 'critical',
+  'crit.sev.md': 'borderline',
+  'crit.sev.lo': 'info',
+
+  /* ---------- sharp inside corners ---------- */
+  'corn.none': 'No inside corner pinches the tool. All corners are convex.',
+  'corn.th.contour': 'Contour',
+  'corn.th.block': 'Block',
+  'corn.th.angle': 'Inside angle',
+  'corn.th.edges': 'Adjacent edges mm',
+  'corn.th.type': 'Corner type',
+  'corn.verySharp': 'very sharp',
+  'corn.sharp': 'sharp',
+  'corn.blunt': 'shallow',
+
+  /* ---------- contour breakdown ---------- */
+  'con.none': 'No contour found.',
+  'con.th.n': '#',
+  'con.th.comp': 'Comp.',
+  'con.th.start': 'Start block',
+  'con.th.els': 'Elements',
+  'con.th.len': 'Length mm',
+  'con.th.minArc': 'Smallest inside arc',
+  'con.th.allowed': 'Allowed Ø',
+  'con.th.outLimit': 'Outward offset limit',
+
+  /* ---------- parser notes ---------- */
+  'parse.clean': 'The program was read completely, no warnings.',
+  'warn.noCC': 'Block {block}: no CC before the C block, taken as straight.',
+  'warn.crChord': 'Block {block}: CR radius smaller than the chord, taken as straight.',
+  'warn.rnd': 'Block {block}: RND R{v} could not be applied, treated as a sharp corner.',
+  'warn.chf': 'Block {block}: CHF {v} could not be applied, treated as a sharp corner.',
+  'warn.noContour': 'No contour opened with RL / RR (or G41 / G42) was found.',
+  'warn.linkFail': 'Plunge analysis failed: {msg}',
+
+  /* ---------- notes written into the program (ASCII, upper case) ---------- */
+  'dl.nothing.tag': 'Nothing to mark',
+  'dl.nothing.txt': 'Run the analysis first; if no warnings come up there is nothing to add to the program.',
+  'dl.fail.tag': 'Download failed',
+  'dl.suffix': '-ANNOTATED.H',
+  'an.range': 'DR RANGE {a} ... {b} (CONTROL)',
+  'an.rangeOpen': 'DR LOWER LIMIT {a} , NO UPPER LIMIT',
+  'an.form': 'TOP DR WHERE STOCK HOLDS EVERYWHERE {v}',
+  'an.outFloor': 'OUTWARD OFFSET FLOOR DR {v} : SLOT GROWS UP TO {mm} MM',
+  'an.harm': 'PERMANENT DAMAGE : CUTS {mm} MM PAST THE NOMINAL WALL',
+  'an.lossLimit': 'ABOVE DR {v} THE STOCK LEFT HERE IS CUT BACK',
+  'an.lossNow': ' , NOW {mm} MM',
+  'an.arcflip': 'INSIDE ARC : EFFECTIVE RADIUS MUST STAY BELOW {v} MM',
+  'an.swallow': 'ABOVE DR {v} THIS ELEMENT IS SWALLOWED BY THE OFFSET',
+  'an.gouge': 'AT DR {v} OVERCUT {mm} MM',
+  'an.arc': 'AT DR {v} THIS ARC CANNOT BE MACHINED',
+  'an.apprShort': 'APPROACH/DEPARTURE BLOCK {mm} MM SHORTER THAN THE EFFECTIVE RADIUS',
+  'an.compIn': 'COMPENSATION {what} INSIDE THE CUT : {dz} MM BELOW THE BLANK TOP , {mm} MM SIDEWAYS SWEEP',
+  'an.compIn.on': 'SWITCHED ON',
+  'an.compIn.off': 'SWITCHED OFF'
+});
+  </script>
+  <script>
+/* ---- assets/js/geometry.js ---- */
+/* =====================================================================
+   geometry.js — GEOMETRİ ÇEKİRDEĞİ / GEOMETRY CORE
+
+   Elemanlar / elements:
+     {type:'line', p0:{x,y}, p1:{x,y}, block}
+     {type:'arc',  c:{x,y}, r, a0, sweep, block}   sweep>0 => CCW
+   ===================================================================== */
+const TAU = Math.PI * 2;
+const add = (a, b) => ({ x: a.x + b.x, y: a.y + b.y });
+const sub = (a, b) => ({ x: a.x - b.x, y: a.y - b.y });
+const mul = (a, k) => ({ x: a.x * k, y: a.y * k });
+const len = a => Math.hypot(a.x, a.y);
+const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+const dot = (a, b) => a.x * b.x + a.y * b.y;
+const crs = (a, b) => a.x * b.y - a.y * b.x;
+const perp = a => ({ x: -a.y, y: a.x });               // +90° (CCW) = sol normal / left normal
+const nrm = a => { const l = len(a) || 1; return { x: a.x / l, y: a.y / l }; };
+const rhat = t => ({ x: Math.cos(t), y: Math.sin(t) });
+const rnd = (v, n = 3) => Math.round(v * Math.pow(10, n)) / Math.pow(10, n);
+
+function angDelta(a0, a1, ccw) {
+  let d = a1 - a0;
+  if (ccw) { while (d <= 1e-12) d += TAU; while (d > TAU + 1e-12) d -= TAU; }
+  else { while (d >= -1e-12) d -= TAU; while (d < -TAU - 1e-12) d += TAU; }
+  return d;
+}
+function elStart(e) { return e.type === 'line' ? e.p0 : add(e.c, mul(rhat(e.a0), e.r)); }
+function elEnd(e) { return e.type === 'line' ? e.p1 : add(e.c, mul(rhat(e.a0 + e.sweep), e.r)); }
+function elStartDir(e) {
+  if (e.type === 'line') return nrm(sub(e.p1, e.p0));
+  const t = perp(rhat(e.a0)); return e.sweep > 0 ? t : mul(t, -1);
+}
+function elEndDir(e) {
+  if (e.type === 'line') return nrm(sub(e.p1, e.p0));
+  const t = perp(rhat(e.a0 + e.sweep)); return e.sweep > 0 ? t : mul(t, -1);
+}
+function elLength(e) { return e.type === 'line' ? dist(e.p0, e.p1) : Math.abs(e.sweep) * e.r; }
+function elMid(e) {
+  if (e.type === 'line') return mul(add(e.p0, e.p1), 0.5);
+  return add(e.c, mul(rhat(e.a0 + e.sweep / 2), e.r));
+}
+
+/* ---- kesişimler / intersections ---- */
+function lineLineInt(p1, d1, p2, d2) {
+  const den = crs(d1, d2); if (Math.abs(den) < 1e-12) return null;
+  const t = crs(sub(p2, p1), d2) / den; return add(p1, mul(d1, t));
+}
+function lineCircleInt(p, d, c, r) {
+  const f = sub(p, c), a = dot(d, d), b = 2 * dot(f, d), cc = dot(f, f) - r * r;
+  const disc = b * b - 4 * a * cc; if (disc < 0) return [];
+  const s = Math.sqrt(disc);
+  return [(-b - s) / (2 * a), (-b + s) / (2 * a)].map(t => add(p, mul(d, t)));
+}
+function circleCircleInt(c1, r1, c2, r2) {
+  const dv = sub(c2, c1), d = len(dv);
+  if (d < 1e-12) return [];
+  if (d > r1 + r2 + 1e-7 || d < Math.abs(r1 - r2) - 1e-7) return [];
+  const a = (r1 * r1 - r2 * r2 + d * d) / (2 * d), h = Math.sqrt(Math.max(0, r1 * r1 - a * a));
+  const pm = add(c1, mul(dv, a / d)), pv = mul(perp(mul(dv, 1 / d)), h);
+  return [add(pm, pv), sub(pm, pv)];
+}
+function offsetGeom(e, R, side) {          // side=+1 => yol yönünün soluna / left of travel
+  if (e.type === 'line') {
+    const d = nrm(sub(e.p1, e.p0));
+    return { kind: 'line', p: add(e.p0, mul(perp(d), R * side)), d };
+  }
+  const rr = e.r + side * (e.sweep > 0 ? -1 : 1) * R;
+  if (rr <= 1e-7) return null;
+  return { kind: 'circle', c: e.c, r: rr };
+}
+function geomInt(g1, g2) {
+  if (!g1 || !g2) return [];
+  if (g1.kind === 'line' && g2.kind === 'line') { const x = lineLineInt(g1.p, g1.d, g2.p, g2.d); return x ? [x] : []; }
+  if (g1.kind === 'line') return lineCircleInt(g1.p, g1.d, g2.c, g2.r);
+  if (g2.kind === 'line') return lineCircleInt(g2.p, g2.d, g1.c, g1.r);
+  return circleCircleInt(g1.c, g1.r, g2.c, g2.r);
+}
+function projOnEl(e, p) {
+  if (e.type === 'line') {
+    const d = nrm(sub(e.p1, e.p0));
+    return add(e.p0, mul(d, dot(sub(p, e.p0), d)));
+  }
+  return add(e.c, mul(nrm(sub(p, e.c)), e.r));
+}
+function trimEnd(e, p) {
+  if (e.type === 'line') { e.p1 = { x: p.x, y: p.y }; return; }
+  const th = Math.atan2(p.y - e.c.y, p.x - e.c.x);
+  let d = angDelta(e.a0, th, e.sweep > 0);
+  if (Math.abs(d) > Math.abs(e.sweep)) d = e.sweep;
+  e.sweep = d;
+}
+function trimStart(e, p) {
+  if (e.type === 'line') { e.p0 = { x: p.x, y: p.y }; return; }
+  const th = Math.atan2(p.y - e.c.y, p.x - e.c.x);
+  let d = angDelta(e.a0, th, e.sweep > 0);
+  if (Math.abs(d) > Math.abs(e.sweep)) d = 0;
+  e.a0 = th; e.sweep = e.sweep - d;
+}
+
+/* ---- yay kurucular / arc constructors ---- */
+function makeArcFromCenter(S, E, cc, ccw, block) {
+  const r = dist(S, cc);
+  const a0 = Math.atan2(S.y - cc.y, S.x - cc.x);
+  const a1 = Math.atan2(E.y - cc.y, E.x - cc.x);
+  const sweep = angDelta(a0, a1, ccw);
+  return { type: 'arc', c: { x: cc.x, y: cc.y }, r, a0, sweep, block };
+}
+function centerFromCR(S, E, R, ccw) {
+  const aR = Math.abs(R), d = dist(S, E);
+  if (d < 1e-9 || d > 2 * aR + 1e-6) return null;
+  const mid = mul(add(S, E), 0.5);
+  const u = nrm(sub(E, S));
+  const h = Math.sqrt(Math.max(0, aR * aR - (d / 2) * (d / 2)));
+  const n = perp(u);
+  const cands = [add(mid, mul(n, h)), sub(mid, mul(n, h))];
+  const wantBig = R < 0;                     // R- => yay >180° / arc >180°
+  for (const c of cands) {
+    const a0 = Math.atan2(S.y - c.y, S.x - c.x), a1 = Math.atan2(E.y - c.y, E.x - c.x);
+    const sw = Math.abs(angDelta(a0, a1, ccw));
+    if (wantBig ? sw > Math.PI - 1e-6 : sw <= Math.PI + 1e-6) return c;
+  }
+  return cands[0];
+}
+
+/* --- görüntü için kontur poligonu / contour polygon for display --- */
+function discretize(els, sag) {
+  const pts = [];
+  for (const e of els) {
+    if (e.type === 'line') {
+      if (!pts.length) pts.push({ x: e.p0.x, y: e.p0.y, block: e.block });
+      pts.push({ x: e.p1.x, y: e.p1.y, block: e.block });
+    } else {
+      const step = Math.min(Math.PI / 90, 2 * Math.acos(Math.max(-1, Math.min(1, 1 - sag / Math.max(e.r, 1e-6)))) || 0.02);
+      const n = Math.max(2, Math.min(720, Math.ceil(Math.abs(e.sweep) / Math.max(step, 1e-4))));
+      if (!pts.length) { const q = elStart(e); pts.push({ x: q.x, y: q.y, block: e.block }); }
+      for (let i = 1; i <= n; i++) {
+        const a = e.a0 + e.sweep * (i / n);
+        pts.push({ x: e.c.x + e.r * Math.cos(a), y: e.c.y + e.r * Math.sin(a), block: e.block });
+      }
+    }
+  }
+  return pts;
+}
+  </script>
+  <script>
+/* ---- assets/js/parser.js ---- */
+/* =====================================================================
+   parser.js — AYRIŞTIRICI (Klartext + basit ISO)
+   parser.js — PARSER (Klartext + simple ISO)
+
+   Uyarılar dile bağlı olmasın diye {k, p} biçiminde biriktirilir:
+   k = çeviri anahtarı, p = yer tutucu değerleri. Metne çevirmek arayüzün işi.
+   Warnings are collected as {k, p} so they stay language independent;
+   the UI turns them into text.
+   ===================================================================== */
+function warn(k, p) { return { k: k, p: p || {} }; }
+
+function coordOf(s, key) {
+  let m = s.match(new RegExp('(?:^|\\s)' + key + '\\s?([+-]?\\d*\\.?\\d+)', 'i'));
+  if (m) return { val: parseFloat(m[1]), inc: false };
+  m = s.match(new RegExp('(?:^|\\s)I' + key + '\\s?([+-]?\\d*\\.?\\d+)', 'i'));
+  if (m) return { val: parseFloat(m[1]), inc: true };
+  return null;
+}
+function radiusOf(s) {
+  let m = s.match(/(?:^|\s)R([+-]\d*\.?\d+)/i); if (m) return parseFloat(m[1]);
+  m = s.match(/(?:^|\s)R(\d*\.?\d+)/i);
+  if (m && !/^\s*R0(\s|$)/i.test(' ' + m[0].trim())) return parseFloat(m[1]);
+  return null;
+}
+function drOf(s) { const m = s.match(/(?:^|\s)DR\s?([+-])/i); return m ? (m[1] === '+') : null; }
+
+function parseProgram(text) {
+  const klartext = /BEGIN\s+PGM/i.test(text) || /(^|\n)\s*\d+\s+(L|CC|CR|CT|APPR|TOOL\s+CALL)\b/i.test(text);
+  return klartext ? parseKlartext(text) : parseISO(text);
+}
+
+function parseKlartext(text) {
+  const warnings = [], contours = [], links = []; let stock = null, toolCall = null;
+  let cur = null, pos = { x: 0, y: 0, z: 0 }, cc = null, lastDR = null, prevEl = null;
+  let badXY = true, badZ = true, cid = 0;      // program başında konum bilinmiyor / position unknown at start
+  const push = (el) => { if (cur) { cur.raw.push(el); if (el.type !== 'corner') prevEl = el; } };
+  const closeContour = () => { if (cur) { if (cur.raw.some(e => e.type !== 'corner')) contours.push(cur); cur = null; prevEl = null; } };
+
+  for (const rawLine of text.split(/\r?\n/)) {
+    let s = rawLine; const ci = s.indexOf(';'); if (ci >= 0) s = s.slice(0, ci);
+    s = s.trim(); if (!s) continue;
+    let block = null; const bm = s.match(/^(\d+)\s+(.*)$/);
+    if (bm) { block = parseInt(bm[1], 10); s = bm[2].trim(); }
+    if (!s || s.startsWith('*')) continue;
+    const U = s.toUpperCase();
+    const t0 = U.split(/\s+/)[0];
+
+    if (/^BLK\s+FORM/i.test(U)) {
+      const cx = coordOf(U, 'X'), cy = coordOf(U, 'Y'), cz = coordOf(U, 'Z');
+      if (cx && cy) {
+        stock = stock || { x1: cx.val, y1: cy.val, x2: cx.val, y2: cy.val };
+        stock.x1 = Math.min(stock.x1, cx.val); stock.y1 = Math.min(stock.y1, cy.val);
+        stock.x2 = Math.max(stock.x2, cx.val); stock.y2 = Math.max(stock.y2, cy.val);
+      }
+      if (cz) {
+        if (!stock) stock = {};
+        stock.z1 = (stock.z1 === undefined) ? cz.val : Math.min(stock.z1, cz.val);
+        stock.z2 = (stock.z2 === undefined) ? cz.val : Math.max(stock.z2, cz.val);
+      }
+      continue;
+    }
+    if (/^(BEGIN|END)\s+PGM/i.test(U)) { closeContour(); continue; }
+    if (/\bM(2|30)\b/.test(U)) { /* devam et, aşağıda kapanır / keep going, closed below */ }
+
+    // konumu belirsizleştiren komutlar: makine koordinatı, sınıra çekilme, düzlem çevirme
+    // commands that make the position uncertain: machine coords, retract to limit, plane tilt
+    if (/\bM9[12]\b/.test(U)) { badXY = true; badZ = true; }
+    if (/\bM14\d\b/.test(U)) badZ = true;
+    if (/^PLANE\b/.test(U) && /\b(TURN|MOVE)\b/.test(U)) { badXY = true; badZ = true; }
+    if (/^(CYCL\s+CALL|CALL\s+LBL|L\s+CYCL)/.test(U)) { badXY = true; badZ = true; }
+
+    const hasRL = /(?:^|\s)RL(?:\s|$)/.test(U), hasRR = /(?:^|\s)RR(?:\s|$)/.test(U);
+    const hasR0 = /(?:^|\s)R0(?:\s|$)/.test(U);
+    const isMotion = ['L', 'C', 'CR', 'CT', 'CC'].includes(t0) || t0.startsWith('APPR') || t0.startsWith('DEP');
+    const isCorner = t0 === 'RND' || t0 === 'CHF';
+
+    if (!isMotion && !isCorner) {
+      if (/^TOOL\s+CALL/i.test(U) && !toolCall) {
+        const tm = U.match(/^TOOL\s+CALL\s+(\S+)/);
+        const dm = s.match(/(?:^|\s)DR\s?([+-]?\d*\.?\d+)/i);
+        toolCall = { tool: tm ? tm[1] : null, dr: dm ? parseFloat(dm[1]) : null, block };
+      }
+      if (/\bM(2|30)\b/.test(U)) closeContour();
+      continue;                                   // TOOL CALL, CYCL, LBL, FN, PLANE ...
+    }
+
+    // ---- CC : daire merkezi / circle centre
+    if (t0 === 'CC') {
+      const cx = coordOf(s, 'X'), cy = coordOf(s, 'Y');
+      const nc = {
+        x: cx ? (cx.inc ? pos.x + cx.val : cx.val) : pos.x,
+        y: cy ? (cy.inc ? pos.y + cy.val : cy.val) : pos.y
+      };
+      cc = nc; continue;
+    }
+    // ---- köşe elemanları / corner elements
+    if (isCorner) {
+      const v = t0 === 'RND' ? radiusOf(s) : (s.match(/(?:^|\s)CHF\s?([+-]?\d*\.?\d+)/i) || [])[1];
+      const val = parseFloat(v);
+      if (cur && isFinite(val) && val > 0) push({ type: 'corner', kind: t0, val, block });
+      continue;
+    }
+
+    const startP = { x: pos.x, y: pos.y };
+    const cxv = coordOf(s, 'X'), cyv = coordOf(s, 'Y'), czv = coordOf(s, 'Z');
+    const endP = {
+      x: cxv ? (cxv.inc ? pos.x + cxv.val : cxv.val) : pos.x,
+      y: cyv ? (cyv.inc ? pos.y + cyv.val : cyv.val) : pos.y
+    };
+    const newZ = czv ? (czv.inc ? pos.z + czv.val : czv.val) : pos.z;
+
+    // düzeltme kapalıyken yapılan her hareket bir "bağlantı": dalış, çıkış, ara konumlama.
+    // Bunlar takım merkezine göre programlanır, DR ile yer değiştirmez.
+    // every move made with compensation off is a "link": plunge, exit, intermediate positioning.
+    // They are programmed on the tool centre and do not shift with DR.
+    const wasBadXY = badXY, wasBadZ = badZ;
+    if (cxv && cyv) badXY = false;
+    if (czv) badZ = false;
+    const mkLink = (kind, extra) => {
+      if (dist(startP, endP) < 1e-9 && Math.abs(newZ - pos.z) < 1e-9) return;
+      links.push(Object.assign({
+        kind, block, p0: { x: startP.x, y: startP.y }, p1: { x: endP.x, y: endP.y },
+        z0: pos.z, z1: newZ, unsure: wasBadXY || wasBadZ
+      }, extra || {}));
+    };
+
+    // ---- düzeltme aç / compensation on
+    if ((hasRL || hasRR) && !cur) {
+      const id = cid++;
+      mkLink('on', { cid: id });
+      cur = {
+        id, side: hasRL ? 1 : -1, sideName: hasRL ? 'RL' : 'RR', raw: [], startBlock: block,
+        apprLen: dist(startP, { x: endP.x, y: endP.y }),
+        apprFrom: { x: startP.x, y: startP.y }, apprTo: { x: endP.x, y: endP.y }, apprZ: newZ
+      };
+      pos = { x: endP.x, y: endP.y, z: newZ }; cc = null; prevEl = null; continue;
+    }
+    // ---- düzeltme kapat / compensation off
+    if (hasR0 || t0.startsWith('DEP')) {
+      if (cur) {
+        cur.depLen = dist(startP, { x: endP.x, y: endP.y }); cur.depBlock = block;
+        cur.depFrom = { x: startP.x, y: startP.y }; cur.depZ = pos.z;
+        mkLink('off', { cid: cur.id });
+      } else mkLink('link');
+      closeContour(); pos = { x: endP.x, y: endP.y, z: newZ }; cc = null; continue;
+    }
+    if (!cur) { mkLink('link'); pos = { x: endP.x, y: endP.y, z: newZ }; continue; }
+    if (t0.startsWith('APPR')) { pos = { x: endP.x, y: endP.y, z: newZ }; continue; }
+
+    const moved = dist(startP, endP) > 1e-7;
+    if (t0 === 'L') {
+      if (moved) push({ type: 'line', p0: startP, p1: { x: endP.x, y: endP.y }, block, z0: pos.z, z1: newZ });
+    } else if (t0 === 'C') {
+      const dr = drOf(s); if (dr !== null) lastDR = dr;
+      if (!cc) {
+        warnings.push(warn('warn.noCC', { block }));
+        if (moved) push({ type: 'line', p0: startP, p1: endP, block, z0: pos.z, z1: newZ });
+      }
+      else push(Object.assign(makeArcFromCenter(startP, endP, cc, lastDR === null ? true : lastDR, block), { z0: pos.z, z1: newZ }));
+    } else if (t0 === 'CR') {
+      const R = radiusOf(s), dr = drOf(s); if (dr !== null) lastDR = dr;
+      const c2 = (R !== null) ? centerFromCR(startP, endP, R, lastDR === null ? true : lastDR) : null;
+      if (!c2) {
+        warnings.push(warn('warn.crChord', { block }));
+        if (moved) push({ type: 'line', p0: startP, p1: endP, block, z0: pos.z, z1: newZ });
+      }
+      else { cc = c2; push(Object.assign(makeArcFromCenter(startP, endP, c2, lastDR === null ? true : lastDR, block), { z0: pos.z, z1: newZ })); }
+    } else if (t0 === 'CT') {
+      const d0 = prevEl ? elEndDir(prevEl) : null;
+      if (!d0) { if (moved) push({ type: 'line', p0: startP, p1: endP, block, z0: pos.z, z1: newZ }); }
+      else {
+        const n = perp(d0), v = sub(startP, endP), dn = dot(n, v);
+        if (Math.abs(dn) < 1e-9) { if (moved) push({ type: 'line', p0: startP, p1: endP, block, z0: pos.z, z1: newZ }); }
+        else {
+          const k = -dot(v, v) / (2 * dn), c2 = add(startP, mul(n, k));
+          const ccw = k > 0;
+          cc = c2; push(Object.assign(makeArcFromCenter(startP, endP, c2, ccw, block), { z0: pos.z, z1: newZ }));
+        }
+      }
+    }
+    pos = { x: endP.x, y: endP.y, z: newZ };
+    if (/\bM(2|30)\b/.test(U)) closeContour();
+  }
+  closeContour();
+  return finalize(contours, warnings, stock, toolCall, links);
+}
+
+function parseISO(text) {
+  const warnings = [], contours = [], links = []; let stock = null;
+  let cur = null, pos = { x: 0, y: 0, z: 0 }, motion = 0, comp = 0, prevEl = null, abs = true;
+  let cid = 0;
+  const closeContour = () => { if (cur) { if (cur.raw.some(e => e.type !== 'corner')) contours.push(cur); cur = null; prevEl = null; } };
+  const val = (s, k) => { const m = s.match(new RegExp(k + '\\s?([+-]?\\d*\\.?\\d+)', 'i')); return m ? parseFloat(m[1]) : null; };
+
+  for (const rawLine of text.split(/\r?\n/)) {
+    let s = rawLine.replace(/\(.*?\)/g, '');
+    const ci = s.indexOf(';'); if (ci >= 0) s = s.slice(0, ci);
+    s = s.trim(); if (!s) continue;
+    let block = null; const bm = s.match(/^N\s?(\d+)\s*(.*)$/i);
+    if (bm) { block = parseInt(bm[1], 10); s = bm[2]; }
+    const U = s.toUpperCase();
+    const gs = [...U.matchAll(/G\s?(\d+)/g)].map(m => parseInt(m[1], 10));
+    for (const g of gs) {
+      if ([0, 1, 2, 3].includes(g)) motion = g;
+      if (g === 40) { closeContour(); comp = 0; }
+      if (g === 41) comp = 1;
+      if (g === 42) comp = -1;
+      if (g === 90) abs = true;
+      if (g === 91) abs = false;
+    }
+    const X = val(U, 'X'), Y = val(U, 'Y'), Z = val(U, 'Z');
+    if (X === null && Y === null && Z === null) { if (/M0?(2|30)/.test(U)) closeContour(); continue; }
+    const startP = { x: pos.x, y: pos.y };
+    const endP = { x: X === null ? pos.x : (abs ? X : pos.x + X), y: Y === null ? pos.y : (abs ? Y : pos.y + Y) };
+    const newZ = Z === null ? pos.z : (abs ? Z : pos.z + Z);
+
+    const zr = { z0: pos.z, z1: newZ };
+    const mkLink = (kind, extra) => {
+      if (dist(startP, endP) < 1e-9 && Math.abs(newZ - pos.z) < 1e-9) return;
+      links.push(Object.assign({
+        kind, block, p0: { x: startP.x, y: startP.y }, p1: { x: endP.x, y: endP.y },
+        z0: pos.z, z1: newZ, unsure: false
+      }, extra || {}));
+    };
+
+    if (comp !== 0 && !cur) {
+      const id = cid++;
+      mkLink('on', { cid: id });
+      cur = { id, side: comp, sideName: comp === 1 ? 'G41' : 'G42', raw: [], startBlock: block };
+      pos = { x: endP.x, y: endP.y, z: newZ }; continue;
+    }
+    if (cur) {
+      const moved = dist(startP, endP) > 1e-7;
+      if (motion === 2 || motion === 3) {
+        const I = val(U, 'I'), J = val(U, 'J'), R = val(U, 'R');
+        const ccw = (motion === 3);
+        let c2 = null;
+        if (I !== null || J !== null) c2 = { x: startP.x + (I || 0), y: startP.y + (J || 0) };
+        else if (R !== null) c2 = centerFromCR(startP, endP, R, ccw);
+        if (c2) { const el = Object.assign(makeArcFromCenter(startP, endP, c2, ccw, block), zr); cur.raw.push(el); prevEl = el; }
+        else if (moved) { const el = Object.assign({ type: 'line', p0: startP, p1: endP, block }, zr); cur.raw.push(el); prevEl = el; }
+      } else if (moved) {
+        const el = Object.assign({ type: 'line', p0: startP, p1: endP, block }, zr); cur.raw.push(el); prevEl = el;
+      }
+    } else mkLink('link');
+    pos = { x: endP.x, y: endP.y, z: newZ };
+  }
+  closeContour();
+  return finalize(contours, warnings, stock, null, links);
+}
+
+/* ---- RND / CHF uygula / apply ---- */
+function applyCorners(raw, warnings) {
+  const out = [];
+  for (const item of raw) {
+    if (item.type !== 'corner') { out.push(item); continue; }
+    out.push(item);                              // yer tutucu, ikinci geçişte / placeholder, second pass
+  }
+  const res = [];
+  for (let i = 0; i < out.length; i++) {
+    const it = out[i];
+    if (it.type !== 'corner') { res.push(it); continue; }
+    const A = res[res.length - 1];
+    let jn = i + 1; while (jn < out.length && out[jn].type === 'corner') jn++;
+    const B = out[jn];
+    if (!A || !B) { continue; }
+    if (it.kind === 'RND') {
+      const f = makeFillet(A, B, it.val, it.block);
+      if (f) res.push(f);
+      else warnings.push(warn('warn.rnd', { block: it.block, v: it.val }));
+    } else {
+      const f = makeChamfer(A, B, it.val, it.block);
+      if (f) res.push(f);
+      else warnings.push(warn('warn.chf', { block: it.block, v: it.val }));
+    }
+  }
+  return res;
+}
+function makeFillet(A, B, R, block) {
+  const dA = elEndDir(A), dB = elStartDir(B), t = crs(dA, dB);
+  if (Math.abs(t) < 1e-7) return null;
+  const side = t > 0 ? 1 : -1;
+  const cands = geomInt(offsetGeom(A, R, side), offsetGeom(B, R, side));
+  if (!cands.length) return null;
+  const V = elEnd(A);
+  let c = cands[0]; for (const q of cands) if (dist(q, V) < dist(c, V)) c = q;
+  if (dist(c, V) > R * 4 + 1e-6) return null;
+  const tA = projOnEl(A, c), tB = projOnEl(B, c);
+  trimEnd(A, tA); trimStart(B, tB);
+  const a0 = Math.atan2(tA.y - c.y, tA.x - c.x), a1 = Math.atan2(tB.y - c.y, tB.x - c.x);
+  return { type: 'arc', c, r: R, a0, sweep: angDelta(a0, a1, t > 0), block };
+}
+function makeChamfer(A, B, L, block) {
+  if (A.type !== 'line' || B.type !== 'line') return null;
+  const dA = elEndDir(A), dB = elStartDir(B);
+  if (Math.abs(crs(dA, dB)) < 1e-7) return null;
+  const V = elEnd(A);
+  if (elLength(A) <= L || elLength(B) <= L) return null;
+  const pA = sub(V, mul(dA, L)), pB = add(V, mul(dB, L));
+  trimEnd(A, pA); trimStart(B, pB);
+  return { type: 'line', p0: pA, p1: pB, block };
+}
+
+function finalize(contours, warnings, stock, toolCall, links) {
+  const out = [], byId = new Map();
+  for (const c of contours) {
+    const els = applyCorners(c.raw, warnings).filter(e => elLength(e) > 1e-7);
+    if (!els.length) continue;
+    if (c.id !== undefined) byId.set(c.id, out.length);
+    out.push({
+      side: c.side, sideName: c.sideName, startBlock: c.startBlock, els, zr: elsZRange(els),
+      apprLen: c.apprLen, apprFrom: c.apprFrom, apprTo: c.apprTo, apprZ: c.apprZ,
+      depLen: c.depLen, depBlock: c.depBlock, depFrom: c.depFrom, depZ: c.depZ
+    });
+  }
+  // bağlantı hareketlerini nihai kontur sırasına bağla / bind link moves to final contour order
+  const lk = (links || []).map(l => {
+    const ci = (l.cid !== undefined && byId.has(l.cid)) ? byId.get(l.cid) : undefined;
+    return (l.kind !== 'link' && ci === undefined) ? Object.assign({}, l, { kind: 'link', ci }) : Object.assign({}, l, { ci });
+  });
+  if (!out.length) warnings.push(warn('warn.noContour'));
+  return { contours: out, warnings, stock, toolCall: toolCall || null, links: lk };
+}
+
+function elsZRange(els) {
+  let z0 = Infinity, z1 = -Infinity, any = false;
+  for (const e of els) {
+    if (e.z0 === undefined || e.z1 === undefined) continue;
+    any = true; z0 = Math.min(z0, e.z0, e.z1); z1 = Math.max(z1, e.z0, e.z1);
+  }
+  return any ? { z0, z1 } : null;
+}
+  </script>
+  <script>
+/* ---- assets/js/offset.js ---- */
+/* =====================================================================
+   offset.js — OFSET, tam analitik (poligonlaştırma yok)
+   offset.js — OFFSET, fully analytic (no polygonisation)
+
+   prim: {kind:'line', s0,d,L,t0,t1} | {kind:'arc', c,r,oa0,orig,sign,t0,t1}
+   ===================================================================== */
+const CLOSE_TOL = 0.02;
+const TANG_SIN = 0.0087;   // ~0.5°: bu açının altındaki dönüşler teğet sayılır / turns below this count as tangent
+
+function primPtLine(o, t) { return add(o.s0, mul(o.d, t)); }
+function primPtArc(o, t) { return add(o.c, mul(rhat(o.oa0 + o.sign * t), o.r)); }
+function primStart(o) { return o.kind === 'line' ? primPtLine(o, o.t0) : primPtArc(o, o.t0); }
+function primEnd(o) { return o.kind === 'line' ? primPtLine(o, o.t1) : primPtArc(o, o.t1); }
+function spanPos(o, th) {
+  let q = o.sign > 0 ? (th - o.oa0) : (o.oa0 - th);
+  q = ((q % TAU) + TAU) % TAU;
+  if (q > o.orig + Math.PI) q -= TAU;
+  return q;
+}
+function primPos(o, X) {
+  return o.kind === 'line' ? dot(sub(X, o.s0), o.d)
+    : spanPos(o, Math.atan2(X.y - o.c.y, X.x - o.c.x));
+}
+function primGeom(o) { return o.kind === 'line' ? { kind: 'line', p: o.s0, d: o.d } : { kind: 'circle', c: o.c, r: o.r }; }
+function primMax(o) { return o.kind === 'line' ? o.L : o.orig; }
+function primBad(o, tol) {
+  return !(o.t0 >= -tol && o.t1 <= primMax(o) + tol && o.t1 >= o.t0 - tol * 0.001);
+}
+function primSample(o, out, tol) {
+  if (o.kind === 'line') { out.push(primPtLine(o, o.t0)); out.push(primPtLine(o, o.t1)); return; }
+  const span = Math.abs(o.t1 - o.t0);
+  const n = Math.max(1, Math.min(360, Math.ceil(span / 0.035)));
+  for (let i = 0; i <= n; i++) out.push(primPtArc(o, o.t0 + (o.t1 - o.t0) * i / n));
+}
+function primPt(o, t) { return o.kind === 'line' ? primPtLine(o, t) : primPtArc(o, t); }
+function primBBox(o) {
+  if (o.kind === 'line') {
+    const a = primStart(o), b = primEnd(o);
+    return { x0: Math.min(a.x, b.x), x1: Math.max(a.x, b.x), y0: Math.min(a.y, b.y), y1: Math.max(a.y, b.y) };
+  }
+  return { x0: o.c.x - o.r, x1: o.c.x + o.r, y0: o.c.y - o.r, y1: o.c.y + o.r };
+}
+function pathPolyline(path) {
+  const out = [];
+  for (const o of path) primSample(o, out);
+  return out;
+}
+
+function buildPrims(els, side, r) {
+  const prims = [];
+  for (const e of els) {
+    if (e.type === 'line') {
+      const d = nrm(sub(e.p1, e.p0)), L = dist(e.p0, e.p1), nv = mul(perp(d), side);
+      prims.push({ kind: 'line', s0: add(e.p0, mul(nv, r)), d, L, t0: 0, t1: L, block: e.block, z0: e.z0, z1: e.z1 });
+    } else {
+      const rr = e.r + side * (e.sweep > 0 ? -1 : 1) * r;
+      if (rr <= 1e-9) return { flip: { block: e.block, p: elStart(e) } };
+      prims.push({
+        kind: 'arc', c: e.c, r: rr, oa0: e.a0, orig: Math.abs(e.sweep),
+        sign: e.sweep > 0 ? 1 : -1, t0: 0, t1: Math.abs(e.sweep), block: e.block, z0: e.z0, z1: e.z1
+      });
+    }
+  }
+  return { prims };
+}
+
+/* --- ofset yolunu kur; ok=false ise yarıçap çok büyük ---
+   r < 0  =>  dış ofset: yol konturun öbür tarafına kayar, kanal büyür.
+   Geometrik olarak "side'a r kadar ofset" ile "-side'a |r| kadar ofset" aynı
+   şeydir; işareti burada bir kez normalize edince aşağıdaki içbükey/dışbükey
+   ayrımı, köşe yuvarlama yarıçapı ve yay ters dönme testi olduğu gibi çalışır.
+
+   --- build the offset path; ok=false means the radius is too large ---
+   r < 0  =>  outward offset: the path moves to the other side of the contour
+   and the slot grows. Normalising the sign once here keeps the concave/convex
+   split, the corner rounding radius and the arc-reversal test intact. */
+function offsetPath(els, side, r, collect, gouge) {
+  if (r < 0) { side = -side; r = -r; }
+  const bp = buildPrims(els, side, r);
+  if (bp.flip) return { ok: false, fails: [{ block: bp.flip.block, kind: 'arcflip', p: bp.flip.p }], path: null };
+  const off = bp.prims, n = off.length;
+  const scale = Math.max(1, r);
+  const tol = 1e-7 * scale;
+  const closed = n > 2 && dist(elStart(els[0]), elEnd(els[n - 1])) < CLOSE_TOL;
+  const joins = n - 1 + (closed ? 1 : 0);
+  const kinds = new Array(joins).fill(0);   // 0 teğet, 1 içbükey, -1 dışbükey / tangent, concave, convex
+  const fails = [];
+
+  for (let k = 0; k < joins; k++) {
+    const i = k, j = (k + 1) % n;
+    const A = els[i], B = els[j];
+    const c = crs(elEndDir(A), elStartDir(B)), dp = dot(elEndDir(A), elStartDir(B));
+    if (Math.abs(c) < TANG_SIN && dp > 0) { kinds[k] = 0; continue; }   // teğet / tangent (CAM rounding tolerance)
+    if (side * c > 0) {
+      kinds[k] = 1;
+      const cands = geomInt(primGeom(off[i]), primGeom(off[j]));
+      if (!cands.length) {
+        fails.push({ block: B.block, kind: 'nojoin', p: elEnd(A) });
+        if (!collect) return { ok: false, fails, path: null };
+        continue;
+      }
+      const e0 = primEnd(off[i]), s1 = primStart(off[j]);
+      const hiI = primMax(off[i]), loJ = off[j].t0, hiJ = off[j].t1;
+      let X = null, best = Infinity;
+      for (const q of cands) {
+        const ta = primPos(off[i], q), tb = primPos(off[j], q);
+        const pen = Math.max(0, off[i].t0 - ta) + Math.max(0, ta - hiI)
+          + Math.max(0, loJ - tb) + Math.max(0, tb - hiJ);
+        const sc = pen * 1e3 + dist(q, e0) + dist(q, s1);
+        if (sc < best) { best = sc; X = q; }
+      }
+      off[i].t1 = primPos(off[i], X);
+      off[j].t0 = primPos(off[j], X);
+    } else kinds[k] = -1;
+  }
+
+  for (let oi = 0; oi < off.length; oi++) {           // off[i] <-> els[i] birebir / one to one
+    if (primBad(off[oi], tol)) {
+      fails.push({ block: off[oi].block, kind: 'reversal', p: elMid(els[oi]) });
+      if (!collect) return { ok: false, fails, path: null };
+    }
+  }
+
+  // dışbükey köşelerde takım yuvarlanma yayı / tool roll-around arc at convex corners
+  const path = [];
+  for (let k = 0; k < n; k++) {
+    path.push(off[k]);
+    const jk = (k < joins) ? k : -1;
+    if (jk >= 0 && kinds[jk] === -1) {
+      const V = elEnd(els[k]), P0 = primEnd(off[k]), P1 = primStart(off[(k + 1) % n]);
+      const a0 = Math.atan2(P0.y - V.y, P0.x - V.x), a1 = Math.atan2(P1.y - V.y, P1.x - V.x);
+      const sign = -side;
+      const lk = {
+        kind: 'arc', c: V, r, oa0: a0, orig: TAU, sign, t0: 0, t1: 0, block: els[k].block, link: true,
+        z0: els[k].z1, z1: els[k].z1
+      };
+      lk.t1 = spanPos(lk, a1); if (lk.t1 > Math.PI * 1.9) lk.t1 = 0; lk.orig = lk.t1;
+      path.push(lk);
+    }
+  }
+  if (fails.length && !collect) return { ok: false, fails, path };
+  if (gouge === false) return { ok: fails.length === 0, fails, path, closed };
+
+  // uzaktaki parçalarla çakışma (dar boğaz) — yalnız aynı Z seviyesinde
+  // clash with distant parts (narrow throat) — only at the same Z level
+  const m = path.length;
+  const bb = path.map(o => primBBox(o));
+  for (let a = 0; a < m; a++) {
+    for (let b = a + 2; b < m; b++) {
+      if (closed && a === 0 && b === m - 1) continue;
+      if (!zOverlap(path[a], path[b])) continue;
+      if (bb[a].x1 < bb[b].x0 - tol || bb[b].x1 < bb[a].x0 - tol || bb[a].y1 < bb[b].y0 - tol || bb[b].y1 < bb[a].y0 - tol) continue;
+      const cands = geomInt(primGeom(path[a]), primGeom(path[b]));
+      for (const X of cands) {
+        const ta = primPos(path[a], X), tb = primPos(path[b], X);
+        const ea = 1e-6 * scale;
+        if (ta > path[a].t0 + ea && ta < path[a].t1 - ea && tb > path[b].t0 + ea && tb < path[b].t1 - ea) {
+          fails.push({
+            block: path[a].block, kind: 'overlap', p: X,
+            b2: path[b].block, ia: a, ib: b, ta, tb
+          });
+          if (!collect) return { ok: false, fails, path };
+        }
+      }
+    }
+  }
+  return { ok: fails.length === 0, fails, path, closed };
+}
+
+function distToGeom(P, g) {
+  if (!g) return Infinity;
+  if (g.kind === 'line') return Math.abs(crs(g.d, sub(P, g.p)));
+  return Math.abs(dist(P, g.c) - g.r);
+}
+
+function zOverlap(a, b) {
+  if (a.z0 === undefined || b.z0 === undefined) return true;
+  const a0 = Math.min(a.z0, a.z1), a1 = Math.max(a.z0, a.z1);
+  const b0 = Math.min(b.z0, b.z1), b1 = Math.max(b.z0, b.z1);
+  return a1 >= b0 - 1e-6 && b1 >= a0 - 1e-6;
+}
+
+/* Etkin yarıçap r'de parçada oluşacak bozulmalar.
+   Bir kontur elemanı ofsette tamamen yutulduğunda kumanda ya durur (M120 yoksa)
+   ya da elemanı atlayıp köşeyi keser. İkinci durumda yolun o yüzeyin içine
+   girdiği miktar = gerçek talaş fazlası. Ölçtüğümüz bu.
+
+   Damage produced on the part at effective radius r.
+   When a contour element is fully swallowed by the offset the control either
+   stops (no M120) or skips the element and cuts the corner. In the second case
+   how far the path enters that surface is the real overcut. That is what we measure. */
+function damageAt(els, side, r, withThroat) {
+  const res = offsetPath(els, side, r, true, !!withThroat);
+  const out = { gouges: [], throats: [], arcs: [] };
+  if (!res.path) {
+    (res.fails || []).forEach(f => { if (f.kind === 'arcflip') out.arcs.push({ block: f.block, p: f.p }); });
+    return out;
+  }
+  const prims = res.path.filter(o => !o.link);
+  const bad = new Set();
+  res.fails.forEach(f => {
+    if (f.kind === 'arcflip') out.arcs.push({ block: f.block, p: f.p });
+    if (f.kind === 'overlap') out.throats.push({ block: f.block, b2: f.b2, p: f.p });
+    if (f.kind === 'reversal') bad.add(f.block);
+  });
+  const idxOf = new Map(); prims.forEach((o, i) => idxOf.set(o.block, i));
+  const n = prims.length;
+  for (const blk of bad) {
+    const k = idxOf.get(blk); if (k === undefined) continue;
+    let i = k - 1, j = k + 1;
+    while (i >= 0 && bad.has(prims[i].block)) i--;
+    while (j < n && bad.has(prims[j].block)) j++;
+    if (i < 0 || j >= n) continue;
+    const cands = geomInt(primGeom(prims[i]), primGeom(prims[j]));
+    if (!cands.length) continue;
+    const ref = primPt(prims[k], (prims[k].t0 + prims[k].t1) / 2);
+    let Y = cands[0]; for (const q of cands) if (dist(q, ref) < dist(Y, ref)) Y = q;
+    const depth = distToGeom(Y, primGeom(prims[k]));
+    if (isFinite(depth)) out.gouges.push({ block: blk, p: elMid(els[k]), depth, cut: Y });
+  }
+  out.gouges.sort((a, b) => b.depth - a.depth);
+  return out;
+}
+  </script>
+  <script>
+/* ---- assets/js/analysis.js ---- */
+/* =====================================================================
+   analysis.js — DALIŞ / BAĞLANTI HAREKETLERİ ve DR TARAMASI
+   analysis.js — PLUNGE / LINK MOVES and DR SWEEP
+
+   Model: program CAM'in bastığı takım merkez yoludur, DR bir "pay bırakma
+   kadranı"dır. Etkin yarıçap r = R_tablo + DR kadar RL yönünde kaydırılan
+   merkez yolu, fiziksel yarıçap Rf ile süpürülünce işlenmiş alanı verir:
+        S(r) = { x : dist(x, merkezYolu(r)) <= Rf }
+   Düzeltme kapalı hareketler (dalış, çıkış, ara konumlama) DR ile YERİNDE
+   KALIR. O hareketin süpürdüğü kapsül S(r)'nin dışına taşarsa, o taşma
+   nihai duvarda kalıcı hasardır. DR büyüdükçe S(r) daralır, taşma artar.
+
+   Model: the program is the tool centre path posted by CAM and DR is a
+   "stock dial". The centre path shifted by the effective radius r = R_table + DR
+   toward RL, swept with the physical radius Rf, gives the machined area:
+        S(r) = { x : dist(x, centrePath(r)) <= Rf }
+   Moves with compensation off (plunge, exit, positioning) STAY PUT as DR
+   changes. Wherever the capsule swept by such a move breaks out of S(r), that
+   break-out is permanent damage on the final wall. As DR grows S(r) shrinks
+   and the break-out grows.
+   ===================================================================== */
+function segDist(P, a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, L2 = dx * dx + dy * dy;
+  if (L2 < 1e-18) return Math.hypot(P.x - a.x, P.y - a.y);
+  let t = ((P.x - a.x) * dx + (P.y - a.y) * dy) / L2;
+  t = t < 0 ? 0 : (t > 1 ? 1 : t);
+  return Math.hypot(P.x - a.x - t * dx, P.y - a.y - t * dy);
+}
+
+function buildIdx(segs, cell) {
+  if (!segs.length) return null;
+  let x0 = 1e18, y0 = 1e18, x1 = -1e18, y1 = -1e18;
+  for (const s of segs) {
+    x0 = Math.min(x0, s.a.x, s.b.x); x1 = Math.max(x1, s.a.x, s.b.x);
+    y0 = Math.min(y0, s.a.y, s.b.y); y1 = Math.max(y1, s.a.y, s.b.y);
+  }
+  cell = cell || 0.5;
+  // hücre yoğunluğa göre küçülsün, ama halka taraması patlamasın diye tabanı var
+  // shrink the cell with density, but keep a floor so the ring scan does not blow up
+  const area = Math.max(1e-6, (x1 - x0 + cell) * (y1 - y0 + cell));
+  cell = Math.max(cell / 6, Math.min(cell, Math.sqrt(area / Math.max(1, segs.length)) * 2.5));
+  const nx = Math.max(1, Math.ceil((x1 - x0) / cell) + 1);
+  const ny = Math.max(1, Math.ceil((y1 - y0) / cell) + 1);
+  const buckets = new Array(nx * ny);
+  segs.forEach((s, k) => {
+    const i0 = Math.floor((Math.min(s.a.x, s.b.x) - x0) / cell), i1 = Math.floor((Math.max(s.a.x, s.b.x) - x0) / cell);
+    const j0 = Math.floor((Math.min(s.a.y, s.b.y) - y0) / cell), j1 = Math.floor((Math.max(s.a.y, s.b.y) - y0) / cell);
+    for (let i = i0; i <= i1; i++) for (let j = j0; j <= j1; j++) {
+      if (i < 0 || j < 0 || i >= nx || j >= ny) continue;
+      const id = j * nx + i; (buckets[id] || (buckets[id] = [])).push(k);
+    }
+  });
+  return { segs, x0, y0, nx, ny, cell, buckets };
+}
+
+function idxDist(ix, P, cap) {
+  if (!ix) return cap;
+  let best = cap;
+  const ci = Math.floor((P.x - ix.x0) / ix.cell), cj = Math.floor((P.y - ix.y0) / ix.cell);
+  const maxR = Math.ceil(cap / ix.cell) + 1;
+  for (let r = 0; r <= maxR; r++) {
+    if (r > 0 && (r - 1) * ix.cell > best) break;
+    for (let i = ci - r; i <= ci + r; i++) {
+      if (i < 0 || i >= ix.nx) continue;
+      for (let j = cj - r; j <= cj + r; j++) {
+        if (r > 0 && Math.abs(i - ci) !== r && Math.abs(j - cj) !== r) continue;
+        if (j < 0 || j >= ix.ny) continue;
+        const b = ix.buckets[j * ix.nx + i]; if (!b) continue;
+        for (let q = 0; q < b.length; q++) {
+          const s = ix.segs[b[q]], d = segDist(P, s.a, s.b);
+          if (d < best) best = d;
+        }
+      }
+    }
+  }
+  return best;
+}
+
+/* yay örneklemesi — sehim toleransına göre, mesafe alanı için yeterli
+   arc sampling — by sagitta tolerance, good enough for the distance field */
+function primSampleTol(o, out, sag) {
+  if (o.kind === 'line') { out.push(primStart(o)); out.push(primEnd(o)); return; }
+  const span = Math.abs(o.t1 - o.t0);
+  const st = 2 * Math.acos(Math.max(-1, Math.min(1, 1 - sag / Math.max(o.r, 1e-6))));
+  const n = Math.max(1, Math.min(400, Math.ceil(span / Math.max(st, 0.02))));
+  for (let i = 0; i <= n; i++) out.push(primPtArc(o, o.t0 + (o.t1 - o.t0) * i / n));
+}
+
+/* Bağlantı hareketlerinin çevresindeki ilgi alanları — indeksi buna daraltırız.
+   Hiçbir konturla Z'de kesişmeyen hareket zaten değerlendirilmez; onu alma,
+   yoksa parçayı boydan boya geçen Z10 konumlamaları tüm konturu içeri sokar.
+
+   Regions of interest around the link moves — the index is narrowed to these.
+   A move that overlaps no contour in Z is not evaluated anyway; leaving it out
+   keeps a Z10 traverse across the whole part from dragging in the entire contour. */
+function linkROIs(A, pad) {
+  const out = [];
+  const zs = A.results.map(R => R.zr).filter(Boolean);
+  for (const lk of (A.links || [])) {
+    if (lk.unsure) continue;
+    const z0 = Math.min(lk.z0, lk.z1), z1 = Math.max(lk.z0, lk.z1);
+    if (zs.length && !zs.some(z => z.z1 >= z0 - 1e-6 && z1 >= z.z0 - 1e-6)) continue;
+    out.push({
+      x0: Math.min(lk.p0.x, lk.p1.x) - pad, x1: Math.max(lk.p0.x, lk.p1.x) + pad,
+      y0: Math.min(lk.p0.y, lk.p1.y) - pad, y1: Math.max(lk.p0.y, lk.p1.y) + pad
+    });
+  }
+  return out;
+}
+function roiHitsBox(rois, bb) {
+  for (const r of rois) if (!(bb.x1 < r.x0 || r.x1 < bb.x0 || bb.y1 < r.y0 || r.y1 < bb.y0)) return true;
+  return false;
+}
+function inROI(rois, a, b) {
+  return roiHitsBox(rois, {
+    x0: Math.min(a.x, b.x), x1: Math.max(a.x, b.x),
+    y0: Math.min(a.y, b.y), y1: Math.max(a.y, b.y)
+  });
+}
+
+/* r etkin yarıçapında her konturun düzeltilmiş merkez yolu + uzaysal indeks
+   compensated centre path of every contour at effective radius r + spatial index */
+function machinedIndex(results, r, rois) {
+  return results.map(R => {
+    const off = offsetPath(R.els, R.side, r, true, false);
+    if (!off.path || !off.path.length) return null;
+    const segs = [];
+    for (const o of off.path) {
+      if (rois && !roiHitsBox(rois, primBBox(o))) continue;   // uzaktaki elemanı hiç örnekleme / skip distant elements
+      const pts = []; primSampleTol(o, pts, 0.0015);
+      for (let i = 1; i < pts.length; i++) {
+        if (rois && !inROI(rois, pts[i - 1], pts[i])) continue;
+        segs.push({ a: pts[i - 1], b: pts[i] });
+      }
+    }
+    let last = null;
+    for (let i = off.path.length - 1; i >= 0; i--) if (!off.path[i].link) { last = off.path[i]; break; }
+    return {
+      ix: buildIdx(segs), zr: R.zr,
+      start: primStart(off.path[0]), end: last ? primEnd(last) : null, ok: off.ok
+    };
+  });
+}
+
+/* Kapsülün (a–b ekseni, Rf yarıçap) her indeks grubundan en uzak noktası.
+   Sonuç Rf'yi aşarsa aradaki fark, o duvara giren taşma miktarıdır.
+   Aynı örnek noktalar birden çok gruba karşı ölçülür (nominal / güncel).
+
+   Farthest point of the capsule (axis a–b, radius Rf) from each index group.
+   Where the result exceeds Rf, the difference is how far it breaks into the wall.
+   The same sample points are measured against several groups (nominal / current). */
+function capsuleMax(a, b, Rf, groups, cap) {
+  const L = dist(a, b);
+  const d = L > 1e-9 ? nrm(sub(b, a)) : { x: 1, y: 0 };
+  const n = perp(d);
+  const G = groups.length;
+  const best = new Array(G).fill(-Infinity), at = new Array(G).fill(a);
+  const probe = (P) => {
+    for (let g = 0; g < G; g++) {
+      const ixs = groups[g];
+      let m = cap;
+      for (let k = 0; k < ixs.length; k++) { const v = idxDist(ixs[k], P, m); if (v < m) m = v; }
+      if (m > best[g]) { best[g] = m; at[g] = P; }
+    }
+  };
+  const step = Math.max(0.003, Rf / 45);
+  const nl = Math.max(1, Math.min(2000, Math.ceil(L / step)));
+  for (let s = -1; s <= 1; s += 2)
+    for (let i = 0; i <= nl; i++) probe(add(add(a, mul(d, L * i / nl)), mul(n, s * Rf)));
+  const nc = Math.max(12, Math.min(360, Math.ceil(Math.PI * Rf / step)));
+  const th0 = Math.atan2(n.y, n.x);
+  for (let i = 0; i <= nc; i++) {
+    probe(add(b, mul(rhat(th0 - Math.PI * i / nc), Rf)));
+    probe(add(a, mul(rhat(th0 + Math.PI * i / nc), Rf)));
+  }
+  // iç ızgara: pasolar arasında sırt kalıyorsa yakalasın / inner grid: catch ridges left between passes
+  for (let i = 0; i <= nl; i++) {
+    const c0 = add(a, mul(d, L * i / nl));
+    for (let k = -4; k <= 4; k++) if (k) probe(add(c0, mul(n, k * Rf / 5)));
+  }
+  return { d: best, at };
+}
+
+function linkKindOf(lk) {
+  if (lk.kind !== 'link') return lk.kind;
+  if (dist(lk.p0, lk.p1) > 1e-6) return 'link';
+  return lk.z1 < lk.z0 ? 'plunge' : 'retract';
+}
+
+/* Bir etkin yarıçapta bağlantı hareketlerinin iki ölçütü:
+     over    — o DR'de oluşacak duvarın ötesine taşma  (offset kaybı)
+     overRef — nominal (referans DR) duvarın ötesine taşma (kalıcı hasar)
+
+   Two measures for the link moves at one effective radius:
+     over    — break-out past the wall produced at that DR (stock loss)
+     overRef — break-out past the nominal (reference DR) wall (permanent damage) */
+function linkProbe(A, idxCur, idxRef, Rf, cap, skip) {
+  const out = [];
+  for (const lk of (A.links || [])) {
+    if (lk.unsure) continue;
+    if (skip && skip.has(lk.block + '|' + lk.kind)) continue;   // referansta boşta / idle at reference
+    let a = lk.p0, b = lk.p1;
+    const m = (lk.ci !== undefined) ? idxCur[lk.ci] : null;
+    if (lk.kind === 'on' && m && m.start) b = m.start;
+    if (lk.kind === 'off' && m && m.end) a = m.end;
+    const z0 = Math.min(lk.z0, lk.z1), z1 = Math.max(lk.z0, lk.z1);
+    const pick = (idx) => {
+      const ixs = [];
+      for (const q of idx) {
+        if (!q || !q.ix) continue;
+        if (q.zr && !(q.zr.z1 >= z0 - 1e-6 && z1 >= q.zr.z0 - 1e-6)) continue;
+        ixs.push(q.ix);
+      }
+      return ixs;
+    };
+    const gCur = pick(idxCur), gRef = idxRef ? pick(idxRef) : gCur;
+    if (!gCur.length) continue;
+    const cis = [];
+    idxCur.forEach((q, i) => {
+      if (!q || !q.ix) return;
+      if (q.zr && !(q.zr.z1 >= z0 - 1e-6 && z1 >= q.zr.z0 - 1e-6)) return;
+      cis.push(i);
+    });
+    const res = capsuleMax(a, b, Rf, [gCur, gRef], cap);
+    out.push({
+      key: lk.block + '|' + lk.kind, block: lk.block, kind: linkKindOf(lk),
+      ci: lk.ci !== undefined ? lk.ci : (cis.length ? cis[0] : undefined), cis,
+      a, b, z0, z1,
+      over: Math.max(0, res.d[0] - Rf), overRef: Math.max(0, res.d[1] - Rf),
+      at: res.at[0], atRef: res.at[1], cap
+    });
+  }
+  return out;
+}
+
+/* DR taraması.
+   kalıcı hasar = hareket nominal duvarın ötesine kesiyor  -> parça hurda riski
+   offset kaybı = o noktada bırakılmak istenen pay tutmuyor -> yerel form hatası
+   Referansta zaten boşta olan hareketler (kütük durumu bilinmiyor) elenir.
+
+   DR sweep.
+   permanent damage = the move cuts past the nominal wall -> scrap risk
+   stock loss       = the stock meant to stay there does not hold -> local form error
+   Moves already idle at the reference (blank condition unknown) are dropped. */
+function damageWindow(A, o) {
+  const Rt = o.rtab, Rf = o.rphys, drRef = o.drRef;
+  /* Tarama yalnız pay bırakma bölgesindedir: DR = −R altında bırakılacak pay
+     zaten yoktur, orada kayıp ölçmenin anlamı yok. Dış ofset burada sadece
+     ROI'leri genişletir, ki seçili DR eksiye inince yol indeksin dışına düşmesin.
+
+     The sweep covers only the stock-leaving zone: below DR = −R there is no
+     stock to leave, so measuring loss there is meaningless. The outward offset
+     only widens the ROIs here, so the path does not fall outside the index when
+     the selected DR goes negative. */
+  const nom = -Rt;
+  const drMin = nom;
+  const outRoom = Math.max(0, o.outRoom || 0);
+  const cap = Rf * 3 + 0.25;
+  const eps = o.eps === undefined ? 0.001 : o.eps;
+  const ctlTop = isFinite(A.rmax) ? A.rmax - Rt : nom + Math.max(0.5, Rt * 2);
+  const top = Math.max(nom, Math.min(ctlTop, nom + (o.span || 1.0)));
+  const reach = Math.max(Math.abs(Rt + top), outRoom, Math.abs(Rt + drRef));
+  const rois = linkROIs(A, Rf + cap + reach + 0.05);
+
+  const idxRef = machinedIndex(A.results, Rt + drRef, rois);
+  const base = new Map(), idle = new Set();
+  linkProbe(A, idxRef, idxRef, Rf, cap).forEach(l => {
+    base.set(l.key, l.over);
+    if (l.over > Rf * 0.6) idle.add(l.key);        // referansta boşta / idle at reference
+  });
+
+  const N = Math.max(6, o.steps || 24);
+  const rows = [], perLink = new Map();
+  for (let i = 0; i <= N; i++) {
+    const dr = drMin + (top - drMin) * (N ? i / N : 0);
+    const idxCur = machinedIndex(A.results, Rt + dr, rois);
+    const ls = linkProbe(A, idxCur, idxRef, Rf, cap, idle);
+    let loss = 0, lossWho = null, harm = 0, harmWho = null;
+    for (const l of ls) {
+      const b0 = base.has(l.key) ? base.get(l.key) : 0;
+      const lo = Math.max(0, l.over - b0);
+      if (!perLink.has(l.key)) perLink.set(l.key, { link: l, base: b0, pts: [] });
+      const rec = perLink.get(l.key);
+      rec.link = l; rec.pts.push({ dr, loss: lo, harm: l.overRef });
+      if (lo > loss) { loss = lo; lossWho = l; }
+      if (l.overRef > harm) { harm = l.overRef; harmWho = l; }
+    }
+    rows.push({ dr, loss, lossWho, harm, harmWho });
+  }
+  const cross = (pts, key) => {
+    if (!pts.length) return null;
+    if (pts[0][key] > eps) return pts[0].dr;      // en alt DR'de bile aşıyor / exceeds even at the lowest DR
+    for (let i = 1; i < pts.length; i++) {
+      if (pts[i][key] > eps) {
+        const p0 = pts[i - 1], p1 = pts[i];
+        if (p1[key] === p0[key]) return p0.dr;
+        return p0.dr + (p1.dr - p0.dr) * (eps - p0[key]) / (p1[key] - p0[key]);
+      }
+    }
+    return null;
+  };
+  const links = [...perLink.values()].map(v => ({
+    link: v.link, base: v.base, pts: v.pts,
+    lossLimit: cross(v.pts, 'loss'), harmLimit: cross(v.pts, 'harm')
+  }));
+  links.sort((a, b) => (a.lossLimit === null ? 1e9 : a.lossLimit) - (b.lossLimit === null ? 1e9 : b.lossLimit));
+  return {
+    drMin, nom, ctlTop, top, rows, links, base, cap, rois, idxRef, drRef, rphys: Rf, rtab: Rt,
+    evaluated: links.length,
+    byKey: new Map(links.map(v => [v.link.key, v])),
+    lossTop: cross(rows, 'loss'), harmTop: cross(rows, 'harm'),
+    unlimitedCtl: !isFinite(A.rmax)
+  };
+}
+
+function analyseContour(con, opt) {
+  const els = con.els;
+  const pts = discretize(els, opt.tol || 0.01);
+  let minx = 1e18, miny = 1e18, maxx = -1e18, maxy = -1e18;
+  for (const p of pts) { minx = Math.min(minx, p.x); miny = Math.min(miny, p.y); maxx = Math.max(maxx, p.x); maxy = Math.max(maxy, p.y); }
+  const diag = Math.hypot(maxx - minx, maxy - miny) || 10;
+  const hi = diag * 0.75 + 1;
+  const valid = r => offsetPath(els, con.side, r, false, false).ok;      // sadece kumanda hatası / control error only
+
+  let rmax, unlimited = false;
+  if (valid(hi)) { rmax = hi; unlimited = true; }
+  else {
+    let lo = 0, h = hi;
+    for (let i = 0; i < 48; i++) { const m = (lo + h) / 2; if (valid(m)) lo = m; else h = m; }
+    rmax = lo;
+  }
+  const critAt = (r) => {
+    const res = offsetPath(els, con.side, r, true, false);
+    const seen = new Map();
+    for (const f of res.fails) {
+      const k = f.block + '/' + f.kind;
+      if (!seen.has(k)) seen.set(k, { block: f.block, kind: f.kind, p: f.p, n: 0 });
+      seen.get(k).n++;
+    }
+    return [...seen.values()].slice(0, 12);
+  };
+  let crit = [];
+  if (!unlimited) crit = critAt(rmax + Math.max(1e-6, diag * 1e-7));
+
+  /* Dış ofset sınırı: yolu konturun öbür tarafına kaydırdığında (etkin yarıçap
+     eksi) form nerede bozuluyor. İçeri ofsette iç yaylar sıkıştırır; dışarı
+     ofsette bu sefer dışbükey köşe yayları ters döner ve dar sırtlarda yol
+     kendini keser.
+
+     Outward offset limit: where the form breaks down once the path is pushed to
+     the other side of the contour (negative effective radius). Offsetting inward
+     is pinched by inside arcs; offsetting outward inverts the convex corner arcs
+     and makes the path cut itself across narrow ridges. */
+  const validOut = r => offsetPath(els, con.side, -r, false, false).ok;
+  let routMax, outUnlimited = false;
+  if (validOut(hi)) { routMax = hi; outUnlimited = true; }
+  else {
+    let lo = 0, h = hi;
+    for (let i = 0; i < 48; i++) { const m = (lo + h) / 2; if (validOut(m)) lo = m; else h = m; }
+    routMax = lo;
+  }
+  const outCrit = outUnlimited ? [] : critAt(-(routMax + Math.max(1e-6, diag * 1e-7)));
+  const concaveArcs = [];
+  for (const e of els) {
+    if (e.type !== 'arc') continue;
+    if (con.side * (e.sweep > 0 ? -1 : 1) < 0)
+      concaveArcs.push({ block: e.block, r: e.r, deg: Math.abs(e.sweep) * 180 / Math.PI });
+  }
+  concaveArcs.sort((a, b) => a.r - b.r);
+  const corners = [];
+  const closedC = els.length > 2 && dist(elStart(els[0]), elEnd(els[els.length - 1])) < CLOSE_TOL;
+  const nj = els.length - 1 + (closedC ? 1 : 0);
+  for (let i = 0; i < nj; i++) {
+    const A = els[i], B = els[(i + 1) % els.length];
+    const c = crs(elEndDir(A), elStartDir(B));
+    if (con.side * c > 1e-9) {
+      const turn = Math.atan2(Math.abs(c), dot(elEndDir(A), elStartDir(B))) * 180 / Math.PI;
+      corners.push({
+        block: B.block, inner: 180 - turn, p: elEnd(A),
+        la: elLength(A), lb: elLength(B)
+      });
+    }
+  }
+  corners.sort((a, b) => a.inner - b.inner);
+  return {
+    pts, bbox: { minx, miny, maxx, maxy }, rmax, unlimited, crit, concaveArcs, corners,
+    routMax, outUnlimited, outCrit,
+    length: els.reduce((s, e) => s + elLength(e), 0)
+  };
+}
+
+function analyseProgram(text, opt) {
+  const parsed = parseProgram(text);
+  const results = parsed.contours.map((c, i) => {
+    const a = analyseContour(c, opt);
+    return Object.assign({
+      index: i + 1, side: c.side, sideName: c.sideName, startBlock: c.startBlock,
+      apprLen: c.apprLen, apprFrom: c.apprFrom, apprTo: c.apprTo, apprZ: c.apprZ,
+      depLen: c.depLen, depBlock: c.depBlock, depFrom: c.depFrom, depZ: c.depZ,
+      els: c.els, count: c.els.length, zr: c.zr
+    }, a);
+  });
+  let rmax = Infinity, limiter = null;
+  for (const r of results) if (!r.unlimited && r.rmax < rmax) { rmax = r.rmax; limiter = r; }
+  let routMax = Infinity, outLimiter = null;
+  for (const r of results) if (!r.outUnlimited && r.routMax < routMax) { routMax = r.routMax; outLimiter = r; }
+  return {
+    results, warnings: parsed.warnings, stock: parsed.stock, toolCall: parsed.toolCall,
+    links: parsed.links || [], rmax, limiter, routMax, outLimiter
+  };
+}
+
+if (typeof module !== 'undefined' && module.exports) module.exports = {
+  analyseProgram, parseProgram, analyseContour, linkProbe, damageWindow, machinedIndex
+};
+  </script>
+  <script>
+/* ---- assets/js/app.js ---- */
+/* =====================================================================
+   app.js — ARAYÜZ / USER INTERFACE
+   ===================================================================== */
+if (typeof document !== 'undefined') {
+  (function () {
+    const $ = id => document.getElementById(id);
+    const STD = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 14, 16, 20, 25, 32, 40, 50, 63];
+    let STATE = null, ACTIVE = 0, TESTR = 0, CRIT = [], CORN = [], LASTTEXT = null, DAMAGE = [], INFO = null, FNAME = 'program';
+    let WIN = null, LINKS = [], LNKROWS = [], MACH = null, EPSD = 0.001;
+    let DRFLOOR = null;                // DR ekseninin alt ucu: dış ofset kapalıysa −R / lower end of the DR axis
+    let DETAILS_ON = false;            // "Ayrıntıları göster" durumu / details toggle state
+    let LOADED = null;                 // yüklenen dosya adı / loaded file name
+
+    const SAMPLE = `0 BEGIN PGM KOSE-TEST MM
+1 BLK FORM 0.1 Z X-60 Y-45 Z-20
+2 BLK FORM 0.2 X+60 Y+45 Z+0
+3 TOOL CALL 4 Z S4500
+4 L Z+100 R0 FMAX
+5 L X-80 Y-60 R0 FMAX
+6 L Z-12 F400
+7 APPR LT X-45 Y-30 LEN12 RL F350
+8 L X+45 Y-30
+9 L X+45 Y+10
+10 RND R6
+11 L X+12 Y+10
+12 L X+12 Y+30
+13 L X-4 Y+30
+14 L X-4 Y+10
+15 L X-45 Y+10
+16 L X-45 Y-30
+17 DEP LT LEN12 R0 F800
+18 L Z+100 FMAX M2
+19 END PGM KOSE-TEST MM`;
+
+    /* ---------- yardımcılar / helpers ---------- */
+    function fmt(v, n = 3) { return (Math.round(v * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n).replace(/\.?0+$/, '') || '0'; }
+    function fmtSigned(v) { return (v >= 0 ? '+' : '−') + fmt(Math.abs(v), 3); }
+    function stdBelow(d) { let b = null; for (const s of STD) if (s <= d + 1e-9) b = s; return b; }
+    function stdAbove(d) { for (const s of STD) if (s >= d - 1e-9) return s; return null; }
+    function linkName(kind) { return I18N.opt('link.' + kind) || kind; }
+    const TW0 = '<div class="tablewrap"><table>', TW1 = '</table></div>';
+
+    /* ---------- çizim / plot ---------- */
+    const cv = $('cv'), ctx = cv.getContext('2d');
+    let view = { s: 1, ox: 0, oy: 0 }, needFit = true, FOCUS = null;
+    function fitView(bbox, w, h) {
+      const pad = 26;
+      const sw = (bbox.maxx - bbox.minx) || 1, sh = (bbox.maxy - bbox.miny) || 1;
+      const s = Math.min((w - 2 * pad) / sw, (h - 2 * pad) / sh);
+      return { s, ox: (w - sw * s) / 2 - bbox.minx * s, oy: (h + sh * s) / 2 + bbox.miny * s };
+    }
+    const T = p => ({ x: p.x * view.s + view.ox, y: -p.y * view.s + view.oy });
+
+    function draw() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = cv.clientWidth, h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#fbfcfc'; ctx.fillRect(0, 0, w, h);
+      if (!STATE || !STATE.results.length) {
+        ctx.fillStyle = '#7d8b94'; ctx.font = '13px "IBM Plex Sans", sans-serif';
+        ctx.textAlign = 'center'; ctx.fillText(t('plot.empty'), w / 2, h / 2); return;
+      }
+      const R = STATE.results[ACTIVE]; if (!R) return;
+      if (needFit) { view = fitView(R.bbox, w, h); needFit = false; }
+
+      // ızgara / grid
+      const step = niceStep(40 / view.s);
+      ctx.strokeStyle = '#e3e8ea'; ctx.lineWidth = 1;
+      const b = R.bbox, m = step * 3;
+      ctx.beginPath();
+      for (let x = Math.floor((b.minx - m) / step) * step; x <= b.maxx + m; x += step) {
+        const p = T({ x, y: 0 }); ctx.moveTo(p.x, 0); ctx.lineTo(p.x, h);
+      }
+      for (let y = Math.floor((b.miny - m) / step) * step; y <= b.maxy + m; y += step) {
+        const p = T({ x: 0, y }); ctx.moveTo(0, p.y); ctx.lineTo(w, p.y);
+      }
+      ctx.stroke();
+
+      // ofset yolu / offset path
+      const off = offsetPath(R.els, R.side, TESTR, true, !!($('gouge') && $('gouge').checked));
+      const poly = off.path ? pathPolyline(off.path) : [];
+
+      // işlenen kanal alanı = merkez yolunun gerçek takım yarıçapıyla süpürdüğü şerit
+      // machined slot area = band swept by the centre path with the actual tool radius
+      const Rf = Math.max(0.0005, parseFloat($('rphys').value) || 0.0005);
+      if (poly.length > 1 && Rf * view.s > 0.75) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(15,125,134,.15)';
+        ctx.lineWidth = 2 * Rf * view.s;
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.beginPath();
+        poly.forEach((p, i) => { const q = T(p); i ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y); });
+        if (off.closed) ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      if (poly.length > 1) {
+        ctx.strokeStyle = off.fails.length ? '#b32319' : '#14507e';
+        ctx.lineWidth = 1.6; ctx.setLineDash(off.fails.length ? [5, 3] : []);
+        ctx.beginPath();
+        poly.forEach((p, i) => { const q = T(p); i ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y); });
+        if (off.closed) ctx.closePath();
+        ctx.stroke(); ctx.setLineDash([]);
+      }
+
+      // kontur / contour
+      ctx.strokeStyle = '#0d1418'; ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      R.pts.forEach((p, i) => { const q = T(p); i ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y); });
+      ctx.stroke();
+
+      // yön oku (başlangıç) / start marker
+      const p0 = T(R.pts[0]);
+      ctx.fillStyle = '#0d1418'; ctx.beginPath(); ctx.arc(p0.x, p0.y, 3.5, 0, TAU); ctx.fill();
+
+      // takım çemberi: odaklanan yerde, yoksa en kritik noktada
+      // tool circle: at the focus, otherwise at the most critical point
+      const focus = FOCUS ? FOCUS.p : ((R.crit && R.crit.length) ? R.crit[0].p : null);
+      if (focus && Math.abs(TESTR) > 1e-9) {
+        const q = T(focus);
+        ctx.strokeStyle = TESTR < 0 ? '#14507e' : '#0f7d86'; ctx.lineWidth = 1.4; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.arc(q.x, q.y, Math.abs(TESTR) * view.s, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+      }
+      if (FOCUS) {
+        const q = T(FOCUS.p);
+        ctx.strokeStyle = '#b57405'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(q.x, q.y, 9, 0, TAU); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(q.x - 14, q.y); ctx.lineTo(q.x - 9, q.y);
+        ctx.moveTo(q.x + 9, q.y); ctx.lineTo(q.x + 14, q.y);
+        ctx.moveTo(q.x, q.y - 14); ctx.lineTo(q.x, q.y - 9);
+        ctx.moveTo(q.x, q.y + 9); ctx.lineTo(q.x, q.y + 14); ctx.stroke();
+        if (FOCUS.block !== undefined && FOCUS.block !== null) {
+          ctx.fillStyle = '#b57405'; ctx.font = '600 11px "IBM Plex Mono", monospace'; ctx.textAlign = 'left';
+          ctx.fillText(t('plot.block', { block: FOCUS.block }), q.x + 16, q.y - 8);
+        }
+      }
+
+      // hata işaretleri / failure markers
+      if (off.fails.length) {
+        const shown = new Set();
+        for (const f of off.fails.slice(0, 60)) {
+          const k = f.block + '|' + Math.round(f.p.x * 4) + ',' + Math.round(f.p.y * 4); if (shown.has(k)) continue; shown.add(k);
+          const q = T(f.p);
+          ctx.fillStyle = 'rgba(179,35,25,.9)';
+          ctx.beginPath(); ctx.arc(q.x, q.y, 4.5, 0, TAU); ctx.fill();
+          if (shown.size <= 8 && f.block !== undefined && f.block !== null) {
+            ctx.fillStyle = '#b32319'; ctx.font = '11px "IBM Plex Mono", monospace'; ctx.textAlign = 'left';
+            ctx.fillText(String(f.block), q.x + 7, q.y - 6);
+          }
+        }
+      }
+      // dalış / bağlantı hareketleri: takımın gerçekte süpürdüğü kapsül
+      // plunge / link moves: the capsule the tool actually sweeps
+      for (const l of LINKS) {
+        if (idleLink(l)) continue;
+        const loss = lossOf(l), harm = l.overRef;
+        const A2 = T(l.a), B2 = T(l.b), rr = Rf * view.s;
+        if (rr < 0.4) continue;
+        const bad = harm > EPSD, warnv = loss > EPSD;
+        ctx.save();
+        ctx.strokeStyle = bad ? 'rgba(179,35,25,.28)' : (warnv ? 'rgba(181,116,5,.26)' : 'rgba(122,63,168,.22)');
+        ctx.lineWidth = 2 * rr; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.beginPath(); ctx.moveTo(A2.x, A2.y); ctx.lineTo(B2.x, B2.y); ctx.stroke();
+        ctx.restore();
+        ctx.strokeStyle = bad ? '#b32319' : (warnv ? '#b57405' : '#7a3fa8');
+        ctx.lineWidth = 1.2; ctx.setLineDash([3, 2]);
+        ctx.beginPath(); ctx.arc(A2.x, A2.y, rr, 0, TAU); ctx.stroke();
+        if (Math.hypot(B2.x - A2.x, B2.y - A2.y) > 1) { ctx.beginPath(); ctx.arc(B2.x, B2.y, rr, 0, TAU); ctx.stroke(); }
+        ctx.setLineDash([]);
+        if ((warnv || bad) && l.at) {
+          const wp = T(l.at);
+          ctx.fillStyle = bad ? '#b32319' : '#b57405';
+          ctx.beginPath(); ctx.arc(wp.x, wp.y, 3, 0, TAU); ctx.fill();
+          if (rr > 12) {
+            ctx.font = '600 10px "IBM Plex Mono", monospace'; ctx.textAlign = 'left';
+            ctx.fillText(fmt(bad ? harm : loss, 4), wp.x + 5, wp.y - 4);
+          }
+        }
+      }
+
+      // parça bozulmaları / part damage
+      for (const d of DAMAGE) {
+        if (d.ci !== ACTIVE || !d.p) continue;
+        const q = T(d.p);
+        ctx.strokeStyle = '#b57405'; ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.moveTo(q.x - 5, q.y - 5); ctx.lineTo(q.x + 5, q.y + 5);
+        ctx.moveTo(q.x + 5, q.y - 5); ctx.lineTo(q.x - 5, q.y + 5); ctx.stroke();
+      }
+
+      // ölçek / scale
+      ctx.fillStyle = '#7d8b94'; ctx.font = '10px "IBM Plex Mono", monospace';
+      ctx.textAlign = 'left'; ctx.fillText(t('plot.grid', { step: fmt(step) }), 10, h - 10);
+    }
+    function niceStep(target) {
+      const p = Math.pow(10, Math.floor(Math.log10(Math.max(target, 1e-6))));
+      const c = [1, 2, 5, 10]; for (const k of c) if (p * k >= target) return p * k; return p * 10;
+    }
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { resizeTimer = null; needFit = true; draw(); }, 120);
+    });
+
+    function focusOn(p, r) {
+      const w = cv.clientWidth, h = cv.clientHeight;
+      view.s = Math.min(w, h) / Math.max(r * 9, 1);
+      view.ox = w / 2 - p.x * view.s; view.oy = h / 2 + p.y * view.s;
+      needFit = false; draw();
+    }
+
+    /* ---------- gezinme: tekerlek, sürükleme, iki parmakla yakınlaştırma ----------
+       navigation: wheel, drag, two-finger pinch */
+    const canvasPt = e => { const rc = cv.getBoundingClientRect(); return { x: e.clientX - rc.left, y: e.clientY - rc.top }; };
+    const PTRS = new Map();
+    let dragFrom = null, pinch = null;
+    const ptrList = () => [...PTRS.values()];
+
+    cv.addEventListener('wheel', e => {
+      if (!STATE) return;
+      e.preventDefault();
+      const p = canvasPt(e);
+      const k = Math.exp(-e.deltaY * 0.0015);
+      view.ox = p.x + (view.ox - p.x) * k; view.oy = p.y + (view.oy - p.y) * k; view.s *= k;
+      needFit = false; draw();
+    }, { passive: false });
+
+    cv.addEventListener('pointerdown', e => {
+      if (!STATE) return;
+      PTRS.set(e.pointerId, canvasPt(e));
+      if (cv.setPointerCapture) { try { cv.setPointerCapture(e.pointerId); } catch (_) { /* yakalanamadı */ } }
+      if (PTRS.size >= 2) {
+        const l = ptrList(), a = l[0], b = l[1];
+        pinch = {
+          d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2,
+          ox: view.ox, oy: view.oy, s: view.s
+        };
+        dragFrom = null;
+      } else {
+        const p = canvasPt(e);
+        dragFrom = { x: p.x, y: p.y, ox: view.ox, oy: view.oy };
+        cv.style.cursor = 'grabbing';
+      }
+    });
+
+    cv.addEventListener('pointermove', e => {
+      if (!STATE) return;
+      if (PTRS.has(e.pointerId)) PTRS.set(e.pointerId, canvasPt(e));
+      if (PTRS.size >= 2 && pinch) {
+        const l = ptrList(), a = l[0], b = l[1];
+        const d = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+        const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        const k = d / pinch.d;
+        view.s = pinch.s * k;
+        view.ox = mx - (pinch.mx - pinch.ox) * k;
+        view.oy = my - (pinch.my - pinch.oy) * k;
+        needFit = false; draw();
+        return;
+      }
+      if (!dragFrom) return;
+      const p = canvasPt(e);
+      view.ox = dragFrom.ox + (p.x - dragFrom.x); view.oy = dragFrom.oy + (p.y - dragFrom.y);
+      needFit = false; draw();
+    });
+
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => cv.addEventListener(ev, e => {
+      PTRS.delete(e.pointerId);
+      if (PTRS.size < 2) pinch = null;
+      if (!PTRS.size) { dragFrom = null; cv.style.cursor = 'grab'; }
+      else { const p = ptrList()[0]; dragFrom = { x: p.x, y: p.y, ox: view.ox, oy: view.oy }; }
+    }));
+    cv.style.cursor = 'grab';
+    $('fit').onclick = () => { FOCUS = null; needFit = true; draw(); };
+
+    /* ---------- programa uyarı işleme / annotate the program ---------- */
+    function ascii(s) {
+      const m = {
+        'ı': 'i', 'İ': 'I', 'ş': 's', 'Ş': 'S', 'ğ': 'g', 'Ğ': 'G', 'ü': 'u', 'Ü': 'U',
+        'ö': 'o', 'Ö': 'O', 'ç': 'c', 'Ç': 'C', '−': '-'
+      };
+      return String(s).replace(/[ıİşŞğĞüÜöÖçÇ−]/g, ch => m[ch] || ch);
+    }
+    function num(v, n) { return (v < 0 ? '-' : '') + Math.abs(v).toFixed(n); }
+
+    function buildAnnotated() {
+      const text = $('src').value;
+      if (!text.trim() || !STATE || !INFO) return null;
+      const notes = new Map();
+      const put = (b, msg) => {
+        if (b === null || b === undefined) return;
+        if (!notes.has(b)) notes.set(b, []);
+        const a = notes.get(b); if (a.length < 2 && a.indexOf(msg) < 0) a.push(msg);
+      };
+
+      if (INFO.toolBlock !== null) {
+        put(INFO.toolBlock, INFO.finite
+          ? t('an.range', { a: num(INFO.drMin, 3), b: num(INFO.drMax, 3) })
+          : t('an.rangeOpen', { a: num(INFO.drMin, 3) }));
+        if (INFO.drForm !== null && INFO.drForm !== undefined)
+          put(INFO.toolBlock, t('an.form', { v: num(INFO.drForm, 3) }));
+        if (INFO.outRoom > 1e-9)
+          put(INFO.toolBlock, t('an.outFloor', { v: num(INFO.drFloor, 3), mm: (2 * INFO.outRoom).toFixed(3) }));
+      }
+      // dalış / bağlantı hareketleri / plunge and link moves
+      (LNKROWS || []).slice(0, 20).forEach(r => {
+        if (r.idle) return;
+        if (r.harm > EPSD)
+          put(r.l.block, t('an.harm', { mm: r.harm.toFixed(4) }));
+        else if (r.limit !== null)
+          put(r.l.block, t('an.lossLimit', { v: num(r.limit, 3) }) +
+            (r.loss > EPSD ? t('an.lossNow', { mm: r.loss.toFixed(4) }) : ''));
+      });
+      // sınırı belirleyen kütükler / blocks that set the limit
+      let cnt = 0;
+      STATE.results.forEach(R => {
+        if (R.unlimited) return;
+        R.crit.slice(0, 6).forEach(c => {
+          if (cnt++ > 40) return;
+          put(c.block, c.kind === 'arcflip'
+            ? t('an.arcflip', { v: num(R.rmax, 3) })
+            : t('an.swallow', { v: num(INFO.drMax, 3) }));
+        });
+      });
+      // seçilen DR'deki bozulmalar / damage at the selected DR
+      let dn = 0;
+      DAMAGE.slice(0, 12).forEach(d => {
+        const msg = d.kind === 'gouge'
+          ? t('an.gouge', { v: num(INFO.drCur, 3), mm: d.depth.toFixed(3) })
+          : t('an.arc', { v: num(INFO.drCur, 3) });
+        if (d.kind === 'throat') return;
+        if (d.kind === 'appr' || d.kind === 'dep') {
+          put(d.block, t('an.apprShort', { mm: d.depth.toFixed(3) }));
+          return;
+        }
+        if (d.kind === 'onIn' || d.kind === 'onOut') {
+          put(d.block, t('an.compIn', {
+            what: t(d.kind === 'onIn' ? 'an.compIn.on' : 'an.compIn.off'),
+            dz: d.dz.toFixed(3), mm: d.depth.toFixed(3)
+          }));
+          return;
+        }
+        (d.blocks || [d.block]).forEach(b => { if (dn++ < 300) put(b, msg); });
+      });
+      if (!notes.size) return null;
+
+      const crlf = text.indexOf('\r\n') >= 0 ? '\r\n' : '\n';
+      const out = text.split(/\r?\n/).map(line => {
+        const m = line.match(/^\s*(\d+)\s/);
+        if (!m) return line;
+        const ns = notes.get(parseInt(m[1], 10));
+        if (!ns) return line;
+        const msg = ascii('!! ' + ns.join(' / '));
+        const base = line.replace(/\s+$/, '');
+        return base.indexOf(';') >= 0 ? base + ' / ' + msg : base + ' ; ' + msg;
+      }).join(crlf);
+      return { text: out, count: notes.size };
+    }
+
+    if ($('dl')) $('dl').onclick = () => {
+      const r = buildAnnotated();
+      if (!r) { setVerdict('warn', 'dl.nothing.tag', 'dl.nothing.txt'); return; }
+      try {
+        const blob = new Blob([r.text], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = FNAME.replace(/\.[^.]+$/, '') + t('dl.suffix');
+        document.body.appendChild(a); a.click();
+        setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+      } catch (e) { setVerdictRaw('bad', t('dl.fail.tag'), e.message); }
+    };
+
+    function syncDetails() {
+      const els = document.querySelectorAll('.det');
+      for (let i = 0; i < els.length; i++) els[i].style.display = DETAILS_ON ? '' : 'none';
+      $('toggleDet').textContent = t(DETAILS_ON ? 'btn.detailsHide' : 'btn.detailsShow');
+    }
+    if ($('toggleDet')) $('toggleDet').onclick = () => { DETAILS_ON = !DETAILS_ON; syncDetails(); };
+
+    /* ---------- analiz / analysis ---------- */
+    function run() {
+      const text = $('src').value;
+      if (!text.trim()) { setVerdict('warn', 'vd.empty.tag', 'vd.empty.txt'); return; }
+      const opt = {
+        tol: Math.max(0.0005, parseFloat($('tol').value) || 0.002),
+        gouge: !!($('gouge') && $('gouge').checked)
+      };
+      let A;
+      try { A = analyseProgram(text, opt); }
+      catch (err) { setVerdict('bad', 'vd.error.tag', 'vd.error.txt', { msg: err.message }); return; }
+      STATE = A; ACTIVE = 0; FOCUS = null; needFit = true;
+
+      // TOOL CALL'daki DR'yi bir kez otomatik al / pick up the DR from TOOL CALL once
+      if (text !== LASTTEXT) {
+        LASTTEXT = text;
+        if (A.toolCall && A.toolCall.dr !== null && A.toolCall.dr !== undefined) {
+          $('drcur').value = String(A.toolCall.dr);
+          $('drref').value = String(A.toolCall.dr);      // nominal form = CAM'in çıkardığı hâl / as CAM posted it
+        }
+        $('rphys').value = $('rtab').value;              // aksi söylenene kadar takım tam ölçüsünde / assume nominal tool
+      }
+
+      const safety = Math.max(0, parseFloat($('safety').value) || 0);
+      const Rt = Math.max(0, parseFloat($('rtab').value) || 0);
+      const drCur = parseFloat($('drcur').value);
+      const hasDr = isFinite(drCur);
+      const Rf = Math.max(0.0005, parseFloat($('rphys').value) || Rt || 0.0005);
+      const drRefIn = parseFloat($('drref').value);
+      const drRef = isFinite(drRefIn) ? drRefIn : -Rt;
+
+      const finite = isFinite(A.rmax);
+      const rLim = finite ? A.rmax : Infinity;
+      const rSafe = finite ? Math.max(0, rLim - safety) : Infinity;
+      const drMin = -Rt;
+      const drMax = finite ? rSafe - Rt : Infinity;
+
+      // ---- dış ofset: DR ekseninin −R altına açılan bölümü / outward offset zone
+      const outAllow = !!($('outAllow') && $('outAllow').checked);
+      const outCap = Math.max(0, parseFloat($('outcap').value) || 0);
+      const outFin = isFinite(A.routMax);
+      const outGeo = outFin ? Math.max(0, A.routMax - safety) : Infinity;
+      const outRoom = outAllow ? Math.max(0, Math.min(outCap, outGeo)) : 0;
+      const outCapped = outAllow && outFin && outGeo < outCap - 1e-9;   // sınırı geometri koyuyor / geometry sets it
+      const drFloor = drMin - outRoom;
+      DRFLOOR = drFloor;
+      /* Dış ofset kapalıyken kumanda −R altını hiç işlemez; o durumda ölçüyü ve
+         çizimi nominale kenetle ki olmayacak bir yol gösterilmesin.
+         With the outward offset off the control never runs below −R; clamp the
+         measurement and the drawing to nominal so no impossible path is shown. */
+      const rEffOf = d => outAllow ? Rt + d : Math.max(0, Rt + d);
+
+      // ---- DR taraması: dalış / bağlantı hareketleri / DR sweep over plunge and link moves
+      WIN = null; LINKS = [];
+      if (A.results.length && A.links.length) {
+        try {
+          WIN = damageWindow(A, {
+            rtab: Rt, rphys: Rf, drRef, eps: EPSD, outRoom,
+            steps: 16, span: Math.max(1, Rt * 4)
+          });
+          if (hasDr) {
+            const idxCur = machinedIndex(A.results, rEffOf(drCur), WIN.rois);
+            MACH = idxCur;
+            LINKS = linkProbe(A, idxCur, WIN.idxRef, Rf, WIN.cap);
+          }
+        } catch (e) { WIN = null; A.warnings.push({ k: 'warn.linkFail', p: { msg: e.message } }); }
+      }
+      const drForm = WIN ? WIN.lossTop : null;
+      const outNow = hasDr && drCur < drMin - 1e-9;      // şu an dış ofsetteyiz / we are in the outward zone
+
+      // ---- göstergeler / readouts
+      $('kMin').textContent = t(outRoom > 0 ? 'dro.minOut' : 'dro.min');
+      $('vMin').innerHTML = A.results.length ? fmtSigned(drFloor) : t('common.dash');
+      $('vMin').className = 'v' + (A.results.length ? (outRoom > 0 ? ' warn' : ' ok') : '');
+      $('sMin').textContent = !A.results.length ? t('dro.noContour')
+        : outRoom > 0
+          ? t('dro.minOutSub', { out: fmt(outRoom, 3), ch: fmt(2 * outRoom, 3) }) +
+          t(outCapped ? 'dro.minOutGeo' : 'dro.minOutMach')
+          : t('dro.minNomSub');
+      $('cellMin').className = 'cell' + ((outNow && drCur < drFloor - 1e-9) ? ' warnbg' : '');
+
+      if (!A.results.length) {
+        $('vMax').innerHTML = t('common.dash'); $('vMax').className = 'v'; $('sMax').textContent = t('dro.noRLRR');
+      } else if (!finite) {
+        $('vMax').innerHTML = t('dro.maxFree'); $('vMax').className = 'v ok';
+        $('sMax').textContent = t('dro.maxFreeSub');
+      } else if (drMax < drMin) {
+        $('vMax').innerHTML = fmtSigned(drMax); $('vMax').className = 'v bad';
+        $('sMax').textContent = t('dro.maxTooTight', { r: fmt(rSafe, 3) });
+      } else {
+        $('vMax').innerHTML = fmtSigned(drMax); $('vMax').className = 'v warn';
+        $('sMax').textContent = t('dro.maxSub', { r: fmt(rSafe, 3), s: fmt(safety, 3) });
+      }
+      $('cellMax').className = 'cell' + ((finite && hasDr && drCur > drMax) ? ' warnbg' : '');
+
+      if (!A.results.length || !WIN || !WIN.evaluated) {
+        $('vForm').innerHTML = t('common.dash'); $('vForm').className = 'v';
+        $('sForm').textContent = !A.results.length ? t('dro.noRLRR')
+          : (WIN && LINKS.length ? t('dro.formOutside') : t('dro.formNoLinks'));
+      } else if (drForm === null) {
+        $('vForm').innerHTML = finite ? fmtSigned(drMax) : t('dro.formNoLimit'); $('vForm').className = 'v ok';
+        $('sForm').textContent = I18N.plural('dro.formOkSub', WIN.evaluated);
+      } else if (drForm <= drMin + 2 * EPSD) {
+        $('vForm').innerHTML = t('dro.formNone'); $('vForm').className = 'v bad';
+        $('sForm').textContent = t('dro.formTightSub');
+      } else {
+        $('vForm').innerHTML = fmtSigned(drForm); $('vForm').className = 'v warn';
+        $('sForm').textContent = t('dro.formSub');
+      }
+      $('cellForm').className = 'cell' + ((drForm !== null && hasDr && drCur > drForm + 1e-9) ? ' warnbg' : '');
+
+      // ---- karar / verdict
+      const devOf = d => (d - drRef) + (Rt - Rf);          // duvar sapması, + = kanal daralır / wall deviation
+      const harmAny = WIN && WIN.harmTop !== null;
+      if (!A.results.length) {
+        setVerdict('warn', 'vd.noContour.tag', 'vd.noContour.txt');
+      } else if (finite && drMax < drMin) {
+        setVerdict('bad', 'vd.noRange.tag', 'vd.noRange.txt', { r: fmt(rSafe, 3), drMin: fmtSigned(drMin) });
+      } else if (hasDr && drCur < drFloor - 1e-9 && !outAllow) {
+        setVerdict('bad', 'vd.drNeg.tag', 'vd.drNeg.txt', { dr: fmtSigned(drCur), drMin: fmtSigned(drMin) });
+      } else if (hasDr && drCur < drFloor - 1e-9) {
+        setVerdict('bad', 'vd.outMuch.tag', 'vd.outMuch.txt', {
+          dr: fmtSigned(drCur), out: fmt(-(Rt + drCur), 3), floor: fmtSigned(drFloor),
+          room: fmt(outRoom, 3), why: t(outCapped ? 'vd.outMuch.geo' : 'vd.outMuch.mach')
+        });
+      } else if (finite && hasDr && drCur > drMax) {
+        setVerdict('bad', 'vd.drMuch.tag', 'vd.drMuch.txt', {
+          dr: fmtSigned(drCur), floor: fmtSigned(drFloor), drMax: fmtSigned(drMax)
+        });
+      } else if (outNow) {
+        const d = devOf(drCur);
+        const wh = WIN ? worstHarm() : null;
+        setVerdict('warn', 'vd.outZone.tag', 'vd.outZone.txt', {
+          dr: fmtSigned(drCur), out: fmt(-(Rt + drCur), 3), dev: fmtSigned(d), ch: fmtSigned(-2 * d),
+          note: t(d < -1e-9 ? 'vd.outZone.cutting' : 'vd.outZone.safe'), floor: fmtSigned(drFloor),
+          harm: wh ? t('vd.outZone.harm', { kind: linkName(wh.kind), block: wh.block, mm: fmt(wh.harm, 4) }) : ''
+        });
+      } else if (WIN && worstHarm()) {
+        const wh = worstHarm();
+        setVerdict('bad', 'vd.harm.tag', 'vd.harm.txt', {
+          dr: fmtSigned(drCur), kind: linkName(wh.kind), block: wh.block, mm: fmt(wh.harm, 4),
+          top: (harmAny && WIN.harmTop > drMin + EPSD) ? t('vd.harm.top', { v: fmtSigned(WIN.harmTop) }) : ''
+        });
+      } else if (drForm !== null && drForm <= drMin + 2 * EPSD) {
+        const n = tangentCount(drMin);
+        const dialed = hasDr && drCur > drMin + EPSD;
+        const wl = dialed ? worstLoss() : null;
+        const tail = I18N.plural('vd.tight.tail', n, { dia: fmt(2 * Rf, 3) });
+        if (dialed) {
+          setVerdict('warn', 'vd.tightDialed.tag', 'vd.tightDialed.txt', {
+            dr: fmtSigned(drCur), dev: fmt(Math.abs(devOf(drCur)), 4), tail,
+            worst: wl ? t('vd.tightDialed.worst', { block: wl.block, mm: fmt(wl.loss, 4) }) : ''
+          });
+        } else {
+          setVerdict('ok', 'vd.tightNominal.tag', 'vd.tightNominal.txt', { drMax: fmtSigned(drMax), tail });
+        }
+      } else if (drForm !== null && hasDr && drCur > drForm + 1e-9) {
+        const wl = LINKS.length ? worstLoss() : null;
+        setVerdict('warn', 'vd.lossy.tag', 'vd.lossy.txt', {
+          dr: fmtSigned(drCur), dev: fmt(Math.abs(devOf(drCur)), 4),
+          lost: wl ? fmt(wl.loss, 4) + ' mm' : t('vd.lossy.some'),
+          where: wl ? t('vd.lossy.whereBlock', { block: wl.block }) : t('vd.lossy.whereGeneric'),
+          form: fmtSigned(drForm)
+        });
+      } else if (!finite) {
+        setVerdict('ok', 'vd.free.tag', 'vd.free.txt', { drMin: fmtSigned(drMin) });
+      } else {
+        const eff = drForm !== null ? Math.min(drMax, drForm) : drMax;
+        setVerdict('ok', 'vd.fine.tag', 'vd.fine.txt', {
+          drMin: fmtSigned(drMin), eff: fmtSigned(eff),
+          room: fmt(eff - drMin, 4), ch: fmt(2 * (eff - drMin), 4),
+          cur: hasDr ? t('vd.fine.cur', { dr: fmtSigned(drCur) }) : '',
+          out: outRoom > 0 ? t('vd.fine.out', { floor: fmtSigned(drFloor), ch: fmt(2 * outRoom, 3) }) : ''
+        });
+      }
+      // ---- seçilen DR'de parça bozulmaları / part damage at the selected DR
+      DAMAGE = [];
+      if (A.results.length && hasDr) {
+        const rEff = rEffOf(drCur);              // eksi = dış ofset / negative = outward offset
+        A.results.forEach((R, ri) => {
+          const d = damageAt(R.els, R.side, rEff, opt.gouge);
+          d.gouges.forEach(g => DAMAGE.push({ ci: ri, con: R.index, kind: 'gouge', ...g }));
+          d.arcs.forEach(g => DAMAGE.push({ ci: ri, con: R.index, kind: 'arc', depth: Infinity, ...g }));
+          if (opt.gouge) d.throats.forEach(g => DAMAGE.push({ ci: ri, con: R.index, kind: 'throat', depth: NaN, ...g }));
+        });
+        // aynı XY noktası her Z seviyesinde tekrar eder -> konuma göre grupla
+        // the same XY point repeats at every Z level -> group by position
+        const grp = new Map();
+        for (const d of DAMAGE) {
+          const k = d.kind + '|' + Math.round(d.p.x * 100) + '|' + Math.round(d.p.y * 100);
+          const g = grp.get(k);
+          if (!g) grp.set(k, { ...d, n: 1, blocks: [d.block] });
+          else {
+            g.n++; if (g.blocks.length < 60) g.blocks.push(d.block);
+            if ((d.depth || 0) > (g.depth || 0)) g.depth = d.depth;
+          }
+        }
+        DAMAGE = [...grp.values()].sort((a, b) => (b.depth || 0) - (a.depth || 0));
+        // Yaklaşma / uzaklaşma bloğu için kaba kontrol. Dalış analizi çalıştıysa
+        // aynı soruyu gerçek geometriyle o cevaplıyor; burayı tekrar sayma.
+        // Rough check for the approach / departure block. If the plunge analysis ran,
+        // it answers the same question with real geometry — do not count it twice.
+        if (!WIN) A.results.forEach((R, ri) => {
+          const chk = (l, blk, kind) => {
+            if (l === undefined || blk === undefined || blk === null) return;
+            if (l >= rEff - 1e-9 || rEff <= 1e-9) return;
+            DAMAGE.push({
+              ci: ri, con: R.index, kind, block: blk, depth: rEff - l, n: 1, blocks: [blk],
+              p: R.pts[kind === 'appr' ? 0 : R.pts.length - 1]
+            });
+          };
+          chk(R.apprLen, R.startBlock, 'appr');
+          chk(R.depLen, R.depBlock, 'dep');
+          // düzeltme, takım kütüğün içindeyken devreye giriyor/çıkıyorsa yanal süpürme talaştır
+          // if compensation switches while the tool is inside the blank, the sideways sweep is a cut
+          const top = (A.stock && isFinite(A.stock.z2)) ? A.stock.z2 : null;
+          if (top !== null && Math.abs(rEff) > 1e-9) {
+            const sweep = (from, to, dir, blk, z, kind) => {
+              if (!from || !to || z === undefined || z >= top - 1e-9) return;
+              const nv = mul(perp(dir), R.side);
+              const lat = Math.abs(dot(sub(add(to, mul(nv, rEff)), from), nv));
+              if (lat <= 1e-6) return;
+              DAMAGE.push({
+                ci: ri, con: R.index, kind, block: blk, depth: lat, dz: top - z,
+                n: 1, blocks: [blk], p: { ...to }
+              });
+            };
+            sweep(R.apprFrom, R.apprTo, elStartDir(R.els[0]), R.startBlock, R.apprZ, 'onIn');
+            const last = R.els[R.els.length - 1];
+            sweep(R.depFrom, elEnd(last), elEndDir(last), R.depBlock, R.depZ, 'onOut');
+          }
+        });
+      }
+      {
+        const rich = new Set(DAMAGE.filter(d => d.kind === 'onIn' || d.kind === 'onOut').map(d => d.block));
+        DAMAGE = DAMAGE.filter(d => !((d.kind === 'appr' || d.kind === 'dep') && rich.has(d.block)));
+        DAMAGE.sort((a, b) => (b.depth || 0) - (a.depth || 0));
+      }
+      renderDamage(hasDr ? drCur : null);
+      if (DAMAGE.length) {
+        const worst = DAMAGE[0];
+        const txt = worst.kind === 'arc' ? t('vd.damageArc') : t('vd.damageGouge', { mm: fmt(worst.depth, 4) });
+        $('verdict').innerHTML += `<br><span style="color:var(--red)">${I18N.plural('vd.damageLine', DAMAGE.length, { txt })}</span>`;
+      }
+
+      // ---- kontur seçici / contour picker
+      const chips = $('conChips'); chips.innerHTML = '';
+      A.results.forEach((r, i) => {
+        const el = document.createElement('button');
+        el.className = 'chip' + (i === 0 ? ' on' : '');
+        el.textContent = t('plot.chip', {
+          i: r.index, side: r.sideName, lim: r.unlimited ? '∞' : 'Ø' + fmt(r.rmax * 2, 2)
+        });
+        el.onclick = () => {
+          ACTIVE = i; FOCUS = null; needFit = true;
+          [...chips.children].forEach(c => c.classList.remove('on'));
+          el.classList.add('on'); setupSlider(); draw();
+        };
+        chips.appendChild(el);
+      });
+
+      INFO = {
+        drMin, drMax, drCur: hasDr ? drCur : null, Rt, Rf, drRef, finite, drForm,
+        drFloor, outRoom, outCapped, outNow,
+        harmTop: WIN ? WIN.harmTop : null, dev: hasDr ? devOf(drCur) : null,
+        toolBlock: A.toolCall ? A.toolCall.block : null
+      };
+      renderWindow(drMin, drMax, drForm, hasDr ? drCur : null, devOf, finite, drFloor, outCapped);
+      renderLinks(hasDr ? drCur : null);
+      renderCrit(A, rSafe);
+      renderCorners(A);
+      renderContours(A, safety);
+      renderWarnings(A);
+      setupSlider();
+      draw();
+    }
+
+    function setupSlider() {
+      const R = STATE && STATE.results[ACTIVE];
+      const rng = $('rng');
+      if (!R) { rng.disabled = true; $('rngVal').textContent = t('common.dash'); return; }
+      rng.disabled = false;
+      const Rt = Math.max(0, parseFloat($('rtab').value) || 0);
+      const top = R.unlimited ? Math.max(Rt * 2, 0.5) : Math.max(R.rmax * 1.6, Rt * 0.2 + 0.01);
+      rng.min = Math.round((DRFLOOR === null ? -Rt : Math.min(DRFLOOR, -Rt)) * 1000);
+      rng.max = Math.round((top - Rt) * 1000);
+      const drCur = parseFloat($('drcur').value);
+      rng.value = Math.max(rng.min, Math.min(rng.max, Math.round((isFinite(drCur) ? drCur : -Rt) * 1000)));
+      applySlider();
+    }
+    let probeTimer = null;
+    function applySlider() {
+      const Rt = Math.max(0, parseFloat($('rtab').value) || 0);
+      const dr = parseInt($('rng').value, 10) / 1000;
+      TESTR = Rt + dr;                       // eksi = dış ofset / negative = outward offset
+      $('rngVal').textContent = t('plot.val', { dr: fmtSigned(dr) });
+      const R = STATE && STATE.results[ACTIVE];
+      if (R) $('rngVal').style.color =
+        ((!R.unlimited && TESTR > R.rmax) || (!R.outUnlimited && -TESTR > R.routMax)) ? '#b32319'
+          : (TESTR < 0 ? '#14507e' : '#0d1418');
+      draw();
+      // kaydırıcı durunca dalış hareketlerini o DR'de yeniden ölç
+      // when the slider settles, re-measure the plunge moves at that DR
+      if (WIN && STATE) {
+        if (probeTimer) clearTimeout(probeTimer);
+        probeTimer = setTimeout(() => {
+          probeTimer = null;
+          try {
+            const Rf = Math.max(0.0005, parseFloat($('rphys').value) || 0.0005);
+            const idxCur = machinedIndex(STATE.results, TESTR, WIN.rois);
+            MACH = idxCur;
+            LINKS = linkProbe(STATE, idxCur, WIN.idxRef, Rf, WIN.cap);
+            renderLinks(dr);
+            draw();
+          } catch (e) { /* çizim bozulmasın / keep the drawing alive */ }
+        }, 140);
+      }
+    }
+    $('rng').addEventListener('input', applySlider);
+
+    function setVerdictRaw(cls, tag, txt) {
+      const v = $('verdict'); v.className = 'verdict ' + cls;
+      v.innerHTML = `<span class="tag">${tag}</span><span>${txt}</span>`;
+    }
+    function setVerdict(cls, tagKey, txtKey, params) {
+      setVerdictRaw(cls, t(tagKey), t(txtKey, params));
+    }
+
+    function renderCrit(A, rSafe) {
+      const box = $('critBox');
+      const rows = [];
+      CRIT = [];
+      A.results.forEach((r, ri) => {
+        if (r.unlimited) return;
+        const seen = new Set(), blocks = new Set();
+        r.crit.forEach(c => {
+          const k = c.block + '/' + c.kind; if (seen.has(k)) return; seen.add(k); blocks.add(c.block);
+          rows.push({ con: r.index, ci: ri, p: c.p, block: c.block, kind: c.kind, rmax: r.rmax });
+        });
+        r.concaveArcs.slice(0, 3).forEach(a => {
+          if (blocks.has(a.block)) return;
+          const e = r.els.find(x => x.block === a.block);
+          rows.push({ con: r.index, ci: ri, p: e ? elMid(e) : null, block: a.block, kind: 'arc', val: a.r, rmax: a.r });
+        });
+      });
+      if (!rows.length) { box.innerHTML = `<p class="empty">${t('crit.none')}</p>`; return; }
+      rows.sort((a, b) => a.rmax - b.rmax);
+      let html = TW0 + `<thead><tr><th>${t('crit.th.contour')}</th><th>${t('crit.th.block')}</th>` +
+        `<th>${t('crit.th.what')}</th><th class="num">${t('crit.th.limit')}</th>` +
+        `<th>${t('crit.th.sev')}</th></tr></thead><tbody>`;
+      rows.slice(0, 14).forEach(r => {
+        const sev = r.rmax <= rSafe ? 'hi' : (r.rmax <= rSafe * 1.3 ? 'md' : 'lo');
+        const idx = CRIT.push(r) - 1;
+        html += `<tr data-i="${idx}" class="crow"><td>${r.con}</td><td><span class="blk">${r.block ?? '—'}</span></td>` +
+          `<td>${I18N.opt('crit.' + r.kind) || r.kind}${r.val !== undefined ? ` · R${fmt(r.val, 2)}` : ''}</td>` +
+          `<td class="num">${fmt(r.rmax * 2, 2)}</td>` +
+          `<td><span class="sev ${sev}">${t('crit.sev.' + sev)}</span></td></tr>`;
+      });
+      html += '</tbody>' + TW1;
+      box.innerHTML = html;
+      box.querySelectorAll('tr[data-i]').forEach(tr => {
+        tr.onclick = () => {
+          const r = CRIT[parseInt(tr.getAttribute('data-i'), 10)];
+          if (!r || !r.p) return;
+          if (r.ci !== ACTIVE) {
+            ACTIVE = r.ci;
+            const ch = $('conChips').children;
+            for (let i = 0; i < ch.length; i++) ch[i].classList[i === ACTIVE ? 'add' : 'remove']('on');
+            setupSlider();
+          }
+          FOCUS = { p: r.p, block: r.block };
+          focusOn(r.p, Math.max(r.rmax, 1));
+        };
+      });
+    }
+
+    /* ---------- DR penceresi / DR window ---------- */
+    function lossOf(l) {
+      if (!WIN) return 0;
+      const b = WIN.base.has(l.key) ? WIN.base.get(l.key) : 0;
+      return Math.max(0, l.over - b);
+    }
+    function idleLink(l) {
+      if (!WIN) return false;
+      const b = WIN.base.has(l.key) ? WIN.base.get(l.key) : 0;
+      return b > WIN.rphys * 0.6;
+    }
+    function worstLoss() {
+      let w = null;
+      for (const l of LINKS) {
+        if (idleLink(l)) continue;
+        const lo = lossOf(l);
+        if (!w || lo > w.loss) w = { loss: lo, block: l.block, kind: l.kind, link: l };
+      }
+      return (w && w.loss > EPSD) ? w : null;
+    }
+    function worstHarm() {
+      let w = null;
+      for (const l of LINKS) {
+        if (idleLink(l)) continue;
+        if (!w || l.overRef > w.harm) w = { harm: l.overRef, block: l.block, kind: l.kind, link: l };
+      }
+      return (w && w.harm > EPSD) ? w : null;
+    }
+    /* nominal duvara teğet duran, yani DR ne olursa olsun payı kaçıran nokta sayısı
+       how many points sit tangent to the nominal wall, i.e. lose the stock at any DR */
+    function tangentCount(drMin) {
+      if (!WIN) return 0;
+      return WIN.links.filter(v => v.lossLimit !== null && v.lossLimit <= drMin + 2 * EPSD).length;
+    }
+
+    function renderWindow(drMin, drMax, drForm, drCur, devOf, finite, drFloor, outCapped) {
+      const band = $('band'), axis = $('bandAxis'), txt = $('winTxt');
+      band.innerHTML = ''; axis.innerHTML = '';
+      if (drFloor === undefined || drFloor === null) drFloor = drMin;
+      const outRoom = Math.max(0, drMin - drFloor);
+      if ($('keyOut')) $('keyOut').style.display = outRoom > 1e-9 ? '' : 'none';
+      if (!STATE || !STATE.results.length) {
+        $('winNote').textContent = '';
+        txt.innerHTML = `<p class="empty" style="padding:0">${t('window.placeholder')}</p>`;
+        return;
+      }
+      const ctl = finite ? drMax : (WIN ? WIN.top : drMin + 0.5);
+      const lo = drFloor;
+      const hi = Math.max(ctl + Math.max(0.02, (ctl - lo) * 0.18), (drCur !== null ? drCur : ctl) + 0.01, lo + 0.02);
+      const pct = v => Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100));
+      const green = drForm === null ? ctl : Math.max(drMin, Math.min(drForm, ctl));
+
+      const seg = (cls, a, b) => {
+        const w = pct(b) - pct(a); if (w <= 0.01) return;
+        const d = document.createElement('div');
+        d.className = 'seg ' + cls; d.style.width = w + '%';
+        band.appendChild(d);
+      };
+      seg('o', lo, drMin);
+      seg('g', drMin, green);
+      seg('a', green, ctl);
+      if (finite) seg('r', ctl, hi);
+
+      if (drCur !== null) {
+        const m = document.createElement('div');
+        m.className = 'mark'; m.style.left = pct(drCur) + '%';
+        band.appendChild(m);
+      }
+      const tick = (v, lab) => {
+        const s = document.createElement('span');
+        s.style.left = pct(v) + '%';
+        s.innerHTML = `<b>${fmtSigned(v)}</b>${lab}`;
+        axis.appendChild(s);
+      };
+      const tight = drForm !== null && drForm <= drMin + 2 * EPSD;
+      if (outRoom > 1e-9) tick(lo, t('window.tickOut'));
+      tick(drMin, t(outRoom > 1e-9 ? 'window.tickNominal' : 'window.tickNoRoom'));
+      if (drForm !== null && !tight && drForm < ctl - (hi - lo) * 0.04) tick(drForm, t('window.tickForm'));
+      if (finite) tick(ctl, t('window.tickCtl'));
+
+      $('winNote').textContent = drCur === null ? '' : t('window.note', { dr: fmtSigned(drCur) });
+
+      const eff = drForm !== null ? Math.min(ctl, drForm) : ctl;
+      const room = Math.max(0, eff - drMin);
+      const P = [];
+      if (outRoom > 1e-9) {
+        P.push(t('window.outP', {
+          out: fmt(outRoom, 3), drMin: fmtSigned(drMin), ch: fmt(2 * outRoom, 3),
+          who: outCapped ? t('window.outGeo', { floor: fmtSigned(drFloor) }) : t('window.outMach')
+        }));
+      }
+      if (tight) {
+        P.push(t('window.tightP1', {
+          drMin: fmtSigned(drMin), ctl: fmtSigned(ctl),
+          room: fmt(ctl - drMin, 4), ch: fmt(2 * (ctl - drMin), 4)
+        }));
+        P.push(I18N.plural('window.tightP2', tangentCount(drMin), {
+          dia: fmt(2 * (WIN ? WIN.rphys : 0), 3)
+        }));
+      } else {
+        P.push(t('window.roomP', {
+          room: fmt(room, 4), drMin: fmtSigned(drMin), eff: fmtSigned(eff), ch: fmt(2 * room, 4)
+        }));
+        if (drForm !== null && drForm < ctl - 1e-4)
+          P.push(t('window.lossyP', { form: fmtSigned(drForm), ctl: fmtSigned(ctl) }));
+      }
+      if (WIN && WIN.harmTop !== null)
+        P.push(t('window.harmP', { dr: fmtSigned(WIN.harmTop) }));
+      else if (WIN)
+        P.push(t('window.safeP', {
+          extra: outRoom > 1e-9 ? t('window.safeOutNote', { drMin: fmtSigned(drMin) }) : ''
+        }));
+      if (drCur !== null) {
+        const d = devOf(drCur);
+        const wear = WIN ? (WIN.rtab - WIN.rphys) : 0;
+        P.push(t('window.curP', {
+          dr: fmtSigned(drCur), dev: fmtSigned(d), ch: fmtSigned(-2 * d),
+          wear: Math.abs(wear) > 1e-6 ? t('window.curWear', { wear: fmtSigned(wear) }) : ''
+        }));
+      }
+      P.push(t(outRoom > 1e-9 ? 'window.tailOut' : 'window.tailIn', { drMin: fmtSigned(drMin) }));
+      txt.innerHTML = P.join('');
+    }
+
+    /* ---------- dalış / bağlantı tablosu / plunge and link table ---------- */
+    function renderLinks(dr) {
+      const box = $('lnkBox');
+      $('lnkAt').textContent = dr === null ? '' : t('common.at', { dr: fmtSigned(dr) });
+      if (!STATE || !STATE.results.length) { box.innerHTML = `<p class="empty">${t('common.afterAnalysis')}</p>`; return; }
+      if (!WIN) { box.innerHTML = `<p class="empty">${t('lnk.noWin')}</p>`; return; }
+      if (!LINKS.length) { box.innerHTML = `<p class="empty">${t('lnk.noRows')}</p>`; return; }
+
+      const rows = LINKS.map(l => {
+        const w = WIN.byKey.get(l.key);
+        return {
+          l, idle: idleLink(l), loss: lossOf(l), harm: l.overRef,
+          limit: w ? w.lossLimit : null, hlimit: w ? w.harmLimit : null
+        };
+      });
+      rows.sort((a, b) => (a.idle - b.idle) || (b.harm - a.harm) || (b.loss - a.loss) ||
+        ((a.limit === null ? 1e9 : a.limit) - (b.limit === null ? 1e9 : b.limit)));
+      LNKROWS = rows;
+
+      const nz = rows.filter(r => !r.idle && r.loss > EPSD).length;
+      const nh = rows.filter(r => !r.idle && r.harm > EPSD).length;
+      const outZone = dr !== null && dr < -WIN.rtab - 1e-9;
+      let html = `<p class="hint" style="padding:10px 10px 0">` +
+        I18N.plural('lnk.summary', rows.length, {
+          harm: nh ? I18N.plural('lnk.summaryHarm', nh) : t('lnk.summaryNoHarm'),
+          loss: nz ? I18N.plural('lnk.summaryLoss', nz) : t('lnk.summaryNoLoss')
+        }) +
+        (outZone ? t('lnk.outZone', { v: fmtSigned(-WIN.rtab) }) : '') + `</p>` +
+        TW0 + `<thead><tr><th>${t('lnk.th.block')}</th><th>${t('lnk.th.move')}</th><th class="num">${t('lnk.th.z')}</th>` +
+        `<th class="num">${t('lnk.th.harm')}</th><th class="num">${t('lnk.th.loss')}</th>` +
+        `<th class="num">${t('lnk.th.limit')}</th></tr></thead><tbody>`;
+      rows.slice(0, 18).forEach((r, i) => {
+        const zs = Math.abs(r.l.z1 - r.l.z0) < 1e-6 ? fmt(r.l.z0, 2) : fmt(r.l.z0, 2) + '…' + fmt(r.l.z1, 2);
+        const col = r.idle ? 'color:var(--ink-3)' : '';
+        html += `<tr data-i="${i}" class="crow" style="${col}"><td><span class="blk">${r.l.block ?? '—'}</span></td>` +
+          `<td>${linkName(r.l.kind)}${r.idle ? t('lnk.idle') : ''}</td>` +
+          `<td class="num">${zs}</td>` +
+          `<td class="num">${r.idle ? '—' : (r.harm > EPSD ? `<b style="color:var(--red)">${fmt(r.harm, 4)}</b>` : `<span style="color:var(--green)">${t('lnk.noHarm')}</span>`)}</td>` +
+          `<td class="num">${r.idle ? '—' : (r.loss > EPSD ? fmt(r.loss, 4) : '—')}</td>` +
+          `<td class="num">${r.idle ? '—' : (r.limit === null ? `<span style="color:var(--green)">${t('lnk.noLimit')}</span>` : fmtSigned(r.limit))}</td></tr>`;
+      });
+      html += '</tbody>' + TW1;
+      if (rows.length > 18) html += `<p class="hint" style="padding:8px 10px">${I18N.plural('lnk.more', rows.length - 18)}</p>`;
+      box.innerHTML = html;
+      box.querySelectorAll('tr[data-i]').forEach(tr => {
+        tr.onclick = () => {
+          const r = LNKROWS[parseInt(tr.getAttribute('data-i'), 10)];
+          if (!r) return;
+          const ci = r.l.ci;
+          if (ci !== undefined && ci !== ACTIVE && STATE.results[ci]) {
+            ACTIVE = ci;
+            const ch = $('conChips').children;
+            for (let i = 0; i < ch.length; i++) ch[i].classList[i === ACTIVE ? 'add' : 'remove']('on');
+            setupSlider();
+          }
+          FOCUS = { p: r.l.a, block: r.l.block };
+          focusOn(r.l.a, Math.max(WIN.rphys * 2, 0.5));
+        };
+      });
+    }
+
+    function renderDamage(dr) {
+      const box = $('dmgBox');
+      $('dmgAt').textContent = dr === null ? '' : t('common.at', { dr: fmtSigned(dr) });
+      if (!STATE || !STATE.results.length) { box.innerHTML = `<p class="empty">${t('common.afterAnalysis')}</p>`; return; }
+      if (!DAMAGE.length) {
+        box.innerHTML = `<p class="empty" style="color:var(--green)">${t('dmg.none')}</p>`; return;
+      }
+      const tot = DAMAGE.reduce((a, d) => a + (d.n || 1), 0);
+      let html = `<p class="hint" style="padding:10px 10px 0">${t('dmg.summary', { places: DAMAGE.length, blocks: tot })}</p>` +
+        TW0 + `<thead><tr><th>${t('dmg.th.contour')}</th><th>${t('dmg.th.block')}</th>` +
+        `<th class="num">${t('dmg.th.level')}</th><th>${t('dmg.th.what')}</th>` +
+        `<th class="num">${t('dmg.th.excess')}</th></tr></thead><tbody>`;
+      DAMAGE.slice(0, 12).forEach((d, i) => {
+        html += `<tr data-i="${i}" class="crow"><td>${d.con}</td>` +
+          `<td><span class="blk">${d.block ?? '—'}</span></td>` +
+          `<td class="num">${d.n > 1 ? '×' + d.n : '1'}</td>` +
+          `<td>${I18N.opt('dmg.kind.' + d.kind) || d.kind}${d.dz !== undefined ? t('dmg.dz', { mm: fmt(d.dz, 3) }) : ''}</td>` +
+          `<td class="num">${d.kind === 'arc' ? t('dmg.unmachinable') : (d.kind === 'throat' ? '—' : fmt(d.depth, 4) + ' mm')}</td></tr>`;
+      });
+      html += '</tbody>' + TW1;
+      if (DAMAGE.length > 12) html += `<p class="hint" style="padding:8px 10px">${I18N.plural('dmg.more', DAMAGE.length - 12)}</p>`;
+      box.innerHTML = html;
+      box.querySelectorAll('tr[data-i]').forEach(tr => {
+        tr.onclick = () => {
+          const d = DAMAGE[parseInt(tr.getAttribute('data-i'), 10)];
+          if (!d || !d.p) return;
+          if (d.ci !== ACTIVE) {
+            ACTIVE = d.ci;
+            const ch = $('conChips').children;
+            for (let i = 0; i < ch.length; i++) ch[i].classList[i === ACTIVE ? 'add' : 'remove']('on');
+            setupSlider();
+          }
+          FOCUS = { p: d.p, block: d.block };
+          focusOn(d.p, Math.max(Math.abs(TESTR), 0.5));
+        };
+      });
+    }
+
+    function renderCorners(A) {
+      const box = $('cornBox');
+      const rows = [];
+      A.results.forEach((r, ri) => r.corners.forEach(c => rows.push({ ci: ri, con: r.index, ...c })));
+      if (!rows.length) { box.innerHTML = `<p class="empty">${t('corn.none')}</p>`; return; }
+      rows.sort((a, b) => a.inner - b.inner);
+      CORN = [];
+      let html = TW0 + `<thead><tr><th>${t('corn.th.contour')}</th><th>${t('corn.th.block')}</th>` +
+        `<th class="num">${t('corn.th.angle')}</th><th class="num">${t('corn.th.edges')}</th>` +
+        `<th>${t('corn.th.type')}</th></tr></thead><tbody>`;
+      rows.slice(0, 12).forEach(c => {
+        const i = CORN.push(c) - 1;
+        const tip = t(c.inner < 45 ? 'corn.verySharp' : c.inner < 95 ? 'corn.sharp' : 'corn.blunt');
+        html += `<tr data-i="${i}" class="crow"><td>${c.con}</td>` +
+          `<td><span class="blk">${c.block ?? '—'}</span></td>` +
+          `<td class="num">${fmt(c.inner, 1)}°</td>` +
+          `<td class="num">${fmt(c.la, 1)} / ${fmt(c.lb, 1)}</td>` +
+          `<td>${tip}</td></tr>`;
+      });
+      html += '</tbody>' + TW1;
+      box.innerHTML = html;
+      box.querySelectorAll('tr[data-i]').forEach(tr => {
+        tr.onclick = () => {
+          const c = CORN[parseInt(tr.getAttribute('data-i'), 10)];
+          if (!c || !c.p) return;
+          if (c.ci !== ACTIVE) {
+            ACTIVE = c.ci;
+            const ch = $('conChips').children;
+            for (let i = 0; i < ch.length; i++) ch[i].classList[i === ACTIVE ? 'add' : 'remove']('on');
+            setupSlider();
+          }
+          FOCUS = { p: c.p, block: c.block };
+          focusOn(c.p, Math.max(Math.abs(TESTR), Math.min(c.la, c.lb) / 3, 1));
+        };
+      });
+    }
+
+    function renderContours(A, safety) {
+      const box = $('conBox');
+      if (!A.results.length) { box.innerHTML = `<p class="empty">${t('con.none')}</p>`; return; }
+      let html = TW0 + `<thead><tr><th>${t('con.th.n')}</th><th>${t('con.th.comp')}</th>` +
+        `<th class="num">${t('con.th.start')}</th><th class="num">${t('con.th.els')}</th>` +
+        `<th class="num">${t('con.th.len')}</th><th class="num">${t('con.th.minArc')}</th>` +
+        `<th class="num">${t('con.th.allowed')}</th><th class="num">${t('con.th.outLimit')}</th></tr></thead><tbody>`;
+      A.results.forEach(r => {
+        const ca = r.concaveArcs[0];
+        html += `<tr><td>${r.index}</td><td><span class="blk">${r.sideName}</span></td>` +
+          `<td class="num">${r.startBlock ?? '—'}</td><td class="num">${r.count}</td>` +
+          `<td class="num">${fmt(r.length, 1)}</td>` +
+          `<td class="num">${ca ? 'R' + fmt(ca.r, 2) : '—'}</td>` +
+          `<td class="num">${r.unlimited ? '∞' : fmt(Math.max(0, r.rmax - safety) * 2, 2)}</td>` +
+          `<td class="num">${r.outUnlimited ? '∞' : fmt(Math.max(0, r.routMax - safety), 3)}</td></tr>`;
+      });
+      html += '</tbody>' + TW1;
+      box.innerHTML = html;
+    }
+
+    function renderWarnings(A) {
+      const box = $('warnBox');
+      if (!A.warnings.length) { box.innerHTML = `<p class="empty">${t('parse.clean')}</p>`; return; }
+      box.innerHTML = '<div class="body" style="padding:12px"><ul class="notes">' +
+        A.warnings.map(w => {
+          const s = typeof w === 'string' ? w : t(w.k, w.p);
+          return `<li>${s.replace(/</g, '&lt;')}</li>`;
+        }).join('') + '</ul></div>';
+    }
+
+    /* ---------- çıktıları başlangıç durumuna al / reset the outputs ---------- */
+    function resetOutputs() {
+      const ph = `<p class="empty">${t('common.afterAnalysis')}</p>`;
+      $('conChips').innerHTML = '';
+      $('critBox').innerHTML = ph;
+      $('conBox').innerHTML = ph;
+      $('cornBox').innerHTML = ph;
+      $('lnkBox').innerHTML = ph;
+      $('dmgBox').innerHTML = ph; DAMAGE = [];
+      $('warnBox').innerHTML = `<p class="empty">${t('common.dash')}</p>`;
+      $('winTxt').innerHTML = `<p class="empty" style="padding:0">${t('window.placeholder')}</p>`;
+      $('band').innerHTML = ''; $('bandAxis').innerHTML = '';
+      $('winNote').textContent = ''; $('lnkAt').textContent = ''; $('dmgAt').textContent = '';
+      ['vMax', 'vMin', 'vForm'].forEach(id => { $(id).innerHTML = t('common.dash'); $(id).className = 'v'; });
+      ['sMax', 'sMin', 'sForm'].forEach(id => { $(id).textContent = t('dro.notYet'); });
+      $('kMin').textContent = t('dro.min'); DRFLOOR = null;
+      $('cellMin').className = 'cell'; $('cellMax').className = 'cell'; $('cellForm').className = 'cell';
+      $('rng').disabled = true; $('rngVal').textContent = t('plot.noVal');
+      setVerdict('idle', 'vd.idle.tag', 'vd.idle.txt');
+    }
+
+    /* ---------- olaylar / events ---------- */
+    $('run').onclick = run;
+    $('sample').onclick = () => { LOADED = null; FNAME = 'program'; $('drop').innerHTML = t('drop.idle'); $('src').value = SAMPLE; run(); };
+    $('clear').onclick = () => {
+      $('src').value = ''; STATE = null; ACTIVE = 0; INFO = null; WIN = null; LINKS = []; LNKROWS = [];
+      LOADED = null; FNAME = 'program'; $('drop').innerHTML = t('drop.idle');
+      FOCUS = null; needFit = true; LASTTEXT = null;
+      resetOutputs(); draw();
+    };
+
+    ['rtab', 'drcur', 'safety', 'tol', 'gouge', 'outcap'].forEach(id => {
+      $(id).addEventListener('change', () => { if (STATE) run(); });
+    });
+    $('outAllow').addEventListener('change', () => {
+      $('outcap').disabled = !$('outAllow').checked;
+      if (STATE) run();
+    });
+
+    const drop = $('drop'), file = $('file');
+    drop.onclick = () => file.click();
+    drop.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); file.click(); } };
+    file.onchange = e => { const f = e.target.files[0]; if (f) readFile(f); };
+    ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('hot'); }));
+    ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('hot'); }));
+    drop.addEventListener('drop', e => { const f = e.dataTransfer.files[0]; if (f) readFile(f); });
+    document.addEventListener('dragover', e => e.preventDefault());
+    document.addEventListener('drop', e => e.preventDefault());
+    function readFile(f) {
+      const rd = new FileReader();
+      rd.onload = () => {
+        FNAME = f.name; LOADED = f.name; $('src').value = String(rd.result);
+        drop.innerHTML = t('drop.loaded', { name: f.name }); run();
+      };
+      rd.readAsText(f, 'utf-8');
+    }
+
+    /* ---------- dil / language ---------- */
+    I18N.init();
+    (function buildLangBar() {
+      const bar = $('langbar'); if (!bar) return;
+      bar.innerHTML = '';
+      I18N.langs().forEach(m => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.textContent = m.label; b.title = m.name;
+        b.setAttribute('data-lang', m.code);
+        b.setAttribute('aria-pressed', String(m.code === I18N.lang));
+        b.onclick = () => I18N.setLang(m.code);
+        bar.appendChild(b);
+      });
+    })();
+    I18N.onChange(() => {
+      const bar = $('langbar');
+      if (bar) [...bar.children].forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === I18N.lang)));
+      syncDetails();
+      if (LOADED) drop.innerHTML = t('drop.loaded', { name: LOADED });
+      if (STATE) run(); else { resetOutputs(); draw(); }
+    });
+
+    syncDetails();
+    $('outcap').disabled = !$('outAllow').checked;
+    resetOutputs();
+    draw();
+  })();
+}
+  </script>
+</body>
+
+</html>

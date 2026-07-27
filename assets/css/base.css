@@ -1,0 +1,238 @@
+/* =====================================================================
+   base.css — değişkenler, sıfırlama, tipografi, form denetimleri
+   base.css — tokens, reset, typography, form controls
+   ===================================================================== */
+:root {
+  --bg: #d7dcdf;
+  --panel: #f3f5f6;
+  --panel-2: #e8ecee;
+  --ink: #0d1418;
+  --ink-2: #4d5a63;
+  --ink-3: #7d8b94;
+  --line: #b6c0c6;
+  --line-hard: #94a2aa;
+  --blue: #14507e;
+  --teal: #0f7d86;
+  --amber: #b57405;
+  --red: #b32319;
+  --green: #2c6b41;
+  --shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(13, 20, 24, .14);
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --tap: 44px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0
+}
+
+html {
+  -webkit-text-size-adjust: 100%
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(148, 162, 170, .30) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 162, 170, .30) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- form ---------- */
+label.f {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0 0 4px
+}
+
+input[type=number],
+input[type=text],
+textarea,
+select {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line-hard);
+  padding: 7px 8px;
+  border-radius: 0;
+}
+
+textarea {
+  min-height: 190px;
+  resize: vertical;
+  line-height: 1.45;
+  font-size: 12px;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px
+}
+
+input[type=checkbox] {
+  width: auto;
+  min-width: 18px;
+  min-height: 18px;
+  accent-color: var(--blue);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.row3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.hint {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  margin: 4px 0 0
+}
+
+.chkline {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.chkline input[type=checkbox] {
+  margin-top: 2px
+}
+
+button {
+  font-family: var(--cond);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  padding: 9px 14px;
+  cursor: pointer;
+  border-radius: 0;
+  touch-action: manipulation;
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-hard)
+}
+
+button.ghost:hover {
+  background: var(--panel-2)
+}
+
+button:hover {
+  background: #1d2a31
+}
+
+button.ghost:active,
+button:active {
+  transform: translateY(1px)
+}
+
+.btnrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px
+}
+
+.drop {
+  border: 1.5px dashed var(--line-hard);
+  background: var(--panel-2);
+  padding: 14px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop.hot {
+  border-color: var(--blue);
+  background: #e6eef5;
+  color: var(--blue)
+}
+
+.drop b {
+  font-family: var(--cond);
+  text-transform: uppercase;
+  letter-spacing: .04em
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--panel-2);
+  padding: 1px 4px;
+  border: 1px solid var(--line)
+}
+
+ul.notes {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  color: var(--ink-2)
+}
+
+ul.notes li {
+  margin: 5px 0
+}
+
+.empty {
+  color: var(--ink-3);
+  font-size: 12.5px;
+  padding: 14px 12px
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

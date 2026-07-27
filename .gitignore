@@ -1,0 +1,31 @@
+# --- NC / parça programları — repoya girmez ---
+# --- NC / part programs — never committed ---
+*.h
+*.H
+*.hc
+*.HC
+*.i
+*.I
+*.nc
+*.NC
+
+# --- yerel araç ayarları / local tool settings ---
+.claude/
+.vscode/
+.idea/
+
+# --- eski tek parça sürüm; yerini standalone/index.html aldı ---
+# --- superseded monolith; standalone/index.html replaces it ---
+heidenhain-RL-analizi.html
+
+# --- geçici / scratch ---
+_smoketest*.html
+_shot*.html
+_frame*.html
+*.tmp
+*.log
+
+# --- işletim sistemi / OS cruft ---
+Thumbs.db
+desktop.ini
+.DS_Store

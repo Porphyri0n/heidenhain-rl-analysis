@@ -1,0 +1,262 @@
+/* =====================================================================
+   layout.css — sayfa iskeleti, başlık, ızgara, kartlar, dil anahtarı
+   layout.css — page shell, masthead, grid, cards, language switch
+   ===================================================================== */
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 18px 64px
+}
+
+/* ---------- masthead ---------- */
+header.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.brand h1 {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 13px;
+  max-width: 62ch
+}
+
+.topright {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stamp {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--line-hard);
+  padding: 5px 9px;
+  background: var(--panel);
+  white-space: nowrap;
+}
+
+/* ---------- dil anahtarı / language switch ---------- */
+.langbar {
+  display: flex;
+  border: 1px solid var(--line-hard);
+  background: var(--panel);
+}
+
+.langbar button {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  padding: 6px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  min-height: 30px;
+}
+
+.langbar button+button {
+  border-left: 1px solid var(--line-hard)
+}
+
+.langbar button:hover {
+  background: var(--panel-2);
+  color: var(--ink)
+}
+
+.langbar button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff
+}
+
+/* ---------- layout ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  gap: 16px;
+  align-items: start
+}
+
+/* Izgara hücreleri varsayılan olarak min-content'in altına inmez; program
+   metni "white-space: pre" olduğu için bu, dar ekranlarda sütunu satırın
+   uzunluğu kadar şişirirdi. Taşmayı textarea kendi içinde kaydırarak çözer.
+
+   Grid items do not shrink below min-content by default; since the program
+   text is "white-space: pre" that would blow the column up to the longest
+   line on narrow screens. The textarea scrolls the overflow internally. */
+.grid>* {
+  min-width: 0
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line-hard);
+  box-shadow: var(--shadow)
+}
+
+.card>h2 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  background: var(--panel-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card .body {
+  padding: 12px
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.actionbar {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+footer {
+  margin-top: 26px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-hard);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  letter-spacing: .04em
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .card {
+    transition: box-shadow .15s ease
+  }
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:900px) {
+  .grid {
+    grid-template-columns: 1fr
+  }
+
+  .wrap {
+    padding: 16px 14px 48px
+  }
+
+  .brand h1 {
+    font-size: 25px
+  }
+}
+
+@media (max-width:700px) {
+  header.top {
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .brand {
+    order: 1;
+    width: 100%
+  }
+
+  .topright {
+    order: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stamp {
+    white-space: normal;
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+}
+
+@media (max-width:640px) {
+  .wrap {
+    padding: 14px 12px 40px
+  }
+
+  .brand h1 {
+    font-size: 22px;
+    line-height: 1.15
+  }
+
+  .brand p {
+    font-size: 12.5px
+  }
+
+  /* iOS'ta odaklanınca sayfayı yakınlaştırmasın / avoid iOS focus zoom */
+  input[type=number],
+  input[type=text],
+  select {
+    font-size: 16px;
+    padding: 9px 8px;
+  }
+
+  textarea {
+    font-size: 13px;
+    min-height: 150px
+  }
+
+  button {
+    min-height: var(--tap);
+    padding: 10px 14px;
+  }
+
+  .btnrow button {
+    flex: 1 1 auto
+  }
+
+  .actionbar button {
+    flex: 1 1 auto
+  }
+
+  .card .body {
+    padding: 11px
+  }
+
+  .card>h2 {
+    padding: 9px 11px
+  }
+}
+
+@media (max-width:400px) {
+
+  .row,
+  .row3 {
+    grid-template-columns: 1fr
+  }
+}
