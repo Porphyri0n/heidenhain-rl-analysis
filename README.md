@@ -1,5 +1,7 @@
 # Kontur Yarıçap Analizi — Heidenhain `.H`
 
+> **Canlı / live:** <https://porphyri0n.github.io/heidenhain-rl-analysis/>
+>
 > **Contour Radius Analysis** — English version below.
 
 Heidenhain Klartext (`.H`) veya ISO programını okuyup, **DR ile pay verirken hangi aralıkta

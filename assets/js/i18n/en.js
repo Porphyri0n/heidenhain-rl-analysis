@@ -4,7 +4,7 @@
 I18N.register('en', { code: 'en', label: 'EN', name: 'English' }, {
 
   /* ---------- page shell ---------- */
-  'app.title': 'Contour Radius Analysis — Heidenhain .H',
+  'app.title': 'Heidenhain DR Contour Radius Analysis — tool radius too large | .H / ISO',
   'app.h1': 'Contour Radius Analysis',
   'app.lead': 'Reads a Heidenhain Klartext (<code>.H</code>) or ISO program. When you dial stock in with DR it ' +
     'finds the range you may stay in, from three separate limits: the control\'s “tool radius too large” error, ' +

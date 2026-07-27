@@ -5,9 +5,60 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
+  <title>Heidenhain DR Kontur Yarıçap Analizi — takım yarıçapı çok büyük hatası | .H / ISO</title>
   <meta name="description"
-    content="Heidenhain Klartext (.H) / ISO kontur yarıçap ve DR penceresi analizi — tarayıcıda çalışır. Contour radius and DR window analysis for Heidenhain programs, runs in the browser.">
-  <title>Kontur Yarıçap Analizi — Heidenhain .H</title>
+    content="Heidenhain Klartext (.H) veya ISO programını okuyup DR ile pay verirken kalabileceğin aralığı bulur: “takım yarıçapı çok büyük” sınırı, formun tuttuğu en büyük DR ve dış ofset tabanı. Tarayıcıda çalışır, program hiçbir yere yüklenmez.">
+  <link rel="canonical" href="https://porphyri0n.github.io/heidenhain-rl-analysis/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Porphyri0n">
+  <meta name="theme-color" content="#0d1418">
+
+  <!-- Google Search Console doğrulaması: konsoldan aldığın etiketi buraya yapıştır
+       Google Search Console verification: paste the tag you get from the console here
+  <meta name="google-site-verification" content="..."> -->
+
+  <!-- paylaşım kartları / share cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kontur Yarıçap Analizi">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://porphyri0n.github.io/heidenhain-rl-analysis/">
+  <meta property="og:title" content="Heidenhain DR Kontur Yarıçap Analizi">
+  <meta property="og:description"
+    content="Heidenhain .H / ISO programında DR ile pay verirken hangi aralıkta kalabileceğini üç ayrı sınırdan bulan tek sayfalık araç. Tarayıcıda çalışır.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Heidenhain DR Kontur Yarıçap Analizi">
+  <meta name="twitter:description"
+    content="DR penceresi, “takım yarıçapı çok büyük” sınırı ve kalıcı hasar taraması — tarayıcıda, yükleme yok.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kontur Yarıçap Analizi — Heidenhain .H",
+    "alternateName": "Contour Radius Analysis for Heidenhain",
+    "url": "https://porphyri0n.github.io/heidenhain-rl-analysis/",
+    "applicationCategory": "EngineeringApplication",
+    "applicationSubCategory": "CNC / CAM",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "JavaScript",
+    "inLanguage": ["tr", "en"],
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Porphyri0n", "url": "https://github.com/Porphyri0n" },
+    "codeRepository": "https://github.com/Porphyri0n/heidenhain-rl-analysis",
+    "description": "Heidenhain Klartext (.H) veya ISO programını okuyup DR ile pay verirken kalabileceğin aralığı üç ayrı sınırdan bulan tek sayfalık araç: kumandanın \"takım yarıçapı çok büyük\" hatası, dalış ve geri çekilme hareketlerinin formu bozduğu nokta, ve dış ofset tabanı. Analiz tamamen tarayıcıda yapılır.",
+    "featureList": [
+      "Heidenhain Klartext (.H) ve basit ISO ayrıştırma",
+      "DR penceresi: minimum, kumanda sınırı, form sınırı",
+      "Takım yarıçapı çok büyük hatasının hangi DR'de çıkacağı",
+      "Kalıcı parça hasarı ve keskin iç köşe taraması",
+      "Dar geçit ve yutulan eleman listesi",
+      "Uyarıların programa ; yorumu olarak yazılması"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -24,10 +75,12 @@
     <header class="top">
       <div class="brand">
         <h1 data-i18n="app.h1">Kontur Yarıçap Analizi</h1>
-        <p data-i18n-html="app.lead"></p>
+        <p data-i18n-html="app.lead">Heidenhain Klartext (<code>.H</code>) veya ISO programını okur. DR ile pay
+          verirken hangi aralıkta kalabileceğini üç ayrı sınırdan bulur: kumandanın “takım yarıçapı çok büyük”
+          hatası, dalış ve geri çekilme hareketlerinin kanal duvarına taşması, ve bırakılan payın nerede tutmadığı.</p>
       </div>
       <div class="topright">
-        <div class="stamp" data-i18n="app.stamp"></div>
+        <div class="stamp" data-i18n="app.stamp">Sadece XY düzlemi · mm · yerel çalışır</div>
         <div class="langbar" id="langbar" role="group" data-i18n-aria="app.langAria"></div>
       </div>
     </header>
@@ -39,16 +92,17 @@
         <section class="card">
           <h2 data-i18n="card.program">1 · Program</h2>
           <div class="body">
-            <div class="drop" id="drop" tabindex="0" role="button" data-i18n-html="drop.idle"></div>
+            <div class="drop" id="drop" tabindex="0" role="button" data-i18n-html="drop.idle"><b>Dosya bırak</b> veya
+              tıkla — .H, .HC, .I, .NC, .txt</div>
             <input type="file" id="file" accept=".h,.hc,.H,.i,.I,.nc,.NC,.txt" hidden>
             <div style="margin-top:10px">
-              <label class="f" for="src" data-i18n="label.src"></label>
+              <label class="f" for="src" data-i18n="label.src">Program metni</label>
               <textarea id="src" spellcheck="false" data-i18n-ph="ph.src"></textarea>
             </div>
             <div class="btnrow">
-              <button id="run" data-i18n="btn.run"></button>
-              <button class="ghost" id="sample" data-i18n="btn.sample"></button>
-              <button class="ghost" id="clear" data-i18n="btn.clear"></button>
+              <button id="run" data-i18n="btn.run">Analiz et</button>
+              <button class="ghost" id="sample" data-i18n="btn.sample">Örnek yükle</button>
+              <button class="ghost" id="clear" data-i18n="btn.clear">Temizle</button>
             </div>
           </div>
         </section>
@@ -58,57 +112,67 @@
           <div class="body">
             <div class="row">
               <div>
-                <label class="f" for="rtab" data-i18n="label.rtab"></label>
+                <label class="f" for="rtab" data-i18n="label.rtab">Takım tablosu R (mm)</label>
                 <input type="number" id="rtab" value="0.25" step="0.01" min="0" inputmode="decimal">
               </div>
               <div>
-                <label class="f" for="drcur" data-i18n="label.drcur"></label>
+                <label class="f" for="drcur" data-i18n="label.drcur">Programdaki DR (mm)</label>
                 <input type="number" id="drcur" value="-0.25" step="0.01" inputmode="decimal">
               </div>
             </div>
-            <p class="hint" data-i18n-html="hint.eff"></p>
+            <p class="hint" data-i18n-html="hint.eff">Etkin yarıçap = R + DR. Post DR = &minus;R yazdıysa etkin yarıçap
+              sıfırdır ve tezgah yolu aynen işler. DR alanı programdaki TOOL CALL'dan otomatik doldurulur.</p>
             <div class="row" style="margin-top:10px">
               <div>
-                <label class="f" for="rphys" data-i18n="label.rphys"></label>
+                <label class="f" for="rphys" data-i18n="label.rphys">Gerçek takım yarıçapı (mm)</label>
                 <input type="number" id="rphys" value="0.25" step="0.005" min="0.001" inputmode="decimal">
               </div>
               <div>
-                <label class="f" for="drref" data-i18n="label.drref"></label>
+                <label class="f" for="drref" data-i18n="label.drref">Nominal formun DR'si</label>
                 <input type="number" id="drref" value="-0.25" step="0.01" inputmode="decimal">
               </div>
             </div>
-            <p class="hint" data-i18n-html="hint.dev"></p>
+            <p class="hint" data-i18n-html="hint.dev">Malzemeyi kaldıran <b>gerçek</b> yarıçaptır; tablo R'sinden
+              bağımsızdır. Nominal DR, resimdeki formun oluştuğu değerdir &mdash; CAM takım merkez yolunu bastıysa bu,
+              programdaki DR'dir.<br>Duvar sapması = (DR &minus; nominal DR) + (tablo R &minus; gerçek R). Artı değer,
+              duvarda daha çok malzeme kalması yani kanalın daralması demektir.</p>
             <div class="row" style="margin-top:10px">
               <div>
-                <label class="f" for="safety" data-i18n="label.safety"></label>
+                <label class="f" for="safety" data-i18n="label.safety">Güvenlik payı (mm)</label>
                 <input type="number" id="safety" value="0.005" step="0.005" min="0" inputmode="decimal">
               </div>
               <div>
-                <label class="f" for="tol" data-i18n="label.tol"></label>
+                <label class="f" for="tol" data-i18n="label.tol">Yay hassasiyeti (mm)</label>
                 <input type="number" id="tol" value="0.002" step="0.001" min="0.0005" inputmode="decimal">
               </div>
             </div>
 
             <label class="chkline">
               <input type="checkbox" id="gouge">
-              <span data-i18n="chk.gouge"></span>
+              <span data-i18n="chk.gouge">Dar geçit taraması. Gerçek kontur programlarında aç; CAM'in takım merkez
+                yolunu bastığı programlarda komşu pasoları hata sanar.</span>
             </label>
 
             <label class="chkline">
               <input type="checkbox" id="outAllow">
-              <span data-i18n-html="chk.outAllow"></span>
+              <span data-i18n-html="chk.outAllow"><b>Tezgahta dışarı ofset verebiliyorum.</b> Yolu konturun öbür
+                tarafına kaydırıp kanalı <b>büyütmek</b> için &minus;R'nin altına inebiliyorsan aç. DR ekseni aşağı
+                doğru açılır.</span>
             </label>
 
             <div class="row" style="margin-top:10px">
               <div>
-                <label class="f" for="outcap" data-i18n="label.outcap"></label>
+                <label class="f" for="outcap" data-i18n="label.outcap">Verebildiğin en büyük dış ofset (mm)</label>
                 <input type="number" id="outcap" value="0.3" step="0.01" min="0" inputmode="decimal" disabled>
               </div>
               <div>
-                <p class="hint" style="margin:18px 0 0" data-i18n="hint.outcap"></p>
+                <p class="hint" style="margin:18px 0 0" data-i18n="hint.outcap">Tezgahın / kumandanın pratik sınırı.
+                  Geometrik sınır bunun altındaysa küçük olan geçerlidir.</p>
               </div>
             </div>
-            <p class="hint" data-i18n-html="hint.outoffset"></p>
+            <p class="hint" data-i18n-html="hint.outoffset">Dış ofset = etkin yarıçapın eksiye düşmesi: takım merkezi
+              konturun öbür yanına geçer, duvar her yerde <b>nominalin ötesine</b> kesilir ve kanal iki katı kadar
+              genişler. Bu payın geri alınamayacağını unutma &mdash; verdiğin kadar malzeme kalıcı gider.</p>
           </div>
         </section>
 
@@ -116,15 +180,34 @@
           <h2 data-i18n="card.howto">Nasıl okunur</h2>
           <div class="body">
             <ul class="notes">
-              <li data-i18n-html="howto.1"></li>
-              <li data-i18n-html="howto.2"></li>
-              <li data-i18n-html="howto.3"></li>
-              <li data-i18n-html="howto.4"></li>
-              <li data-i18n-html="howto.5"></li>
-              <li data-i18n-html="howto.6"></li>
-              <li data-i18n-html="howto.7"></li>
-              <li data-i18n-html="howto.8"></li>
-              <li data-i18n-html="howto.9"></li>
+              <li data-i18n-html="howto.1"><b>DR = &minus;R</b> nominal taban: etkin yarıçap sıfır, tezgah programı
+                olduğu gibi işler. Üstü pay bırakır ve kanalı daraltır.</li>
+              <li data-i18n-html="howto.2"><b>DR minimum · dış</b>: &minus;R'nin altı, ancak <i>dış ofset</i> ile
+                mümkündür &mdash; takım merkezi konturun öbür yanına geçer ve kanal büyür. Kumanda toplam yarıçapı eksi
+                kabul etmiyorsa bu bölge kapalıdır; “dışarı ofset verebiliyorum” kutusunu işaretleyince açılır. Sınırı,
+                dışbükey köşe yaylarının ters döndüğü ya da yolun kendini kestiği yerdir.</li>
+              <li data-i18n-html="howto.3"><b>DR maks · kumanda</b>: bu değeri geçince ofset bir kontur elemanını
+                yutuyor ya da bir iç yaydan büyük kalıyor. Kumandanın <i>“takım yarıçapı çok büyük”</i> dediği an
+                burasıdır.</li>
+              <li data-i18n-html="howto.4"><b>DR maks · form tutar</b>: dalış, geri çekilme ve düzeltme aç/kapa
+                hareketleri <b>R0</b> ile programlanır, DR ile yer değiştirmez. Bu değerin üstünde takım o noktalarda
+                bırakmak istediğin payı geri kesip duvarı nominalde bırakır &mdash; kanalın geri kalanı dararken orada
+                yerel bir çentik kalır.</li>
+              <li data-i18n-html="howto.5"><b>Kalıcı hasar</b> ayrı ölçülür: bir hareketin <i>nominal</i> duvarın
+                ötesine kesmesi. Pay bırakma yönünde DR büyütmek normalde bunu yapmaz; program bunu bulursa ayrıca
+                uyarır.</li>
+              <li data-i18n-html="howto.6">Kütük durumu bilinmediği için, nominal DR'de zaten boşta olan hareketler
+                (önceden açılmış cebe inen hızlı dalışlar gibi) değerlendirme dışı bırakılır ve listede <i>boşta</i>
+                diye işaretlenir.</li>
+              <li data-i18n-html="howto.7">Z bantları kontur bazında karşılaştırılır: bir hareket, yalnız Z aralığı
+                örtüşen konturların açtığı alana göre ölçülür. Sürekli Z inişli (Z-level) yollarda kontur bandının
+                tamamı birlikte alınır.</li>
+              <li data-i18n-html="howto.8"><b>Parça bozulması</b>: DR sınırı aştığında kumanda M120 ile çalışıyorsa
+                durmaz, yutulan elemanı atlayıp köşeyi keser. Listedeki mm değeri, yolun o yüzeyin içine girdiği
+                miktardır.</li>
+              <li data-i18n-html="howto.9">Grafikte tekerlekle yakınlaş, sürükleyerek kaydır. Kaydırıcıyla DR'yi
+                gezdirip kanal sınırının nasıl daraldığını ve dalış çemberlerinin ne zaman dışarı taştığını
+                görebilirsin.</li>
             </ul>
           </div>
         </section>
@@ -142,97 +225,107 @@
             <div class="sub" id="sMin"></div>
           </div>
           <div class="cell" id="cellMax">
-            <div class="k" data-i18n="dro.maxCtl"></div>
+            <div class="k" data-i18n="dro.maxCtl">DR maks · kumanda</div>
             <div class="v" id="vMax">—</div>
             <div class="sub" id="sMax"></div>
           </div>
           <div class="cell" id="cellForm">
-            <div class="k" data-i18n="dro.maxForm"></div>
+            <div class="k" data-i18n="dro.maxForm">DR maks · form tutar</div>
             <div class="v" id="vForm">—</div>
             <div class="sub" id="sForm"></div>
           </div>
         </div>
 
         <section class="card">
-          <h2><span data-i18n="card.window"></span><span id="winNote"
+          <h2><span data-i18n="card.window">DR penceresi</span><span id="winNote"
               style="text-transform:none;letter-spacing:0"></span></h2>
           <div class="body">
             <div class="band" id="band"></div>
             <div class="bandaxis" id="bandAxis"></div>
             <div class="bandkey">
               <span id="keyOut" style="display:none"><i class="o" style="background:#b9d4e6"></i><span
-                  data-i18n="band.out"></span></span>
-              <span><i class="g" style="background:#c3dfcc"></i><span data-i18n="band.green"></span></span>
-              <span><i class="a" style="background:#f0daaa"></i><span data-i18n="band.amber"></span></span>
-              <span><i class="r" style="background:#eebeb8"></i><span data-i18n="band.red"></span></span>
+                  data-i18n="band.out">Dış ofset · kanal büyüyor, nominalin ötesine kesiliyor</span></span>
+              <span><i class="g" style="background:#c3dfcc"></i><span data-i18n="band.green">Pay tam
+                    oturuyor</span></span>
+              <span><i class="a" style="background:#f0daaa"></i><span data-i18n="band.amber">Pay kısmen kayboluyor ·
+                    dalış/çıkış noktalarında</span></span>
+              <span><i class="r" style="background:#eebeb8"></i><span data-i18n="band.red">Kumanda hata
+                    verir</span></span>
             </div>
             <div class="wintxt" id="winTxt"></div>
           </div>
         </section>
 
         <section class="card">
-          <h2><span data-i18n="card.plot"></span><span id="plotTitle"></span></h2>
+          <h2><span data-i18n="card.plot">Kontur ve takım yolu</span><span id="plotTitle"></span></h2>
           <div class="plotwrap">
             <canvas id="cv"></canvas>
           </div>
           <div class="plotbar">
-            <label class="f" for="rng" style="margin:0;white-space:nowrap" data-i18n="plot.testdr"></label>
+            <label class="f" for="rng" style="margin:0;white-space:nowrap" data-i18n="plot.testdr">Deneme DR</label>
             <input type="range" id="rng" min="0" max="100" value="50" step="1" disabled>
             <span class="blk" id="rngVal" style="min-width:86px;text-align:right">— mm</span>
-            <button class="ghost" id="fit" style="padding:5px 10px;font-size:12px" data-i18n="plot.fit"></button>
+            <button class="ghost" id="fit" style="padding:5px 10px;font-size:12px"
+              data-i18n="plot.fit">Sığdır</button>
           </div>
           <div class="legend">
-            <span><i style="background:#0d1418"></i><span data-i18n="legend.contour"></span></span>
-            <span><i style="background:#14507e"></i><span data-i18n="legend.center"></span></span>
-            <span><i style="background:#b32319"></i><span data-i18n="legend.gouge"></span></span>
-            <span><i style="background:#0f7d86"></i><span data-i18n="legend.channel"></span></span>
-            <span><i style="background:#7a3fa8"></i><span data-i18n="legend.plunge"></span></span>
-            <span><i style="background:#b57405"></i><span data-i18n="legend.damage"></span></span>
+            <span><i style="background:#0d1418"></i><span data-i18n="legend.contour">Kontur</span></span>
+            <span><i style="background:#14507e"></i><span data-i18n="legend.center">Takım merkez yolu</span></span>
+            <span><i style="background:#b32319"></i><span data-i18n="legend.gouge">Çakışma / gouge</span></span>
+            <span><i style="background:#0f7d86"></i><span data-i18n="legend.channel">İşlenen kanal
+                  sınırı</span></span>
+            <span><i style="background:#7a3fa8"></i><span data-i18n="legend.plunge">Dalış / bağlantı · takım
+                  çemberi</span></span>
+            <span><i style="background:#b57405"></i><span data-i18n="legend.damage">Parça bozulması /
+                  odak</span></span>
           </div>
           <div class="chips" id="conChips" style="padding:0 12px 12px"></div>
         </section>
 
         <section class="card">
-          <h2><span data-i18n="card.links"></span><span id="lnkAt" style="text-transform:none;letter-spacing:0"></span>
+          <h2><span data-i18n="card.links">Dalış ve bağlantı hareketleri</span><span id="lnkAt"
+              style="text-transform:none;letter-spacing:0"></span>
           </h2>
           <div id="lnkBox"></div>
         </section>
 
         <section class="card">
-          <h2><span data-i18n="card.damage"></span><span id="dmgAt" style="text-transform:none;letter-spacing:0"></span>
+          <h2><span data-i18n="card.damage">Parça bozulmaları</span><span id="dmgAt"
+              style="text-transform:none;letter-spacing:0"></span>
           </h2>
           <div id="dmgBox"></div>
         </section>
 
         <div class="actionbar">
-          <button class="ghost" id="dl" data-i18n="btn.annotate"></button>
-          <button class="ghost" id="toggleDet" data-i18n="btn.detailsShow"></button>
+          <button class="ghost" id="dl" data-i18n="btn.annotate">Uyarıları programa işle ve indir</button>
+          <button class="ghost" id="toggleDet" data-i18n="btn.detailsShow">Ayrıntıları göster</button>
         </div>
 
         <section class="card det" style="display:none">
-          <h2 data-i18n="card.crit"></h2>
+          <h2 data-i18n="card.crit">Sınırlayan kütükler</h2>
           <div id="critBox"></div>
         </section>
 
         <section class="card det" style="display:none">
-          <h2 data-i18n="card.corners"></h2>
+          <h2 data-i18n="card.corners">Keskin iç köşeler</h2>
           <div id="cornBox"></div>
         </section>
 
         <section class="card det" style="display:none">
-          <h2 data-i18n="card.contours"></h2>
+          <h2 data-i18n="card.contours">Kontur dökümü</h2>
           <div id="conBox"></div>
         </section>
 
         <section class="card det" style="display:none">
-          <h2 data-i18n="card.parse"></h2>
+          <h2 data-i18n="card.parse">Ayrıştırma notları</h2>
           <div id="warnBox"></div>
         </section>
 
       </div>
     </div>
 
-    <footer data-i18n="app.footer"></footer>
+    <footer data-i18n="app.footer">Tüm hesap tarayıcıda yapılır · program hiçbir yere gönderilmez · sonuçları makinede
+      doğrulamadan üretime alma</footer>
   </div>
 
   <script src="assets/js/i18n.js"></script>

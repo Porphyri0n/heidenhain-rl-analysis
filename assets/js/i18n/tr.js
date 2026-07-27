@@ -4,7 +4,7 @@
 I18N.register('tr', { code: 'tr', label: 'TR', name: 'Türkçe' }, {
 
   /* ---------- sayfa iskeleti ---------- */
-  'app.title': 'Kontur Yarıçap Analizi — Heidenhain .H',
+  'app.title': 'Heidenhain DR Kontur Yarıçap Analizi — takım yarıçapı çok büyük hatası | .H / ISO',
   'app.h1': 'Kontur Yarıçap Analizi',
   'app.lead': 'Heidenhain Klartext (<code>.H</code>) veya ISO programını okur. DR ile pay verirken hangi aralıkta ' +
     'kalabileceğini üç ayrı sınırdan bulur: kumandanın “takım yarıçapı çok büyük” hatası, dalış ve geri çekilme ' +

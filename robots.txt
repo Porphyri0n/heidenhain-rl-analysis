@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://porphyri0n.github.io/heidenhain-rl-analysis/sitemap.xml
