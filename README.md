@@ -1,6 +1,6 @@
 # Kontur Yarıçap Analizi — Heidenhain `.H`
 
-> **Canlı / live:** <https://porphyri0n.github.io/heidenhain-rl-analysis/>
+> **Canlı / live:** <https://erdo.is-a.dev/heidenhain-rl-analysis/>
 >
 > **Contour Radius Analysis** — English version below.
 

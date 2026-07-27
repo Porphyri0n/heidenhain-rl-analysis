@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://porphyri0n.github.io/heidenhain-rl-analysis/sitemap.xml
+Sitemap: https://erdo.is-a.dev/heidenhain-rl-analysis/sitemap.xml
